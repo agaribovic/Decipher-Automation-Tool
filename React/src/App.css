@@ -1,0 +1,64 @@
+.App {
+  text-align: center;
+}
+
+#gallery {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.color:nth-child(1) { 
+  background: red;
+}
+
+.color:nth-child(2) {
+  background: yellow;
+}
+
+.color:nth-child(3) {
+  background:green;
+}
+
+.color {
+  border-radius: 50%;
+  height: 15vh;
+  width: 10vw;
+  position:relative;
+  left: 25%;
+  top:10%;
+  visibility: hidden;
+  padding: 5px;
+}
+
+#semaphore {
+  position:relative;
+  left: 35%;
+  margin-top: 100px;
+  background:black;
+  width: 20vw;
+  height:70vh;
+  padding: 5px;
+}
+
+input:focus {
+  font-size:25px;
+  background-color: #CCF1F7;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
