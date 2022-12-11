@@ -1,0 +1,110 @@
+<float 
+  label="HCPS_VALUE"
+  size="5"
+  ss:postText="%"
+  where="execute,survey,report">
+  <title><font style="color:red">HCPs VALUE</font></title>
+  <exec>
+HCPS_VALUE.r1.ival = S11.c1.r5.ival + S11.c1.r6.ival + S11.c1.r7.ival + S11.c1.r8.ival + S11.c1.r10.ival + S11.c1.r11.ival + S11.c1.r12.ival
+HCPS_VALUE.r2.ival = (30 / float(30 + 35)) * (S11.c1.r4.ival + S11.c1.r6.ival + S11.c1.r7.ival + S11.c1.r8.ival + S11.c1.r9.ival + S11.c1.r10.ival) + (35 / float(30 + 35) * (S12.c1.r4.ival + S12.c1.r6.ival + S12.c1.r7.ival + S12.c1.r8.ival + S12.c1.r9.ival + S12.c1.r10.ival))
+HCPS_VALUE.r3.ival = (30 / float(30 + 35)) * (S11.c1.r1.ival + S11.c1.r2.ival + S11.c1.r3.ival + S11.c1.r4.ival) + ((35 / float(35 + 30)) * (S12.c1.r1.ival + S12.c1.r2.ival + S12.c1.r3.ival + S12.c1.r4.ival))
+HCPS_VALUE.r4.ival = 55
+  </exec>
+
+  <row label="r1">Mild S1P + MAB Use</row>
+  <row label="r2">Newer Product Use</row>
+  <row label="r3">Platform, Aubagio, Fumarate Use</row>
+  <row label="r4">Efficacy Weight</row>
+</float>
+
+<suspend/>
+
+<number 
+  label="PRODUCT_USE_RANGE"
+  size="5"
+  where="execute,survey,report">
+  <title><font style="color:red">PRODUCT_USE_RANGE</font></title>
+  <exec>
+# Mild S1P + MAB Use
+
+if (HCPS_VALUE.r1.ival ge 15 and HCPS_VALUE.r1.ival le 30):
+  PRODUCT_USE_RANGE.r1.ival = 2
+elif HCPS_VALUE.r1.ival lt 15:
+ PRODUCT_USE_RANGE.r1.ival = 1
+else:
+ PRODUCT_USE_RANGE.r1.ival = 3
+ 
+# Newer Product Use
+
+if (HCPS_VALUE.r2.ival ge 24 and HCPS_VALUE.r2.ival le 44):
+ PRODUCT_USE_RANGE.r2.ival = 2
+elif HCPS_VALUE.r2.ival lt 24:
+  PRODUCT_USE_RANGE.r2.ival = 1
+else:
+  PRODUCT_USE_RANGE.r2.ival = 3
+  
+# Platform, Aubagio, Fumarate Use
+
+if (HCPS_VALUE.r3.ival ge 15 and HCPS_VALUE.r3.ival le 30):
+  PRODUCT_USE_RANGE.r3.ival = 2
+elif HCPS_VALUE.r3.ival lt  15:
+  PRODUCT_USE_RANGE.r3.ival = 3
+else:
+  PRODUCT_USE_RANGE.r3.ival = 1
+  
+# Efficacy Weight 
+
+if (HCPS_VALUE.r4.ival ge 18 and HCPS_VALUE.r4.ival le 62):
+  PRODUCT_USE_RANGE.r4.ival = 2
+elif HCPS_VALUE.r4.ival lt 18:
+  PRODUCT_USE_RANGE.r4.ival = 1
+else:
+  PRODUCT_USE_RANGE.r4.ival = 3
+  </exec>
+
+  <row label="r1">Mild S1P + MAB Use</row>
+  <row label="r2">Newer Product Use</row>
+  <row label="r3">Platform, Aubagio, Fumarate Use</row>
+  <row label="r4">Efficacy Weight</row>
+</number>
+
+<suspend/>
+
+<float 
+  label="HCP_SEGMENT_VALUE"
+  size="5"
+  where="execute,survey,report">
+  <title><font style="color:red">HCP SEGMENT VALUE</font></title>
+  <exec>
+# Multiply each column then SUM everything
+
+HCP_SEGMENT_VALUE.val = (PRODUCT_USE_RANGE.r1.ival * 0.25) + (PRODUCT_USE_RANGE.r2.ival * 0.25) + (PRODUCT_USE_RANGE.r3.ival * 0.25) + (PRODUCT_USE_RANGE.r4.ival * 0.25)
+  </exec>
+
+</float>
+
+<suspend/>
+
+<radio 
+  label="SEGMENT"
+  where="execute,survey,report">
+  <title><font style="color:red">SEGMENT TYPE</font></title>
+  <exec>
+print("HCP_SEGMENT_VALUE.val: ", HCP_SEGMENT_VALUE.val)
+print("5 / float(3)", 5 / float(3))
+print("7 / float(3)", 7 / float(3))
+
+if HCP_SEGMENT_VALUE.val le (5 / float(3)):
+  SEGMENT.val = SEGMENT.r1.index
+elif HCP_SEGMENT_VALUE.val le (7 / float(3)):
+  SEGMENT.val = SEGMENT.r2.index
+else:
+  SEGMENT.val = SEGMENT.r3.index
+  </exec>
+
+  <row label="r1">Entrenched Traditionalist</row>
+  <row label="r2">Safe Starter</row>
+  <row label="r3">Innovator</row>
+</radio>
+
+<suspend/>

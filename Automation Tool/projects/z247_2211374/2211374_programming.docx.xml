@@ -1,0 +1,65 @@
+
+  ------------  
+<condition label="Disp1" cond='S1.r5 or S1.r6'>Conditional Disposition 1 </condition>
+
+  ------------  
+
+<row label="r1" value="1">S1 </row>
+
+  ------------  
+
+
+<res label='errOEMin'>Please enter more text.</res>
+<exec when='init'>
+# Checking OE='Open End' Question Length
+# [oemin: 5]
+def OEMinChk(strChk, maxOE):
+	if len(str(strChk.val)) lt maxOE:
+		error(res.errOEMin)
+</exec>
+
+<radio
+	label='S1'>
+	<title>
+		What is your <b>primary medical specialty</b>?
+	</title>
+	<comment>Only one selection</comment>
+	<row label='r1'>Pain Specialist</row>
+	<row label='r2'>Family Practice (FP)</row>
+	<row label='r3'>General Practice (GP)</row>
+	<row label='r4'>Internal Medicine (IM)</row>
+	<row label='r5'>Psychiatric NP / PA</row>
+	<row label='r6' open='1'  openSize='25'  randomize='0' >Other (Please specify: )</row>
+</radio>
+
+
+<note> Original Cond=S1.r5 or S1.r6</note>
+<term label='Term1' cond="(processTerms('Disp1') )"> Terminate S1 </term>
+<suspend/>
+
+<suspend/>
+
+<exec>
+
+if S1.r1 :
+    S1HID.val = S1HID.r1.index
+if S1.r2 :
+    S1HID.val = S1HID.r2.index
+if S1.r3 or S1.r4 :
+    S1HID.val = S1HID.r3.index
+
+</exec>
+
+<suspend/>
+
+<radio
+	label = "S1HID"
+	optional = "1"
+	where = "execute,survey,report">
+	<title>Recorded from question S1</title>
+	  <row label = 'r1'>Pain Specialist</row>
+	  <row label = 'r2'>Y As Pcp</row>
+	  <row label = 'r3'>As Pcp</row>
+</radio>
+
+<suspend/>

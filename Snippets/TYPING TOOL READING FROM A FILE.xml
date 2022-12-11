@@ -1,0 +1,176 @@
+<radio 
+  label="TT2">
+  <title>To what extent do you manage psoriatic arthritis differently compared to rheumatoid arthritis?</title>
+  <comment>Select one</comment>
+  <col label="c1"><b>Not at All <br /> Differently <br /> / Almost <br /> Similar <br /> 1 </b></col>
+  <col label="c2"><b>2</b></col>
+  <col label="c3"><b>3</b></col>
+  <col label="c4" ss:colClassNames="col4"><b>Somewhat <br /> Differently <br /> 4 </b></col>
+  <col label="c5"><b>5</b></col>
+  <col label="c6"><b>6</b></col>
+  <col label="c7"><b>Completely <br /> Differently <br /> 7 </b></col>
+  <style cond="1" name="question.after" wrap="ready"><![CDATA[
+$ ('.col4').css('pointer-events', 'none');
+$ ('.col4').css('background','#ecf0f1');
+]]></style>
+</radio>
+
+<suspend/>
+
+<radio 
+  label="TT4">
+  <title>To what extent do you treat the following psoriatic arthritis patients any differently?
+<br /><br />
+<em><font style="color:red">Psoriatic arthritis patients with vs. without nail psoriasis</font></em>
+</title>
+  <col label="c1"><b>Treat <br /> Exactly the <br /> Same <br /> 1 </b></col>
+  <col label="c2"><b>2</b></col>
+  <col label="c3"><b>3</b></col>
+  <col label="c4"><b>Treat <br /> Somewhat <br /> Differently <br /> 4</b></col>
+  <col label="c5"><b>5</b></col>
+  <col label="c6"><b>6</b></col>
+  <col label="c7"><b>Treat <br /> Completely <br /> Differently <br /> 7</b></col>
+</radio>
+
+<suspend/>
+
+<checkbox 
+  label="TT5"
+  atleast="1"
+  sst="0">
+  <title>Which classes do you prefer to use for the treatment of mild psoriatic arthritis as a <b>first line</b> of therapy?</title>
+  <comment>Select up to 2 options from the list</comment>
+  <validate>
+if TT5.count gt 2:
+  for row in TT5.rows:
+    error("Please select no more than 2 treatment classes", row=row)
+  </validate>
+
+  <row label="r1">Prescription NSAIDs (e.g., ibuprofen, diclofenac, sulindac, oxaprozin, piroxicam, indomethacin, etodolac, meclofenamate, etc.)</row>
+  <row label="r2">Conventional DMARDs
+(e.g., methotrexate, leflunomide, sulfasalazine)</row>
+  <row label="r3">Oral PDE-4 Enzyme Inhibitor
+(Otezla)</row>
+  <row label="r4">Anti-TNFs
+(Enbrel, Humira, Remicade, Cimzia, Simponi)</row>
+  <row label="r5">IL-17s
+(Cosentyx, Taltz)</row>
+  <row label="r6">IL-12/IL-23s
+(Stelara)</row>
+  <row label="r7">Jak inhibitors
+(Xeljanz)</row>
+  <row label="r8">Others
+(Orencia)</row>
+</checkbox>
+
+<suspend/>
+
+<radio 
+  label="TT6">
+  <title>To what extent do you agree or disagree with each of the following statements regarding how appropriate Otezla / Cosentyx / Humira are in different patient circumstances?</title>
+  <comment>Select one</comment>
+  <col label="c1"><b>Completely <br /> Disagree</b> <br /> 1</col>
+  <col label="c2"><b>2</b></col>
+  <col label="c3"><b>3</b></col>
+  <col label="c4" ss:colClassNames="col4"><b>Neither <br /> Agree <br /> nor <br /> Disagree <br /> 4</b></col>
+  <col label="c5"><b>5</b></col>
+  <col label="c6"><b>6</b></col>
+  <col label="c7"><b>Completely <br /> Agree <br /> 7</b></col>
+  <row label="r1">Otezla is the right first systemic treatment for most of my <b>mild</b> psoriatic arthritis patients</row>
+  <row label="r2">Cosentyx is the right first systemic treatment for most of my <b>mild</b> psoriatic arthritis patients</row>
+  <row label="r3">Humira is the right first systemic treatment for most of my <b>mild</b> psoriatic arthritis patients</row>
+  <style cond="1" name="question.after" wrap="ready"><![CDATA[
+$ ('.col4').css('pointer-events', 'none');
+$ ('.col4').css('background','#ecf0f1');
+]]></style>
+</radio>
+
+<suspend/>
+
+<radio 
+  label="TT7">
+  <title>To what extent are the following psoriatic arthritis patient type / triggers appropriate or not appropriate for using Otezla / Cosentyx / Humira?</title>
+  <comment>Select one in each row</comment>
+  <col label="c1"><b>Least <br /> appropriate <br /> patient <br /> 1</b> <br /> 1</col>
+  <col label="c2"><b>Highly <br /> inappropriate <br />patient</b> <br /> 2</col>
+  <col label="c3"><b>Somewhat <br /> inappropriate <br /> patient</b> <br /> 3</col>
+  <col label="c4"><b>Neither <br /> appropriate <br /> nor <br /> inappropriate</b> <br /> 4</col>
+  <col label="c5"><b>Somewhat <br /> appropriate <br /> patient</b> <br /> 5</col>
+  <col label="c6"><b>Highly <br /> appropriate <br /> patient</b> <br /> 6</col>
+  <col label="c7"><b>Most <br /> appropriate <br /> patient</b> <br /> 7</col>
+  <row label="r1">Patient with <b>moderately active</b> psoriatic arthritis - Otezla</row>
+  <row label="r2">Patient with <b>moderately active</b> psoriatic arthritis - Cosentyx</row>
+  <row label="r3">Patient with <b>moderately active</b> psoriatic arthritis - Humira</row>
+</radio>
+
+<suspend/>
+
+<radio 
+  label="SEGMENT"
+  sst="0"
+  where="execute,survey,report">
+  <title>SEGMENT TYPE</title>
+  <comment>Please enter a whole number</comment>
+  <exec>
+import math
+
+
+# SETTINGS for Typing Tool
+TT_var = ['TT2','TT4','TT5','TT6','TT7']
+filename = '2206177_typing_tool_matrix.dat'
+
+TT2val = TT2.val+1
+TT4val = TT4.val+1
+TT5val = TT5.r3.val
+TT6val = TT6.r1.val+1
+TT7val = TT7.r1.val+1
+
+TT_var_val = [TT2val, TT4val, TT5val, TT6val, TT7val]
+
+# END of SETTINGS for Typing Tool
+
+
+# the Dictonary with values from typing tool
+TT_dict = {}  
+with open(filename, 'r') as f:
+    count=0
+    for line in f:
+        count = count + 1
+    	line = line.replace('\r\n','')
+        row = line.split(',')
+        if count gt 1:
+            TT_dict[(row[0],int(row[1]))] = [float(i) for i in row[2:]]
+
+
+# SUMing all chosen values (summing of lists via zip method)
+SUM_ALL =TT_dict['INTERCEPT', 0]
+count=0
+
+for var in TT_var:
+    temp_lists_to_sum = TT_dict[var, TT_var_val[count]]
+    zipped_lists = zip(SUM_ALL, temp_lists_to_sum)
+    SUM_ALL = [list1 + list2 for (list1, list2) in zipped_lists]
+    count = count + 1
+
+
+# CHOSE MAximum Value
+MAX = SUM_ALL[0]
+MAXValue = 0
+i=0
+for value in SUM_ALL:
+    if value gt MAX:
+        MAX = value
+        MAXValue = i
+    i=i+1
+    
+# print(SUM_ALL)
+
+SEGMENT.val=MAXValue
+  </exec>
+
+  <row label="r1">SEGMENT A</row>
+  <row label="r2">SEGMENT B</row>
+  <row label="r3">SEGMENT C</row>
+  <row label="r4">undefined 1</row>
+  <row label="r5">undefined 2</row>
+</radio>

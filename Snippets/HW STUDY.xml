@@ -1,0 +1,442 @@
+<res label="answer_mandatory">Please tick the corresponding checkbox on the left side.</res>
+<res label="answer_mandatory2">Please either tick the radio button or provide your answer in the text box below.</res>
+<res label="answer_mandatory3">Please provide more details in the text box on the right side.</res>
+<res label="answer_no">This field is applicable only if you provided at least one "No" answer.</res>
+<res label="answer_no2">Please specify who prescribes the oncologic therapy in the text box below.</res>
+
+<suspend/>
+
+<radio 
+  label="RESPONDENT_TYPE">
+  <title><font style="color:red">RESPONDENT TYPE</font></title>
+  <exec>
+'''
+endos = ['K_228777c8e8', 'K_0izlf82c34', 'K_77blbaszki', 'K_kokkn4dccx', 'K_r0aobchoyj', 'K_gj7832ivxn']
+neuros = ['K_bb04361f3b', 'K_ca8e9b46ce', 'K_901f2b6fc8', 'K_859f7d00e7', 'K_b9y4sas3cr', 'K_f1fee5r576', 'K_b39tom0rkc', 'K_6ee85a8cbd', 'offlistNeuroOnc', 'offlistNeuroOnc2', 'offlistNeuroOnc3']
+
+if identifier in endos or identifier == "Test1":
+    RESPONDENT_TYPE.val = RESPONDENT_TYPE.r1.index
+elif identifier in neuros or identifier == "Test2":
+    RESPONDENT_TYPE.val = RESPONDENT_TYPE.r2.index
+'''
+  </exec>
+
+  <row label="r1">ENDOs</row>
+  <row label="r2">NEUROs</row>
+</radio>
+
+<suspend/>
+
+<html label="INTRODUCTION" where="survey">As shared, we would like you to complete a 15-minute questionnaire as a homework task ahead of the main interview. We’ll compensate you an additional $50 for your time. The information collected will help focus our discussion on what is most relevant to your experience with VHL disease.
+<br /><br />
+Please complete the task today.</html>
+
+<suspend/>
+
+<pipe label="S1_TEXT" capture="">
+  <case label="r1" cond="RESPONDENT_TYPE.r1">For patients with VHL disease with pNET, which of the following are you, personally, involved in?</case>
+  <case label="r2" cond="RESPONDENT_TYPE.r2">For patients with VHL disease with CNS hemangioblastoma, which of the following are you, personally, involved in?</case>
+  <case label="r3" cond="1">.</case></pipe>
+<checkbox 
+  label="S1A"
+  atleast="1"
+  sst="0">
+  <title>[pipe:S1_TEXT]</title>
+  <comment>Select all that apply</comment>
+  <validate>
+for row in S1A.rows:
+    if S1B.rows[row.index] and not(row):
+        error(res.answer_mandatory, row=row, col=S1A.c1)
+
+if S1A.r3 and not(S1B.r3):
+    error(res.answer_mandatory3, row=this.r3, col=S1B.c1)
+if S1A.r4 and not(S1B.r4):
+    error(res.answer_mandatory3, row=this.r4, col=S1B.c1)
+  </validate>
+
+  <row label="r1" ss:rowClassNames="RoW">Diagnosis</row>
+  <row label="r2" ss:rowClassNames="RoW">Surveillance/Monitoring</row>
+  <row label="r3" ss:rowClassNames="RoW">Surgery/Procedure (please specify)</row>
+  <row label="r4" ss:rowClassNames="RoW">Medication/Treatment (please specify)</row>
+  <row label="r5" ss:rowClassNames="RoW">Multidisciplinary Team</row>
+  <noanswer label="r6">None of the Above</noanswer>
+  <col label="c1" ss:rowClassNames="RoW"><b>Select all that apply</b></col>
+  <style name="question.after" wrap="ready"><![CDATA[
+$ (".RoW").find('input').attr("placeholder", "Click or tap here to enter text.");
+$ (".RoW").find('input').css("text-align", "center");
+]]></style>
+</checkbox>
+
+<text 
+  label="S1B"
+  keepWith="S1A"
+  rightOf="S1A"
+  size="40">
+  <title>[pipe:S1_TEXT]</title>
+  <comment>Please be as specific as possible</comment>
+  <row label="r1">Diagnosis</row>
+  <row label="r2">Surveillance/Monitoring</row>
+  <row label="r3">Surgery/Procedure (please specify)</row>
+  <row label="r4">Medication/Treatment (please specify)</row>
+  <row label="r5">Multidisciplinary Team</row>
+  <col label="c1"><b>Describe your role, if applicable</b></col>
+</text>
+
+<suspend/>
+
+<checkbox 
+  label="S2A"
+  atleast="1"
+  sst="0">
+  <title>At your practice/institution, which specialists are involved in the care of patients with VHL disease who have ccRCC, pNET, or CNS hemangioblastoma manifestations?</title>
+  <comment>Select all that apply</comment>
+  <validate>
+for row in S2A.rows:
+    if S2B.rows[row.index] and not(row):
+        error(res.answer_mandatory, row=row, col=S2A.c1)
+        
+if S2A.r2 and not(S2B.r2):
+    error(res.answer_mandatory3, row=this.r2, col=S2B.c1)
+if S2A.r9 and not(S2B.r9):
+    error(res.answer_mandatory3, row=this.r9, col=S2B.c1)
+  </validate>
+
+  <row label="r1" ss:rowClassNames="RoW">Geneticist(s)</row>
+  <row label="r2" ss:rowClassNames="RoW">Surgeons (please specify type)</row>
+  <row label="r3" ss:rowClassNames="RoW">Oncologist(s)</row>
+  <row label="r4" ss:rowClassNames="RoW">Urologist(s) or Uro-Oncologist(s)</row>
+  <row label="r5" ss:rowClassNames="RoW">Nephrologists</row>
+  <row label="r6" ss:rowClassNames="RoW">Neurologist(s)</row>
+  <row label="r7" ss:rowClassNames="RoW">Endocrinologist(s)</row>
+  <row label="r8" ss:rowClassNames="RoW">Care Coordinator / Case Worker</row>
+  <row label="r9" ss:rowClassNames="RoW">Others (please specify)</row>
+  <noanswer label="r10">None of the Above</noanswer>
+  <col label="c1"><b>Select all that apply</b></col>
+  <style name="question.after" wrap="ready"><![CDATA[
+$ (".RoW").find('input').attr("placeholder", "Click or tap here to enter text.");
+$ (".RoW").find('input').css("text-align", "center");
+]]></style>
+</checkbox>
+
+<text 
+  label="S2B"
+  keepWith="S2A"
+  rightOf="S2A"
+  size="40">
+  <title>For patients with VHL disease with pNET, which of the following are you, personally, involved in?</title>
+  <comment>Please be as specific as possible</comment>
+  <row label="r1">Geneticist(s)</row>
+  <row label="r2">Surgeons (please specify type)</row>
+  <row label="r3">Oncologist(s)</row>
+  <row label="r4">Urologist(s) or Uro-Oncologist(s)</row>
+  <row label="r5">Nephrologists</row>
+  <row label="r6">Neurologist(s)</row>
+  <row label="r7">Endocrinologist(s)</row>
+  <row label="r8">Care Coordinator / Case Worker</row>
+  <row label="r9">Others (please specify)</row>
+  <col label="c1"><b>Describe your interaction with this specialty, if applicable</b></col>
+</text>
+
+<suspend/>
+
+<radio 
+  label="S3">
+  <title>For an active patient case, how frequently do you coordinate efforts with the other specialists or multidisciplinary team who are involved in treating patients with VHL at your practice/institution?</title>
+  <comment>Select one</comment>
+  <row label="r1">Daily</row>
+  <row label="r2">Weekly</row>
+  <row label="r3">Monthly</row>
+  <row label="r4">Quarterly</row>
+  <row label="r5">After scans</row>
+  <row label="r6">As needed (variable frequency)</row>
+  <row label="r7" open="1" openSize="25" randomize="0">Some other frequency, specify here:</row>
+</radio>
+
+<suspend/>
+
+<pipe label="S4_TEXT" capture="">
+  <case label="r1" cond="RESPONDENT_TYPE.r1">How are patients with VHL-associated pNET currently treated?  <span id="placeholder">Click or tap here to enter text.</span>
+  
+    &lt;style&gt;
+     
+    #placeholder {
+        color:#919191;
+        position:absolute;
+        left:3.5%;
+        top:45%;
+        font-size: 15px;
+    } 
+    
+&lt;/style&gt; 
+
+&lt;script type="text/javascript"&gt;
+
+// clicking on the survey's body removes placeholder
+ let placeholder = document.getElementById("placeholder");
+ let body = document.getElementById("primary");
+ body.addEventListener("click", removePlaceholder);
+ 
+// a function to remove placeholder
+ function removePlaceholder() {
+    placeholder.style.opacity = "0";
+ }
+
+// remove placeholder when the validation error is shown
+ if (body.offsetHeight &gt; 48) {
+     placeholder.style.opacity = "0";   
+  } 
+
+&lt;/script/gt;</case>
+  <case label="r2" cond="RESPONDENT_TYPE.r2">How are patients with VHL-associated CNS hemangioblastoma currently treated?  <span id="placeholder">Click or tap here to enter text.</span>
+  
+    &lt;style&gt;
+     
+    #placeholder {
+        color:#919191;
+        position:absolute;
+        left:3.5%;
+        top:45%;
+        font-size: 15px;
+    } 
+    
+&lt;/style&gt; 
+
+&lt;script type="text/javascript"&gt;
+
+// clicking on the survey's body removes placeholder
+ let placeholder = document.getElementById("placeholder");
+ let body = document.getElementById("primary");
+ body.addEventListener("click", removePlaceholder);
+ 
+// a function to remove placeholder
+ function removePlaceholder() {
+    placeholder.style.opacity = "0";
+ }
+
+// remove placeholder when the validation error is shown
+ if (body.offsetHeight &gt; 48) {
+     placeholder.style.opacity = "0";   
+  } 
+
+&lt;/script/gt;</case>
+  <case label="r3" cond="1">.</case></pipe>
+<textarea 
+  label="S4"
+  height="3"
+  optional="0"
+  ss:questionClassNames="S4input"
+  width="80">
+  <title>[pipe:S4_TEXT]</title>
+  <comment>(Describe any monitoring, surgical/procedural, prescription and non-prescription therapy, including off-label.)</comment>
+</textarea>
+
+<suspend/>
+
+<radio 
+  label="S5A_STYLE"
+  where="execute,survey">
+  <title>Hidden question for defining style at S5</title>
+  <exec>
+if RESPONDENT_TYPE.r1:
+    S5A_STYLE.val = S5A_STYLE.r1.index
+elif RESPONDENT_TYPE.r2:
+    S5A_STYLE.val = S5A_STYLE.r2.index
+  </exec>
+
+  <row label="r1"><span id="instruction">If differs by treatment modality, describe here:</span>
+  <span id="placeholder">Click or tap here to enter text.</span>
+  
+&lt;style&gt;
+    
+    #instruction {
+        color:#00008B;
+        position:absolute;
+        left:3.5%;
+        top:61%;
+        font-size:15px;
+        font-style:italic;
+    } 
+     
+    #placeholder {
+        color:#919191;
+        position:absolute;
+        left:3.5%;
+        top:66%;
+        font-size: 15px;
+    } 
+
+&lt;/style&gt;
+
+&lt;script type="text/javascript"&gt;
+
+let placeholder = document.getElementById("placeholder");
+let instruction = document.getElementById("instruction");
+let body = document.getElementById("primary");
+
+body.addEventListener("click", removePlaceholder);
+
+function removePlaceholder() {
+    placeholder.style.opacity = "0";
+    instruction.style.opacity = "0";
+}
+
+if (body.offsetHeight &gt; 48) {
+    placeholder.style.opacity = "0";
+    instruction.style.opacity = "0";
+}   
+
+&lt;/script/gt;</row>
+  <row label="r2"><span id="instruction">If differs by treatment modality, describe here:</span>
+  <span id="placeholder">Click or tap here to enter text.</span>
+  
+&lt;style&gt;
+    
+    #instruction {
+        color:#00008B;
+        position:absolute;
+        left:3.5%;
+        top:63%;
+        font-size:15px;
+        font-style:italic;
+    } 
+     
+    #placeholder {
+        color:#919191;
+        position:absolute;
+        left:3.5%;
+        top:68%;
+        font-size: 15px;
+    } 
+
+&lt;/style&gt;
+
+&lt;script type="text/javascript"&gt;
+
+let placeholder = document.getElementById("placeholder");
+let instruction = document.getElementById("instruction");
+let body = document.getElementById("primary");
+
+body.addEventListener("click", removePlaceholder);
+
+function removePlaceholder() {
+  placeholder.style.opacity = "0";
+  instruction.style.opacity = "0";
+}
+
+if (body.offsetHeight &gt; 48) {
+    placeholder.style.opacity = "0";
+    instruction.style.opacity = "0";    
+}
+
+&lt;/script/gt;</row>
+</radio>
+
+<suspend/>
+
+<pipe label="S5_TEXT" capture="">
+  <case label="r1" cond="RESPONDENT_TYPE.r1">Who is the <u>primary</u> decision maker when it comes to the treatment of patients with VHL-associated pNET?</case>
+  <case label="r2" cond="RESPONDENT_TYPE.r2">Who is the <u>primary</u> decision maker when it comes to the treatment of patients with VHL-associated CNS hemangioblastoma?</case>
+  <case label="r3" cond="1">.</case></pipe>
+<radio 
+  label="S5A"
+  optional="1"
+  sst="0">
+  <title>[pipe:S5_TEXT] ${S5A_STYLE.selected.text}</title>
+  <comment>(Select one - if it differs based on the treatment describe below.)</comment>
+  <validate>
+for row in S5A.rows:
+    if row and S5B.val != '':
+        error(res.answer_mandatory2, row=row)
+if S5A.count == 0 and S5B.val == '':
+    error(res.answer_mandatory2, this.r1)
+    error(res.answer_mandatory2, this.r2)
+    error(res.answer_mandatory2, this.r3)
+    error(res.answer_mandatory2, this.r4)
+  </validate>
+
+  <row label="r1">Myself or other (Neuro/Endo)</row>
+  <row label="r2">Surgeon</row>
+  <row label="r3">Oncologist</row>
+  <row label="r4">Multidisciplinary team / panel</row>
+</radio>
+
+<textarea 
+  label="S5B"
+  below="S5A"
+  height="3"
+  keepWith="S5A"
+  width="80">
+  <title>[pipe:S5_TEXT]    
+    </title>
+</textarea>
+
+<suspend/>
+
+<radio 
+  label="S6">
+  <title>What is your comfort level prescribing oncologic treatments?</title>
+  <comment>Select one in each row</comment>
+  <row label="r1">IV oncologic therapy</row>
+  <row label="r2">Oral oncologic therapy</row>
+  <col label="c1"><b>Not at all comfortable <br /> 1</b></col>
+  <col label="c2"><b>2</b></col>
+  <col label="c3"><b>3</b></col>
+  <col label="c4"><b>4</b></col>
+  <col label="c5"><b>5</b></col>
+  <col label="c6"><b>6</b></col>
+  <col label="c7"><b>Extremely comfortable <br /> 7</b></col>
+</radio>
+
+<suspend/>
+
+<radio 
+  label="S7A">
+  <title>In your practice/at your institution, do you currently prescribe? If no, who prescribes oncologic therapy?</title>
+  <comment>Select one in each row</comment>
+  <row label="r1">IV oncologic therapy</row>
+  <row label="r2">Oral oncologic therapy</row>
+  <col label="c1"><b>Yes</b></col>
+  <col label="c2"><b>No</b></col>
+  <style name="question.after"><![CDATA[
+<style type="text/css">
+
+tr.row:nth-child(3) > td:nth-child(2) {
+    display:none;
+}
+
+tr.row:nth-child(3) > td:nth-child(3) {
+   border: none;
+   position:absolute;
+   left:60%;
+}
+
+   </style>
+]]></style>
+  <style name="question.after" wrap="ready"><![CDATA[
+$ (".RoW").find('input').attr("placeholder", "Click or tap here to enter text.");
+$ (".RoW").find('input').css({
+   "text-align" : "center",
+   "width" : "300px"
+});
+]]></style>
+</radio>
+
+<text 
+  label="S7B"
+  below="S7A"
+  keepWith="S7A"
+  sst="0">
+  <title>In your practice/at your institution, do you currently prescribe? If no, who prescribes oncologic therapy?</title>
+  <validate>
+if S7A.c1.count == 2 and S7B.c2.r3.val != '':
+    error(res.answer_no, this.r3)
+elif S7A.c2.count gt 0 and S7B.c2.r3.val == '':
+    error(res.answer_no2, this.r3)
+  </validate>
+
+  <row label="r3" ss:rowClassNames="RoW">If no, who prescribes oncologic therapy?</row>
+  <col label="c1"><b>Yes</b></col>
+  <col label="c2"><b>No</b></col>
+</text>
+
+<suspend/>

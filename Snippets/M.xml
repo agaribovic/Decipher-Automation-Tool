@@ -1,0 +1,96 @@
+<radio 
+  label="S80"
+  grouping="cols"
+  ss:listDisplay="0">
+  <title>
+  We would like to understand your level of experience with prescription digital therapeutics (PDTs) specifically in <font style="color:red">PIPE</font> indications? <b></b>
+  </title>
+  <comment>SELECT ONE</comment>
+  <row label="r1">I have never heard of PDTs</row>
+  <row label="r2">I have heard of PDTs, but haven't had any experience</row>
+  <row label="r3">I have limited current experience with PDTs</row>
+  <row label="r4">I have adequate current experience with PDTs</row>
+  <row label="r5">I have a lot of current experience with PDTs</row>
+  <row label="r6">I have had experience with PDTs in the past, but not currently</row>
+  <col label="c1">Substance Use Disorder</col>
+  <col label="c2">Chronic Insomnia</col>
+  <col label="c3">Back Pain</col>
+  <col label="c4">Pediatric ADHD</col>
+  <col label="c5">Irritable Bowel Syndrome (IBS)</col>
+  <col label="c6">Amblyopia</col>
+</radio>
+
+<suspend/>
+
+<exec>
+displCount=0
+answedCount=0
+for x in S80.cols:
+ if x.displayed:
+   displCount+=1
+   if(S80[x].r1):
+       answedCount+=1
+     
+HIDCLASS2.val=HIDCLASS2.r2.index
+if displCount==answedCount:
+    HIDCLASS2.val=HIDCLASS2.r1.index
+
+print(displCount)
+print(answedCount)
+</exec>
+
+<suspend/>
+
+<radio 
+  label="HIDCLASS2"
+  where="execute,survey,report">
+  <title>
+    Are all r1 at S80 displayed
+  </title>
+  <row label="r1">Yes</row>
+  <row label="r2">No</row>
+</radio>
+
+<suspend/>
+
+<radio 
+  label="S100"
+  grouping="cols"
+  ss:listDisplay="0"
+  surveyDisplay="desktop">
+  <title>
+    Which of the below statements best describes why you have limited to no experience with PDTs in the below condition(s)? 
+  </title>
+  <comment>SELECT ONE</comment>
+  <row label="r1">I have little to no awareness of PDTs for this condition</row>
+  <row label="r2">Access to PDTs for my patients is difficult due to technology issues</row>
+  <row label="r3">Access to PDTs for my patients is difficult due to cost issues</row>
+  <row label="r4">PDTs are not appropriate for these patients</row>
+  <row label="r5">I personally don't believe PDTs are appropriate to treat this condition</row>
+  <row label="r6" ss:rowClassNames="RoW6">I have had experience with PDTs in this condition and was not satisfied</row>
+  <row label="r7" open="1" openSize="25" randomize="0">Other (Specify)</row>
+  <col label="c1" cond="S80.c1.r2 or S80.c1.r3 or S80.c1.r6">Substance Use Disorder</col>
+  <col label="c2" cond="S80.c2.r2 or S80.c2.r3 or S80.c2.r6">Chronic Insomnia</col>
+  <col label="c3" cond="S80.c3.r2 or S80.c3.r3 or S80.c3.r6">Back Pain</col>
+  <col label="c4" cond="S80.c4.r2 or S80.c4.r3 or S80.c4.r6">Pediatric ADHD</col>
+  <col label="c5" cond="S80.c5.r2 or S80.c5.r3 or S80.c5.r6">Irritable Bowel Syndrome (IBS)</col>
+  <col label="c6" cond="S80.c6.r2 or S80.c6.r3 or S80.c6.r6">Amblyopia</col>
+  <style cond="1" name="question.after" wrap="ready"><![CDATA[
+var count=0;
+\@for x in S100.cols
+
+// we count displayed columns 
+//(mind that the Python code is not intended)
+\@if x.displayed
+count=count+1;
+
+// condition when this we disable radio button in Row6
+\@if S80[x].r2
+
+  $ ('.RoW6').eq(count).css({'pointer-events' : 'none','background' : '#ecf0f1'});
+  
+\@endif
+\@endif
+\@end
+]]></style>
+</radio>

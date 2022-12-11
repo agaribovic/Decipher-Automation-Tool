@@ -1,0 +1,37 @@
+<radio 
+  label="INTRO1">
+  <title>
+  INTRO_TXT
+  </title>
+  <comment><span id="alert_message" style="font-size: 100%; display:none"></span></comment>
+  <row label="r1" open="1" openSize="25" randomize="0" ss:rowClassNames="email">I agree, please enter email:</row>
+  <row label="r2" ss:rowClassNames="RoW2">I do not agree</row>
+  <style cond="1" name="question.after" wrap="ready"><![CDATA[
+const email = $ (".email").find('input');
+const submitButton = $ ("#btn_continue");
+const alert_message = $ ("#alert_message");
+const validRegex = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i;
+
+  email.on('input', function(e) {
+  
+    if (e.target.value.length > 1)
+      $ ("#alert_message").show();
+    else
+      $ ("#alert_message").hide();  
+  
+    if(e.target.value.match(validRegex)) { 
+      $ ("#alert_message").html("E-mail valid.").css('color', 'green');
+      submitButton.attr("disabled", false);
+    }
+    else {
+      $ ("#alert_message").html("Invalid e-mail!").css('color', '#ba0000');
+      submitButton.attr("disabled", true);
+    }
+    
+  });
+  
+$ (".RoW2").click(function(){
+  submitButton.attr("disabled", false);
+});
+]]></style>
+</radio>

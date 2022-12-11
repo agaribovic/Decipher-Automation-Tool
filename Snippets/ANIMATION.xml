@@ -1,0 +1,55 @@
+<html label="LINE_OF_THERAPY" where="survey">Please review the image below for a line of therapy description for Large B-cell Lymphoma (LBCL) treatment. <br/><br/><img src="/survey/selfserve/20dc/221094/line_of_therapy.png" title="Line of Therapy" width="100%" height="50%"/> <br/><br/>
+<div style="text-align: center;"><span id="outerSpan"> <b>You will be able to click "Continue Button" after <span id="countdowntimer">10 </span> seconds.</b> </span><br/><br/><span id="continueBtn" style="display: none;">Click the "continue" button to continue.</span></div></html>
+
+<style label="disable_continue" cond="1" arg:timeout="10" mode="after" name="respview.client.js" with="LINE_OF_THERAPY" wrap="ready"><![CDATA[
+var $submitButton = $ ("#btn_continue, #btn_finish");
+$submitButton.prop("disabled", true);
+setTimeout( function() {
+$submitButton.prop("disabled", false);
+$ ('#outerSpan').hide()
+}, $(timeout) * 1000);
+
+var timeleft = $(timeout);
+  var textTimer = setInterval(function(){
+  timeleft--;
+  $ ('#countdowntimer').text(timeleft).css('color', 'red');
+  if(timeleft <= 0) {
+     $ ("#continueBtn").show();
+      clearInterval(textTimer);
+   }
+  },1000);
+]]></style>
+<suspend/>
+
+<number 
+  label="SCR_S12"
+  autosum:postText="#"
+  autosum:prefill="0"
+  optional="0"
+  size="3"
+  sst="0"
+  uses="autosum.5">
+  <title>Of the <font style="color:red">value from a previous question</font> LBCL patients that you have managed in the <b>past 3 months</b>, how many fall into each of the following lines of therapy?
+  <br /><br />
+  For patients anticipating receiving CAR T, please count those who have not yet been apheresed towards the prior line of therapy
+  <br /><br />
+  <div style="text-align:center">
+  <em>Please refer to <font style="color:blue" id="definition"><u>line of therapy</u></font> definition here</em>
+  <br /><br />
+  <img src="/survey/selfserve/20dc/221094/line_of_therapy.png" title="Line of Therapy" width="70%" height="35%" id="S12_IMG" style="display:none" />
+  </div>
+  </title>
+  <comment>Enter a whole number</comment>
+  <row label="r1">Frontline (1L)</row>
+  <row label="r2">Second line (2L)</row>
+  <row label="r3">Third or later line (3L+)</row>
+  <col label="c1"><b># of LBCL patients</b></col>
+  <style cond="1" name="question.after" wrap="ready"><![CDATA[
+$ ("#definition").mouseover(function(){
+    $ ("#S12_IMG").show(1000);
+}); 
+$ ("#definition").mouseout(function(){
+    $ ("#S12_IMG").hide(1000);
+});
+]]></style>
+</number>

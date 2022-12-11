@@ -1,0 +1,701 @@
+
+  ------------  
+<condition label="Disp1" cond='NHC1.r2'>Conditional Disposition 1 </condition>
+<condition label="Disp2" cond='NHC4.r2'>Conditional Disposition 2 </condition>
+<condition label="Disp3" cond='NHC6.r2'>Conditional Disposition 3 </condition>
+<condition label="Disp4" cond='S1.r7'>Conditional Disposition 4 </condition>
+<condition label="Disp5" cond='S2.ch20 or S2.ch24 or S2.ch46 or S2.ch52'>Conditional Disposition 5 </condition>
+<condition label="Disp6" cond='S3.r2 or S3.r3 or S3.r4 or S3.r5'>Conditional Disposition 6 </condition>
+<condition label="Disp7" cond='S5.r2'>Conditional Disposition 7 </condition>
+<condition label="Disp8" cond='S6.r3'>Conditional Disposition 8 </condition>
+<condition label="Disp9" cond='not S7.r1.check("3-30")'>Conditional Disposition 9 </condition>
+<condition label="Disp10" cond='S9.r5'>Conditional Disposition 10 </condition>
+<condition label="Disp11" cond='S11.r1.ival lt 50'>Conditional Disposition 11 </condition>
+<condition label="Disp12" cond='S11.r1.check("50-75”)'>Conditional Disposition 12 </condition>
+<condition label="Disp13" cond='S13.r4.ival lt 20'>Conditional Disposition 13 </condition>
+<condition label="Disp14" cond='S13.r4.check("20-30")'>Conditional Disposition 14 </condition>
+<condition label="Disp15" cond='((S14.r2.ival + S14.r3.ival) lt 30) or ((S14.r2.ival==0 or S14.r3.ival==0))'>Conditional Disposition 15 </condition>
+<condition label="Disp16" cond='((S14.r2.ival + S14.r3.ival) ge 30) and ((S14.r2.ival + S14.r3.ival) le 40)'>Conditional Disposition 16 </condition>
+<condition label="Disp17" cond='S16.r1'>Conditional Disposition 17 </condition>
+<condition label="Disp18" cond='S17.r3'>Conditional Disposition 18 </condition>
+<condition label="Disp19" cond='NH_CONS_FORM1.r2'>Conditional Disposition 19 </condition>
+<condition label="Disp20" cond='NH2.r2'>Conditional Disposition 20 </condition>
+
+  ------------  
+
+<row label="r1" value="1">NHC1 </row>
+<row label="r2" value="2">NHC4 </row>
+<row label="r3" value="3">NHC6 </row>
+<row label="r4" value="4">S1 </row>
+<row label="r5" value="5">S2 </row>
+<row label="r6" value="6">S3 </row>
+<row label="r7" value="7">S5@end </row>
+<row label="r8" value="8">S6 </row>
+<row label="r9" value="9">S7@end </row>
+<row label="r10" value="10">S9@end </row>
+<row label="r11" value="11">S11 </row>
+<row label="r12" value="12">S11@end </row>
+<row label="r13" value="13">S13 </row>
+<row label="r14" value="14">S13@end </row>
+<row label="r15" value="15">S14 </row>
+<row label="r16" value="16">S14@end </row>
+<row label="r17" value="17">S16 </row>
+<row label="r18" value="18">S17@end </row>
+<row label="r19" value="19">NH_CONS_FORM1 </row>
+<row label="r20" value="20">NH2 </row>
+
+  ------------  
+
+
+<res label='errOEMin'>Please enter more text.</res>
+<exec when='init'>
+# Checking OE='Open End' Question Length
+# [oemin: 5]
+def OEMinChk(strChk, maxOE):
+	if len(str(strChk.val)) lt maxOE:
+		error(res.errOEMin)
+</exec>
+
+<radio
+	label='NHC1'>
+	<title>
+		<b>PRIVACY</b> 
+<br/><br/>We comply with privacy, data use, data protection and informed consent laws and regulations governing your personal information. The research will comply with MR guidelines. Any information you provide us with will be treated as confidential, it will be combined with feedback from others like yourself.  You will remain anonymous unless you give permission to be identified.  Your information will only be used for market research purposes and will <b><u>not</u></b> be sold or passed to any other organisation without your permission.  You have the right to refuse to answer questions or withdraw at any time.  A consent form will be provided explaining what if any personal data will be kept, for how long, for what purpose, who will have access to it and who you may contact with any questions. We need your consent in order for us to collect and use any information about you. 
+<br/><br/>Are you happy to proceed on this basis?
+<br/><br/>
+	</title>
+	<comment>SINGLE CODE</comment>
+	<row label='r1'>YES</row>
+	<row label='r2'>NO</row>
+</radio>
+
+
+<note> Original Cond=NHC1.r2</note>
+<term label='Term1' cond="(processTerms('Disp1') )"> Terminate NHC1 </term>
+<suspend/>
+
+<html
+	label='INTRO1'
+	where='survey'>
+		To participate in this study, you must acknowledge and agree to the following terms regarding study requirements and the information you will provide during the study:
+<br/><br/>
+	
+</html>
+
+
+<suspend/>
+
+<html
+	label='NHC2'
+	where='survey'>
+		<b>Confidentiality of Study Information</b>
+<br/><br/>The purpose of this study is purely to gain your feedback and in no way is a marketing or sales pitch by this market research company or our Sponsor.  By participating, you agree to hold confidential any information you may obtain through this study, and specifically agree not to discuss with others, or attempt to print, copy, or distribute any of the information contained herein. Please note that during this study, you may be exposed to product information that is investigational in nature and may or may not be approved by the appropriate government agencies for use in clinical practice.
+<br/><br/>
+	
+</html>
+
+
+<suspend/>
+
+<html
+	label='NHC3'
+	where='survey'>
+		<b>Data Protection</b>
+<br/><br/>We need your consent for us to collect and use any information about you or your patients, which may include your name, your contact information, your professional background and qualifications, your patients' non-identifiable health information, your opinions and, if recorded, your likeness and voice for purposes of the market research study. We will only collect or process data that is necessary to conduct the study, and not all aforementioned categories will be applicable to all studies. To the extent data about you is collected or processed in conjunction with the market research study, it may be transferred to third parties assisting with the study, such as a moderator or transcriptionist, and will also be transferred to the United States. In such cases, the necessary measures will be taken to ensure the safety of your data in accordance with applicable data protection laws. You can find out more about Narrative Health's privacy practices around processing and transferring data by reading the Narrative Health Privacy Policy, which is available at https:/<a href="https:///www.narrative-health.com/privacy-policy/" target="_blank" rel="noopener"><span style="color:blue;">/www.narrative-health.com/privacy-policy/</span></a>
+<br/><br/>Under applicable data protection laws, you have a right to access your personal data and to request the rectification of any errors and may also have the right to restrict the processing or request the erasure or anonymization of your personal data. Your personal data will be stored only for as long as necessary for the purposes of the market research. Should you wish to exercise any of these rights or have any queries in relation to the use of your personal data, please contact Narrative Health at <a href="mailto:hello@narrative-health.com" target="_blank" rel="noopener"><span style="color:blue;">hello@narrative-health.com</span></a> .
+<br/><br/>
+	
+</html>
+
+
+<suspend/>
+
+<radio
+	label='NHC4'>
+	<title>
+		<b>Recording and Sponsor Engagement</b>
+<br/><br/>The interview will take place over the phone. You consent to the following:<ul>
+<br/><br/><li/>This research will be audio recorded. The interview recordings and any other market research content you provide may be shared with Narrative Health's subcontractors for purposes of the market research study, who will respect the confidentiality of all information exchanged.
+<li/>The sponsor of the study will: <ul>
+<li/>Observe the interview remotely
+<li/>Listen to an audio recording at their offices</ul></ul>
+This will include people from marketing, clinical, and sales departments, all of whom will respect the confidentiality of all information exchanged and will not make sales approaches as a consequence of having access to it. The purpose of this observation is so that the sponsor may better understand your views. You may withdraw this consent at any time.
+<br/><br/>By selecting "I consent” below, you confirm that you have read and understand the information above and agree to the requirements to participate in this market research study.
+	</title>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<note> Original Cond=NHC4.r2</note>
+<term label='Term2' cond="(processTerms('Disp2') )"> Terminate NHC4 </term>
+<suspend/>
+
+<radio
+	label='NHC6'
+	cond='country.us'>
+	<title>
+		<b>Transparency Reporting </b> 
+<br/><br/>The study that you will be participating in is being conducted as double-blind. This means that neither you nor the Sponsor will be told each other's identity, unless the Sponsor is required to be identified by applicable law.
+<br/><br/>Payments or transfers of value made to licensed healthcare professionals for participation in double-blind market research are excluded from reporting under the Federal Open Payments program and applicable state regulations; therefore, payments will not be reported for your participation in this study, unless your identity becomes known to the Sponsor.
+<br/><br/>In the unlikely event that either your identity becomes known to the Sponsor, such as if the Sponsor viewing or listening to the interview recognizes your identity or the Sponsor's identity becomes definitively known to you, and you are subject to the Federal Open Payments program or similar state regulations, the payment will then become reportable. If you are a professional not subject to the Federal Open Payments or similar state regulations and your identity becomes known to the Sponsor, the Sponsor may still require payments for your participation in this research project to be disclosed to them.
+<br/><br/>By selecting "I consent” below, you confirm that you have read and understand the information above and agree to the requirements to participate in this market research study.
+<br/><br/>
+	</title>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<note> Original Cond=NHC6.r2</note>
+<term label='Term3' cond="((country.us) and processTerms('Disp3') )"> Terminate NHC6 </term>
+<suspend/>
+
+<radio
+	label='NHC7'>
+	<title>
+		<b>Pharmacovigilance and Product Technical Complaints Reporting</b>
+<br/><br/>We are required to pass on to the Sponsor details of adverse events, other pharmacovigilance data (also known as PV data), and/or product technical complaints pertaining to their products that are mentioned during the market research study. 
+<br/><br/>"<b>Adverse Event</b>" or "<b>AE</b>” refers to any untoward medical occurrence in a patient who takes or uses a product, and which does not necessarily have a causal relationship with that product.  An adverse event can therefore be any unfavourable and unintended sign (including an abnormal laboratory finding, for example), symptom, or disease, temporally associated with the use of such a product, whether or not considered related to that product.
+<br/><br/>"<b>Pharmacovigilance Data</b>” or "<b>PV Data</b>” includes any adverse event (serious or not), any incident (serious or not), or any of the following special situations (with or without adverse events):  any report of misuse; any medication error; any off-label use (intentional use outside the labelled indication); any overdose (intentional or not); any drug abuse, dependence, addiction, (withdrawal syndrome); any lack of efficacy; any drug exposure during pregnancy or child exposure during breastfeeding or conception (whether from the male or female); any occupational exposure (unintentional exposure during work); accidental exposure; unexpected therapeutic benefit; any suspected transmission of infectious agents; and/or suspected drug interactions involving active ingredients or their metabolites.  
+<br/><br/>"<b>Product complaint</b>”, "<b>Product Technical Complaint</b>” or "<b>PTC</b>” refers to any written, electronic, or oral communication that alleges deficiencies related to the identity, quality, durability, reliability, safety, efficacy or performance of a product, device, its packaging, or any written leaflet or other information provided with such product or device, after it is released for distribution.  
+<br/><br/>Should you mention during the discussion an adverse event or other PV Data or product technical complaint in a specific patient or group of patients about a specific product, we will need to report this even if it has already been reported by you directly to the company or to regulatory authorities.
+<br/><br/>In such a situation, you will be asked whether you are willing to waive the anonymity given to you under the ICC/ESOMAR International Code on Market and Social Research practice and the EphMRA Code of Conduct specifically in relation to that adverse event/product technical complaint. If you are willing to waive your anonymity, your name and contact information will be provided to the research Sponsor, who may report it to the U.S. Food and Drug Administration and you may be contacted for follow-up questions regarding the adverse event, other PV Data, and/or product technical complaint.  If you are not willing to waive your anonymity, the adverse event, other PV Data, and/or product technical complaint will be reported anonymously.  Regardless, everything else you say during the study will continue to remain anonymous. 
+<br/><br/>The sponsor may wish to request further information from you. This will have no impact on the anonymity associated with the study itself. Please indicate whether you consent to us disclosing your name, contact information, and adverse event details to the sponsor in such situations.
+	</title>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<suspend/>
+
+<radio
+	label='S1'>
+	<title>
+		Please indicate the country in which your practice is located:
+	</title>
+	<comment>Select one.</comment>
+	<row label='r1'>United States (US)</row>
+	<row label='r2'>Germany (DE)</row>
+	<row label='r3'>Japan (JP)</row>
+	<row label='r4'>France (FR)</row>
+	<row label='r5'>China (CH)</row>
+	<row label='r6'>Canada (CA)</row>
+	<row label='r7'>Other</row>
+</radio>
+
+
+<note> Original Cond=S1.r7</note>
+<term label='Term4' cond="(processTerms('Disp4') )"> Terminate S1 </term>
+<suspend/>
+
+<checkbox
+	label='S2'
+	cond='S1.r1'
+	multicol:count='5'
+	multicol:start='ch1,ch12,ch23,ch34,ch45'
+	rowLegend='right'
+	ss:legendColWidth='195px'
+	uses='multicol.7'>
+	<title>
+		In what state(s) do you practice medicine?
+<br/><br/>
+	</title>
+	<row label='r1'>State of practice</row><comment>Select all that apply</comment>
+		<row label="ch1"> Alabama</row>
+		<row label="ch2"> Alaska</row>
+		<row label="ch3"> Arizona</row>
+		<row label="ch4"> Arkansas</row>
+		<row label="ch5"> California</row>
+		<row label="ch6"> Colorado</row>
+		<row label="ch7"> Connecticut</row>
+		<row label="ch8"> Delaware</row>
+		<row label="ch9"> District of Columbia (Washington DC)</row>
+		<row label="ch10"> Florida</row>
+		<row label="ch11"> Georgia</row>
+		<row label="ch12"> Hawaii</row>
+		<row label="ch13"> Idaho</row>
+		<row label="ch14"> Illinois</row>
+		<row label="ch15"> Indiana</row>
+		<row label="ch16"> Iowa</row>
+		<row label="ch17"> Kansas</row>
+		<row label="ch18"> Kentucky</row>
+		<row label="ch19"> Louisiana</row>
+		<row label="ch20"> Maine</row>
+		<row label="ch21"> Maryland</row>
+		<row label="ch22"> Massachusetts</row>
+		<row label="ch23"> Michigan</row>
+		<row label="ch24"> Minnesota</row>
+		<row label="ch25"> Mississippi</row>
+		<row label="ch26"> Missouri</row>
+		<row label="ch27"> Montana</row>
+		<row label="ch28"> Nebraska</row>
+		<row label="ch29"> Nevada</row>
+		<row label="ch30"> New Hampshire</row>
+		<row label="ch31"> New Jersey</row>
+		<row label="ch32"> New Mexico</row>
+		<row label="ch33"> New York</row>
+		<row label="ch34"> North Carolina</row>
+		<row label="ch35"> North Dakota</row>
+		<row label="ch36"> Ohio</row>
+		<row label="ch37"> Oklahoma</row>
+		<row label="ch38"> Oregon</row>
+		<row label="ch39"> Pennsylvania</row>
+		<row label="ch40"> Rhode Island</row>
+		<row label="ch41"> South Carolina</row>
+		<row label="ch42"> South Dakota</row>
+		<row label="ch43"> Tennessee</row>
+		<row label="ch44"> Texas</row>
+		<row label="ch45"> Utah</row>
+		<row label="ch46"> Vermont</row>
+		<row label="ch47"> Virginia</row>
+		<row label="ch48"> Washington</row>
+		<row label="ch49"> West Virginia</row>
+		<row label="ch50"> Wisconsin</row>
+		<row label="ch51"> Wyoming</row>
+		<row label="ch52" exclusive='1' > None of the above</row>
+</checkbox>
+
+
+<suspend/>
+
+<exec sst='0'>
+commaFlag=0
+txtArr=""
+for eachRow in S2.rows:
+	if eachRow.val==1:
+		if commaFlag==0:
+			txtArr=txtArr+eachRow.text
+			commaFlag=1
+		else:
+			txtArr=txtArr+", "+eachRow.text
+S2StatesHid.val=txtArr
+</exec>
+
+<suspend/>
+
+<textarea
+	label="S2StatesHid"
+	where="execute,survey,report">
+	<title>S2 countries textual.</title>
+</textarea>
+
+<suspend/>
+
+
+<note> Original Cond=S2.ch20 or S2.ch24 or S2.ch46 or S2.ch52</note>
+<term label='Term5' cond="((S1.r1) and processTerms('Disp5') )"> Terminate S2ter </term>
+<suspend/>
+
+<radio
+	label='S3'
+	cond='S1.r1'>
+	<title>
+		What is your occupation?  
+<br/><br/>
+	</title>
+	<comment>SELECT ONE</comment>
+	<row label='r1'>Physician</row>
+	<row label='r2'>Nurse Practitioner / Physician Assistant (NP/PA)</row>
+	<row label='r3'>Nurse (e.g., Registered Nurse)</row>
+	<row label='r4'>Certified Nurse Assistant (CNA)</row>
+	<row label='r5'>Other</row>
+</radio>
+
+
+<note> Original Cond=S3.r2 or S3.r3 or S3.r4 or S3.r5</note>
+<term label='Term6' cond="((S1.r1) and processTerms('Disp6') )"> Terminate S3 </term>
+<suspend/>
+
+<radio
+	label='S5'>
+	<title>
+		Which of the below best describes your <b>primary</b> medical specialty?
+	</title>
+	<comment>SELECT ONE</comment>
+	<row label='r1'>Pulmonology</row>
+	<row label='r2' open='1'  openSize='25'  randomize='0' >Other (please specify: )</row>
+</radio>
+
+
+<note> Original Cond=S5.r2</note>
+<term label='Term7' cond="(processTerms('Disp7')  and (QHidStage.r2))"> Terminate S5 </term>
+<suspend/>
+
+<radio
+	label='S6'
+	cond='S1.r1'>
+	<title>
+		Are you board certified or board eligible in your medical specialty?
+	</title>
+	<comment>SELECT ONE</comment>
+	<row label='r1'>Board Certified</row>
+	<row label='r2'>Board Eligible</row>
+	<row label='r3'>Neither</row>
+</radio>
+
+
+<note> Original Cond=S6.r3</note>
+<term label='Term8' cond="((S1.r1) and processTerms('Disp8') )"> Terminate S6 </term>
+<suspend/>
+
+<number
+	label='S7'
+	verify='range(0,100)'
+	rowLegend='right'
+	size='5'
+	grouping='cols'
+	optional='0'>
+	<title>
+		How many years have you been in practice post residency?  
+<br/><br/>
+	</title>
+	<comment>SELECT ONE</comment>
+	<row label='r1'>Years of experience</row>
+</number>
+
+
+<suspend/>
+
+<note> Original Cond=not S7.r1.check("3-30")</note>
+<term label='Term9' cond="(processTerms('Disp9')  and (QHidStage.r2) )"> Terminate S7teratend </term>
+<suspend/>
+
+<radio
+	label='S8'>
+	<title>
+		Which of the following best describes your practice setting?
+	</title>
+	<row label='r1'>Primarily office-based private practice</row>
+	<row label='r2'>Primarily hospital setting</row>
+	<row label='r3'>Mixed office and hospital based</row>
+</radio>
+
+
+<suspend/>
+
+<suspend/>
+
+<exec>
+
+if S8.r1 :
+    S8HID.val = S8HID.r1.index
+if S8.r2 or S8.r3 :
+    S8HID.val = S8HID.r2.index
+
+</exec>
+
+<suspend/>
+
+<radio
+	label = "S8HID"
+	optional = "1"
+	where = "execute,survey,report">
+	<title>Recorded from question S8</title>
+	  <row label = 'r1'>Office</row>
+	  <row label = 'r2'>Mix</row>
+</radio>
+
+<suspend/>
+
+<radio
+	label='S9'>
+	<title>
+		Which of the following best describes the setting in which you spend most of your time treating patients?
+	</title>
+	<comment>SELECT ONE</comment>
+	<row label='r1'>Academic or Teaching hospital</row>
+	<row label='r2'>Community Non-Teaching Hospital</row>
+	<row label='r3'>Community-Based Solo Private Practice</row>
+	<row label='r4'>Community-Based Group Private Practice</row>
+	<row label='r5' open='1'  openSize='25'  randomize='0' >Other, please specify</row>
+</radio>
+
+
+<note> Original Cond=S9.r5</note>
+<term label='Term10' cond="(processTerms('Disp10')  and (QHidStage.r2))"> Terminate S9 </term>
+<suspend/>
+
+<suspend/>
+
+<exec>
+
+if S9.r1 :
+    S9HID.val = S9HID.r1.index
+if S9.r2 or S9.r3 or S9.r4 :
+    S9HID.val = S9HID.r2.index
+
+</exec>
+
+<suspend/>
+
+<radio
+	label = "S9HID"
+	optional = "1"
+	where = "execute,survey,report">
+	<title>Recorded from question S9</title>
+	  <row label = 'r1'>Academic</row>
+	  <row label = 'r2'>Community</row>
+</radio>
+
+<suspend/>
+
+<number
+	label='S11'
+	verify='range(0,100)'
+	rowLegend='right'
+	size='5'
+	grouping='cols'
+	optional='0'>
+	<title>
+		What percent of your professional time is spent in <b>direct patient care</b>?
+	</title>
+	<row label='r1'>% of time</row>
+</number>
+
+
+<suspend/>
+
+<note> Original Cond=S11.r1.ival lt 50</note>
+<term label='Term11' cond="(processTerms('Disp11') )"> Terminate S11ter </term>
+<suspend/>
+
+<note> Original Cond=S11.r1.check("50-75”)</note>
+<term label='Term12' cond="(processTerms('Disp12')  and (QHidStage.r2) )"> Terminate S11teratend </term>
+<suspend/>
+
+<number
+	label='S13'
+	shuffle='rows'
+	rowLegend='left'
+	uses='autosum.5'
+	size='5'
+	grouping='cols'
+	autosum:prefill='0'
+	ss:listDisplay='0'>
+	<title>
+		In a <b>typical month</b>, how many patients do you <b>personally actively manage</b> with each of the following condition? 
+<br/><br/>
+	</title>
+	<comment>Consider unique patients, not total patient visits.</comment>
+	<row label='r1'>Pulmonary Hypertension</row>
+	<row label='r2'>Lung Cancer</row>
+	<row label='r3'>Asthma</row>
+	<row label='r4'>Pneumonia</row>
+	<row label='r5'>Chronic Obstructive Pulmonary Disease (COPD)</row>
+	<row label='r6'>Sleep Apnea</row>
+	<col label='c1' ># of Unique Patients</col>
+</number>
+
+
+<suspend/>
+
+<note> Original Cond=S13.r4.ival lt 20</note>
+<term label='Term13' cond="(processTerms('Disp13') )"> Terminate S13ter </term>
+<suspend/>
+
+<note> Original Cond=S13.r4.check("20-30")</note>
+<term label='Term14' cond="(processTerms('Disp14')  and (QHidStage.r2) )"> Terminate S13teratend </term>
+<suspend/>
+
+<number
+	label='S14'
+	amount='100'
+	ss:postText='%'
+	verify='range(0,100)'
+	rowLegend='left'
+	uses='autosum.5'
+	size='5'
+	grouping='cols'
+	autosum:prefill='0'
+	ss:listDisplay='0'>
+	<title>
+		Of the <b>Chronic Obstructive Pulmonary Disease (COPD) patients</b> you manage or treat in a typical month, what percentage of these patients would you classify as mild, moderate, severe, or very severe?  
+<br/><br/>
+<br/><br/>
+	</title>
+	<comment>Please enter a percentage in each row; your responses should sum to 100%.</comment>
+	<row label='r1'>Mild COPD (GOLD 1; FEV<sub>1</sub> ≥ 80% predicted)</row>
+	<row label='r2'>Moderate COPD (GOLD 2; 50% ≤ FEV<sub>1 </sub>< 80% predicted)</row>
+	<row label='r3'>Severe COPD (GOLD 3; 30% ≤ FEV<sub>1</sub>&lt;50% predicted)</row>
+	<row label='r4'>Very Severe COPD (GOLD 4; FEV<sub>1</sub>&lt;30% predicted)</row>
+	<col label='c1' >% of COPD Patients</col>
+</number>
+
+
+<suspend/>
+
+<note> Original Cond=((S14.r2.ival + S14.r3.ival) lt 30) or ((S14.r2.ival==0 or S14.r3.ival==0))</note>
+<term label='Term15' cond="(processTerms('Disp15') )"> Terminate S14ter </term>
+<suspend/>
+
+<note> Original Cond=((S14.r2.ival + S14.r3.ival) ge 30) and ((S14.r2.ival + S14.r3.ival) le 40)</note>
+<term label='Term16' cond="(processTerms('Disp16')  and (QHidStage.r2) )"> Terminate S14teratend </term>
+<suspend/>
+
+<checkbox
+	label='S15'
+	atleast='1'>
+	<title>
+		Which of the following therapies have you used to treat your <b>Chronic Obstructive Pulmonary Disease (COPD) patients</b>? Please include all therapies <b>used currently and previously</b>. 
+<br/><br/>
+	</title>
+	<comment>Please select all that apply.</comment>
+	<group label='g101'>Single Therapy</group>
+	<row label='r1' groups="g101" >Long-acting Muscarinic Antagonists (LAMAs) (e.g., Tiotropium, Aclidinium, Glycopyrronium, Nebulized Glycopyrronium, Revefenacin, Umeclidinium)</row>
+	<row label='r2' groups="g101" >Long-acting Beta Agonists (LABAs) (e.g., Indacaterol, Olodaterol)</row>
+	<row label='r3' groups="g101" >Short-acting muscarinic antagonists (SAMAs) (e.g., Ipratropium)</row>
+	<row label='r4' groups="g101" >Short-acting Beta Agonists (SABAs) (e.g., Albuterol, Levalbuterol)</row>
+	<row label='r5' groups="g101" >Inhaled Corticosteroids (ICSs) (e.g., Fluticasone, Budesonide)</row>
+	<group label='g102'>Combination Therapy</group>
+	<row label='r6' groups="g102" >Double therapy with LAMA + LABA (LAMA + LABA)</row>
+	<row label='r7' groups="g102" >Double therapy with LAMA + ICS (LAMA + ICS)</row>
+	<row label='r8' groups="g102" >Double therapy with LABA + ICS (LABA + ICS)</row>
+	<row label='r9' groups="g102" >Triple therapy with LAMA + LABA + ICS (LAMA + LABA + ICS)</row>
+	<group label='g103'>Other</group>
+	<row label='r10' groups="g103" >Oral Phosphodiesterase-4 (PDE4) Inhibitors (e.g., Roflumilast)</row>
+	<row label='r11' groups="g103" >Methylxanthines (e.g., Theophylline)</row>
+	<row label='r12' groups="g103" >Oral corticosteroids (e.g., Prednisone)</row>
+	<row label='r13' groups="g103" >Antibiotics (e.g., Erythromycin, Azithromycin)</row>
+	<row label='r14' groups="g103" >Biologics</row>
+</checkbox>
+
+
+<suspend/>
+
+<radio
+	label='S16'>
+	<title>
+		Are you currently affiliated with any pharmaceutical manufacturer, biotechnology manufacturer, or government agency (as an employee, clinical researcher, paid consultant, member of a speaker panel, etc.)?
+	</title>
+	<comment>Select one.</comment>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<note> Original Cond=S16.r1</note>
+<term label='Term17' cond="(processTerms('Disp17') )"> Terminate S16 </term>
+<suspend/>
+
+<radio
+	label='S17'>
+	<title>
+		Thank you for completing the screener. As mentioned at the study introduction, we have a range of interviews available. Please kindly indicate which length of interview suits you the best between 6th December and 16th December. Depending on your choice, you will be redirected to a specific moderator's calendar, where you will be able to book your interview. Before you will be redirected to moderators calendar – you will see one last screen with the full consent form.
+	</title>
+	<row label='r1'>60-minute web-assisted telephone interview with the potential 10 minutes follow up (5-7 days after main interview completion)</row>
+	<row label='r2'>75-minute web-assisted telephone interview</row>
+	<row label='r3'>No strong preference – happy to participate in either one.</row>
+</radio>
+
+
+<note> Original Cond=S17.r3</note>
+<term label='Term18' cond="(processTerms('Disp18')  and (QHidStage.r2))"> Terminate S17 </term>
+<suspend/>
+
+<radio
+	label='S17B'
+	cond='S17.r1'>
+	<title>
+		Would you be willing to participate in a 10-minute follow-up telephone interview approximately 5 to 7 days after your initial 60-minute interview?
+	</title>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<suspend/>
+
+<pipe
+	label='NH1PIPE'>
+	<case label='r1' cond='S17.r1'>Web-assisted telephone interview, 60 minutes. Platform: InterVu, Focus Vision</case>
+	<case label='r2' cond='S17.r2'>Web-assisted telephone interview, 75 minutes. Platform: InterVu, Focus Vision</case>
+	<case label='r3' cond='S17.r3'>Web-assisted telephone interview, 60 or 75 minutes. Platform: InterVu, Focus Vision</case>
+	<case label='r4' cond='1'><b></b></case>
+</pipe>
+
+
+<suspend/>
+
+<radio
+	label='NH_CONS_FORM1'>
+	<title>
+		<b>Project Title: COPD</b>
+<br/><br/>Narrative Health, an independent market research agency based in the US/UK, is conducting a market research study on behalf of a pharmaceutical company. 
+<br/><br/>The purpose of this research is to understand more about the treatment and management of COPD, and it will take the form of:
+<br/><br/><ul>
+<br/><br/><li/><b>[pipe: NH1PIPE]</b>
+</ul>
+<br/><br/>Taking this opportunity to have your voice heard would greatly help us further our research and your participation would be hugely appreciated.  If you have any questions, please contact Alyson Tyler by email <a href="mailto:alyson.tyler@surveyhealthcareglobal.com" target="_blank" rel="noopener"><span style="color:blue;">alyson.tyler@surveyhealthcareglobal.com</span></a> or phone at 19868883933.
+<br/><br/>Please do not mention any identifiable information (such as your full name or contact details) during the interview to protect your anonymity.
+<br/><br/><b>Are you happy to proceed to on this basis?</b>
+	</title>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<note> Original Cond=NH_CONS_FORM1.r2</note>
+<term label='Term19' cond="(processTerms('Disp19') )"> Terminate NH_CONS_FORM1 </term>
+<suspend/>
+
+<radio
+	label='NH2'>
+	<title>
+		<b>PRIVACY</b>
+<br/><br/>The research will comply with applicable Data Protection/Privacy law and with the guidelines and codes of conduct of the BHBIA, EphMRA, ABPI, MRS and the Insights Association. 
+<br/><br/>Any information you provide us with will be treated as confidential and will be combined with feedback from others like yourself.  You will remain anonymous unless you give permission to be identified.  
+<br/><br/>Your information will only be used for market research purposes and will not be passed to any other organization without your permission.  
+<br/><br/>We (the client) need your consent in order for us to collect and use any information about you. We won't keep any personal data you give us for longer than 10 years. If you make a request for information to us after this time, we might be unable to identify any information attributed to you because we have permanently deleted any information about you. 
+<br/><br/>You have the right to refuse to answer questions or withdraw at any time.  For more information about your rights please see our privacy notice, it is available at:
+<br/><br/>https:/<a href="https:///www.narrative-health.com/privacy-policy/" target="_blank" rel="noopener"><span style="color:blue;">/www.narrative-health.com/privacy-policy/</span></a> 
+<br/><br/><b>OBSERVATION/RECORDING OF INTERVIEW</b>
+<br/><br/>The interview will be observed live via audio streaming and audio recorded for market research purposes, analysis and internal training by the sponsoring company and Narrative Health's research team.  By consenting to participate, you understand that the sponsoring company and Narrative Health's research team will have access to recordings of this market research interview and information that you share.
+<br/><br/>The sponsoring company that commissioned this market research study may:
+<br/><br/><b>Listen in to the live interview or listen to an audio recording</b>
+<br/><br/>Those listening to the live interview and/or listening to the recordings may be located in countries outside the country in which you live, which may not have data protection laws equivalent to those in your country. In such cases, the necessary measures will be taken to ensure the safety of your data in accordance with applicable data protection laws. 
+<br/><br/>The people in the company, based in the UK and in the US, who will listen to or view the recordings will be in the following functions/roles: <ul>
+<br/><br/><li/><b>Market research/insights</b>
+<li/><b>Medical team</b>
+<li/><b>Marketing team</b>
+<li/><b>Research and Development</b>
+<li/><b>Communications agency</b></ul>
+You understand that all those listening or the live interview and/or the recording must respect the confidentiality of all information exchanged in market research interviews/recordings:<ul>
+<br/><br/><li/>All those listening to the live interview or listening to these recordings agree to abide by the BHBIA, MRS, Insights Association, EphMRA and all other relevant Codes of Conduct for market research. 
+<li/>Your confidentiality and anonymity will be respected at all times and no information can or will be directly attributed to you by name, nor will your name be made available to any third party, for any purpose.
+<li/>The footage will be stored retained by Narrative Health for up to 10 years and then it will be permanently deleted. Narrative Health is responsible for processing the video and audio recordings in accordance with Art. 4 (7) EU General Data Protection Regulation (GDPR). </ul>
+You understand that you can withdraw your consent at any stage or request further information on how your data will be processed, stored and your privacy rights by emailing <a href="mailto:team@narrative-health.com" target="_blank" rel="noopener"><span style="color:blue;">team@narrative-health.com</span></a> or reading the privacy statement located on our website – https:/<a href="https:///www.narrative-health.com/privacy-policy/" target="_blank" rel="noopener"><span style="color:blue;">/www.narrative-health.com/privacy-policy/</span></a>
+<br/><br/><b>ADVERSE EVENTS</b>
+<br/><br/>This research has been commissioned by a company that manufactures medicines/medical devices. It is a legal requirement that the company keep records of any side effects or complaints that people may have about their medicines/medical device. We must assist the company in meeting its legal obligations. 
+<br/><br/>Therefore, if, during the interview, you make any reference to a side effect or complaint about a medicine/medical device, we will let the company know about this even if it has already been reported by you directly to the company or the regulatory authorities. You can decide whether or not to give the company your name and contact details. If you do provide your name and details with the AE, please rest assured everything else you say during the course of the survey will remain confidential.
+<br/><br/>You will be required to have access to a computer with internet access during your interview. You will be asked to connect to <b>InterVu, FocusVision </b>platform to connect via video/audio. Please <b>only enter your first name</b> and do not enter any contact details when connecting. These platforms will ensure that any information you provide to them will be held securely. For more information, please see the privacy notice below:
+<br/><br/>FocusVision: https:/<a href="https:///www.focusvision.com/privacy-statement/" target="_blank" rel="noopener"><span style="color:blue;">/www.focusvision.com/privacy-statement/</span></a> 
+<br/><br/><b>RECONTACT</b>
+<br/><br/>It may be necessary, if there is a question that comes up in the course of our analysis or in regard to any Adverse Events mentioned during the interview, to contact you again for clarification on a point you have made.  
+<br/><br/><b>Do you give us your consent to re-contact you on this basis? </b>
+	</title>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<note> Original Cond=NH2.r2</note>
+<term label='Term20' cond="(processTerms('Disp20') )"> Terminate NH2 </term>
+<suspend/>
+
+<text
+	label='NH3'
+	optional='0'>
+	<title>
+		I confirm that I have read this document and have had the opportunity to ask questions. 
+<br/><br/>Please sign below to confirm you agree with the terms above and would like to proceed with the interview:
+	</title>
+	<row label='r1'>First Name:</row>
+	<row label='r2'>Surname:</row>
+	<row label='r3'>Signature:</row>
+	<row label='r4'>Date:</row>
+</text>
+
+
+<suspend/>

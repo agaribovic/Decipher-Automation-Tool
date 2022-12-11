@@ -1,0 +1,153 @@
+<block label="TypingTool" builder:title="Typing tool for Job# 2105175 - PHARMS" sst="0">
+  <exec>
+#STEP 1: Collect Response Data and Store into QHidRaw
+#Intercept Constant = 1
+
+#QS17_1
+QHidRaw.r1.val=QS17.r1.val
+
+#QS17_2
+QHidRaw.r2.val=QS17.r2.val
+
+#QS17_3
+QHidRaw.r3.val=QS17.r3.val
+
+#QS17_4
+QHidRaw.r4.val=QS17.r4.val
+
+#QS17_5
+QHidRaw.r5.val=QS17.r5.val
+
+#QS16
+QHidRaw.r6.val=QS16.val
+  </exec>
+
+  <suspend/>
+
+  <number 
+   label="QHidRaw"
+   size="3"
+   ss:listDisplay="0"
+   where="execute,survey,report">
+    <title><strong>Hidden question to store the Response Data</strong></title>
+    <row label="r1">QS17_1 =</row>
+    <row label="r2">QS17_2 =</row>
+    <row label="r3">QS17_3 =</row>
+    <row label="r4">QS17_4 =</row>
+    <row label="r5">QS17_5 =</row>
+    <row label="r6">QS16 =</row>
+  </number>
+
+  <suspend/>
+
+  <exec>
+#QHidProbability
+#intercept Array is to store intercept constants
+#seg Arrays are for storing Segment Coefficients
+interceptArr=[-0.182551546,17.73001949,16.91810032]
+seg2=[0.031252826,-0.468290073,-0.015400286,0.023900855,0.099569744,0.471252649]
+seg3=[0.035219064,-0.597684195,0.007669388,-0.001421481,0.207271035,-0.019878698]
+seg4=[0.032614385,-0.448078336,0.010852889,0.001962506,0.048191662,-0.024183235]
+
+sum2=0
+sum3=0
+sum4=0
+
+#ans Array is for storing Input Values from QHidRaw			
+ansArr=[]
+for eachRow in QHidRaw.rows:
+  ansArr.append(eachRow.val)
+print "ansArr=",ansArr
+
+#STEP 2: For each segment, multiply each question's Input Value from STEP 1 with its respective coefficient i.e. Product of Input Value and Coefficients for all questions
+#(ansArr[i])*(segXX[i])=Product of Input Value and Coefficients for all questions
+for i in range(0,len(ansArr)):
+  sum2=sum2+(ansArr[i])*(seg2[i])
+  sum3=sum3+(ansArr[i])*(seg3[i])
+  sum4=sum4+(ansArr[i])*(seg4[i])
+
+#STEP 3: For each segment, calculate the sum of the intercept and the products calculated in STEP 3
+#sum variables are to store the sum of the intercept and the products calculated in STEP 3
+sum2=sum2+interceptArr[0]
+sum3=sum3+interceptArr[1]
+sum4=sum4+interceptArr[2]
+
+#STEP 3: Exponentiate the sums for each segment
+sum2=math.exp(sum2)
+sum3=math.exp(sum3)
+sum4=math.exp(sum4)
+
+#STEP 4: Compute Segment Probability
+#Note: Adding Intercept constant=1 here
+probSegB=(sum2 / (sum2+sum3+sum4+1))
+probSegC=(sum3 / (sum2+sum3+sum4+1))
+probSegD=(sum4 / (sum2+sum3+sum4+1))
+probSegA=1 - (probSegB+probSegC+probSegD)
+QHidProbability.r1.c1.val = probSegA
+QHidProbability.r2.c1.val = probSegB
+QHidProbability.r3.c1.val = probSegC
+QHidProbability.r4.c1.val = probSegD
+QHidProbability.r1.c2.val = int(round(probSegA*100))
+QHidProbability.r2.c2.val = int(round(probSegB*100))
+QHidProbability.r3.c2.val = int(round(probSegC*100))
+QHidProbability.r4.c2.val = int(round(probSegD*100))
+  </exec>
+
+  <suspend/>
+
+  <float 
+   label="QHidProbability"
+   size="15"
+   ss:listDisplay="0"
+   where="execute,survey,report">
+    <title><strong>Hidden question to store Segment Probability</strong></title>
+    <row label="r1">Probability for Segment A</row>
+    <row label="r2">Probability for Segment B</row>
+    <row label="r3">Probability for Segment C</row>
+    <row label="r4">Probability for Segment D</row>
+    <col label="c1">Raw Probability</col>
+    <col label="c2" ss:colClassNames="col92">Probability %</col>
+    <style name="question.after" wrap="ready"><![CDATA[
+$ (".col92").find("input:text").parent().append("%");
+e.preventDefault();
+]]></style>
+  </float>
+
+  <suspend/>
+
+  <exec>
+#STEP 5: Assign Segment Based on Probability
+
+#prob Array is for storing Probabilities calculated in STEP 4
+probArr=[]
+for eachRow in QHidProbability.rows:
+  probArr.append(eachRow.c1.val)
+print "probArr=",probArr
+
+if QHidRaw.sum gt 0:
+	if max(probArr)==QHidProbability.r1.c1.ival:
+		QHidSegment.val=QHidSegment.r1.index
+	elif max(probArr)==QHidProbability.r2.c1.ival:
+		QHidSegment.val=QHidSegment.r2.index
+	elif max(probArr)==QHidProbability.r3.c1.ival:
+		QHidSegment.val=QHidSegment.r3.index
+	else:
+		QHidSegment.val=QHidSegment.r4.index
+  </exec>
+
+  <suspend/>
+
+  <radio 
+   label="QHidSegment"
+   optional="1"
+   ss:listDisplay="0"
+   where="execute,survey,report">
+    <title><strong>Hidden question to store final segment</strong>.</title>
+    <row label="r1">Segment A</row>
+    <row label="r2">Segment B</row>
+    <row label="r3">Segment C</row>
+    <row label="r4">Segment D</row>
+  </radio>
+
+  <suspend/>
+</block>

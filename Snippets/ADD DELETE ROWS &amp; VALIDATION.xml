@@ -1,0 +1,532 @@
+<select 
+  label="S6A">
+  <title>In what state do you primarily practice?</title>
+  <comment>Select one</comment>
+  <choice label="ch1">Alabama</choice>
+  <choice label="ch2">Alaska</choice>
+  <choice label="ch3">Arizona</choice>
+  <choice label="ch4">Arkansas</choice>
+  <choice label="ch5">California</choice>
+  <choice label="ch6">Colorado</choice>
+  <choice label="ch7">Connecticut</choice>
+  <choice label="ch8">Delaware</choice>
+  <choice label="ch9">District of Columbia</choice>
+  <choice label="ch10">Florida</choice>
+  <choice label="ch11">Georgia</choice>
+  <choice label="ch12">Hawaii</choice>
+  <choice label="ch13">Idaho</choice>
+  <choice label="ch14">Illinois</choice>
+  <choice label="ch15">Indiana</choice>
+  <choice label="ch16">Iowa</choice>
+  <choice label="ch17">Kansas</choice>
+  <choice label="ch18">Kentucky</choice>
+  <choice label="ch19">Louisiana</choice>
+  <choice label="ch20">Maine</choice>
+  <choice label="ch21">Maryland</choice>
+  <choice label="ch22">Massachusetts</choice>
+  <choice label="ch23">Michigan</choice>
+  <choice label="ch24">Minnesota</choice>
+  <choice label="ch25">Mississippi</choice>
+  <choice label="ch26">Missouri</choice>
+  <choice label="ch27">Montana</choice>
+  <choice label="ch28">Nebraska</choice>
+  <choice label="ch29">Nevada</choice>
+  <choice label="ch30">New Hampshire</choice>
+  <choice label="ch31">New Jersey</choice>
+  <choice label="ch32">New Mexico</choice>
+  <choice label="ch33">New York</choice>
+  <choice label="ch34">North Carolina</choice>
+  <choice label="ch35">North Dakota</choice>
+  <choice label="ch36">Ohio</choice>
+  <choice label="ch37">Oklahoma</choice>
+  <choice label="ch38">Oregon</choice>
+  <choice label="ch39">Pennsylvania</choice>
+  <choice label="ch40">Rhode Island</choice>
+  <choice label="ch41">South Carolina</choice>
+  <choice label="ch42">South Dakota</choice>
+  <choice label="ch43">Tennessee</choice>
+  <choice label="ch44">Texas</choice>
+  <choice label="ch45">Utah</choice>
+  <choice label="ch46">Vermont</choice>
+  <choice label="ch47">Virginia</choice>
+  <choice label="ch48">Washington</choice>
+  <choice label="ch49">West Virginia</choice>
+  <choice label="ch50">Wisconsin</choice>
+  <choice label="ch51">Wyoming</choice>
+</select>
+
+<suspend/>
+
+<select 
+  label="S6B"
+  ss:questionClassNames="S6B">
+  <title>What is the name of the primary hospital/institution/clinic where you practice?</title>
+  <comment>Select one</comment>
+  <choice label="ch1" cond="(S6A.ch5)">City of Hope</choice>
+  <choice label="ch2" cond="(S6A.ch5)">Stanford Health Care</choice>
+  <choice label="ch3" cond="(S6A.ch5)">UCLA</choice>
+  <choice label="ch4" cond="(S6A.ch44)">Baylor College of Medicine</choice>
+  <choice label="ch5" cond="(S6A.ch44)">Baylor University Medical Center</choice>
+  <choice label="ch6" cond="(S6A.ch48)">Fed Hutchinson Cancer Center</choice>
+  <choice label="ch7" cond="(S6A.ch26)">Barnes Jewish Hospital</choice>
+  <choice label="ch8" cond="(S6A.ch36)">Ohio State Medical Center  -James Cancer Center</choice>
+  <choice label="ch9" cond="(S6A.ch36)">Cleveland Clinic</choice>
+  <choice label="ch10" cond="(S6A.ch10)">Moffitt Cancer Center</choice>
+  <choice label="ch11" cond="(S6A.ch31)">Hackensack University Medical Center</choice>
+  <choice label="ch12" cond="(S6A.ch11)">Transplant Program at Northside Hospital</choice>
+  <choice label="ch13" cond="(S6A.ch34)">University of North Carolina</choice>
+  <choice label="ch14" cond="(S6A.ch34)">Duke university</choice>
+  <choice label="ch15" cond="(S6A.ch24)">Mayo Clinic</choice>
+  <choice label="ch16" cond="(S6A.ch24)">University of Minnesota Medical Center</choice>
+  <choice label="ch17" cond="(S6A.ch39)">Abramson Cancer Center at U Penn Health System</choice>
+  <choice label="ch18" cond="(S6A.ch23)">University of Michigan</choice>
+  <choice label="ch19" cond="(S6A.ch23)">Karmanos Cancer Center</choice>
+  <choice label="ch20" cond="(S6A.ch3)">Mayo Clinic Arizona</choice>
+  <choice label="ch21" cond="(S6A.ch33)">Memorial Sloan Kettering Cancer Center</choice>
+  <choice label="ch22" cond="(S6A.ch33)">New York Presbyterian/Columbia Medical Center</choice>
+  <choice label="ch23" cond="(S6A.ch33)">New York Presbyterian Weill/Cornell Medical Center</choice>
+  <choice label="ch24" cond="(S6A.ch33)">Mt. Sinai Medical Center</choice>
+  <choice label="ch25" cond="(S6A.ch22)">Dana Farber / Brigham and Womens Cancer Center</choice>
+  <choice label="ch26" cond="(S6A.ch22)">Tufts Medical Center</choice>
+  <choice label="ch27" cond="(S6A.ch22)">Beth Israel Deaconess</choice>
+  <choice label="ch28" cond="(S6A.ch22)">Massachusetts General</choice>
+  <choice label="ch29">Other (Please specify)</choice>
+</select>
+
+<text 
+  label="S6B_OPEN_ENDED"
+  size="40"
+  sst="0">
+  <title><span style="display:none">What is the name of the primary hospital/institution/clinic where you practice?</span></title>
+  <validate>
+if S6B.ch29 and (S6A.ch5 or S6A.ch44 or S6A.ch48 or S6A.ch26 or S6A.ch36 or S6A.ch10 or S6A.ch31 or S6A.ch11 or S6A.ch34 or S6A.ch24 or S6A.ch39 or S6A.ch23 or S6A.ch3 or S6A.ch33 or S6A.ch22) and S6B_OPEN_ENDED.r1.val == '':
+  error(res.field_mandatory, this.r1)
+elif not(S6A.ch5 or S6A.ch44 or S6A.ch48 or S6A.ch26 or S6A.ch36 or S6A.ch10 or S6A.ch31 or S6A.ch11 or S6A.ch34 or S6A.ch24 or S6A.ch39 or S6A.ch23 or S6A.ch3 or S6A.ch33 or S6A.ch22) and S6B_OPEN_ENDED.r2.val == '':
+  error(res.field_mandatory, this.r2)
+  </validate>
+
+  <row label="r1" ss:rowClassNames="S6B_OPEN_ENDED">Other (Please specify)</row>
+  <row label="r2" ss:rowClassNames="S6B_ANSWER">What is the name of the primary hospital/institution/clinic where you practice?</row>
+  <style name="question.after" wrap="ready"><![CDATA[
+$ ('.S6B_OPEN_ENDED').hide();
+$ ('.S6B_ANSWER').hide(); 
+
+ 
+$ ('.S6B').find('select').change(function(){
+  let getVal = $ ('.S6B').find('select').val();
+  if (getVal == 28) {
+    $ ('.S6B_OPEN_ENDED').show(1000);
+  } else {
+    $ ('.S6B_OPEN_ENDED').hide(1000);
+    $ ('.S6B_OPEN_ENDED').find('input').val("");
+    $ ('#field_error').hide();
+    $ ('.S6B_OPEN_ENDED').css("background-color", "white");   
+  }
+});
+
+
+//Validation
+
+\@if S6B.ch29 and (S6A.ch5 or S6A.ch44 or S6A.ch48 or S6A.ch26 or S6A.ch36 or S6A.ch10 or S6A.ch31 or S6A.ch11 or S6A.ch34 or S6A.ch24 or S6A.ch39 or S6A.ch23 or S6A.ch3 or S6A.ch33 or S6A.ch22)
+  $ ('.S6B_OPEN_ENDED').show();
+\@endif
+
+\@if not(S6A.ch5 or S6A.ch44 or S6A.ch48 or S6A.ch26 or S6A.ch36 or S6A.ch10 or S6A.ch31 or S6A.ch11 or S6A.ch34 or S6A.ch24 or S6A.ch39 or S6A.ch23 or S6A.ch3 or S6A.ch33 or S6A.ch22)
+   $ ('.S6B_ANSWER').show();   
+\@endif
+]]></style>
+</text>
+
+<suspend/>
+
+<text 
+  label="S8B"
+  size="40"
+  sst="0">
+  <title>Please insert the names, email addresses, and phone numbers for those who DO perform myeloablative allogenic transplants.</title>
+  <comment>Please be as specific as possible</comment>
+  <validate>
+  
+#ONLY PARTIAL VALIDATION  
+
+#REGEX for email validation
+
+#importing library
+
+import re   
+
+#regex pattern
+  
+regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$' 
+
+#defining email validator function, where rowNumber is the question row number
+
+def check(email,rowNumber):   
+  
+    if(re.search(regex,email)):   
+        print("Valid Email")   
+    else:   
+        error("Please enter a valid email address (must be in the form of user@domain.name).", rowNumber) 
+
+
+#my custom phone number validation - if phone number contains less than 5 numbers
+
+def phoneValidation(phone, rowNumber):
+  counter = 0
+  for char in phone:
+    if char.isdigit():
+      counter +=1
+  if counter != 10:
+    error("There is an error with the phone number entered. Please enter in '5551234567' format.", rowNumber)
+    
+    
+#if name or phone are empty
+
+if S8B.r2.val != '':
+  
+  #invoking email validator function
+  
+  check(S8B.r2.val, this.r2)
+  
+  #name is mandatory if e-mail is specified
+  
+  if S8B.r1.val == '':
+    error(res.field_mandatory, this.r1)
+
+if S8B.r3.val != '':
+  
+  #invoking phone validator function
+    
+  phoneValidation(S8B.r3.val, this.r3)
+  
+  #name is mandatory if phone is specified
+  
+  if S8B.r1.val == '':
+    error(res.field_mandatory, this.r1)
+  
+
+#if name or phone are empty
+
+if S8B.r5.val != '':
+  
+  #invoking email validator function
+  
+  check(S8B.r5.val, this.r5)
+  
+  #name is mandatory if e-mail is specified
+  
+  if S8B.r4.val == '':
+    error(res.field_mandatory, this.r4)
+
+if S8B.r6.val != '':
+  
+  #invoking phone validator function
+    
+  phoneValidation(S8B.r6.val, this.r6)
+  
+  #name is mandatory if phone is specified
+  
+  if S8B.r4.val == '':
+    error(res.field_mandatory, this.r4)
+
+
+#if name or phone are empty
+
+if S8B.r8.val != '':
+  
+  #invoking email validator function
+  
+  check(S8B.r8.val, this.r8)
+  
+  #name is mandatory if e-mail is specified
+  
+  if S8B.r7.val == '':
+    error(res.field_mandatory, this.r7)
+
+if S8B.r9.val != '':
+  
+  #invoking phone validator function
+    
+  phoneValidation(S8B.r9.val, this.r9)
+  
+  #name is mandatory if phone is specified
+  
+  if S8B.r7.val == '':
+    error(res.field_mandatory, this.r7)
+
+#if name or phone are empty
+
+if S8B.r11.val != '':
+  
+  #invoking email validator function
+  
+  check(S8B.r11.val, this.r11)
+  
+  #name is mandatory if e-mail is specified
+  
+  if S8B.r10.val == '':
+    error(res.field_mandatory, this.r10)
+
+if S8B.r12.val != '':
+  
+  #invoking phone validator function
+    
+  phoneValidation(S8B.r12.val, this.r12)
+  
+  #name is mandatory if phone is specified
+  
+  if S8B.r10.val == '':
+    error(res.field_mandatory, this.r10)
+
+
+#if name or phone are empty
+
+if S8B.r14.val != '':
+  
+  #invoking email validator function
+  
+  check(S8B.r14.val, this.r14)
+  
+  #name is mandatory if e-mail is specified
+  
+  if S8B.r13.val == '':
+    error(res.field_mandatory, this.r13)
+
+if S8B.r15.val != '':
+  
+  #invoking phone validator function
+    
+  phoneValidation(S8B.r15.val, this.r15)
+  
+  #name is mandatory if phone is specified
+  
+  if S8B.r13.val == '':
+    error(res.field_mandatory, this.r13)
+
+'''
+
+This would be for a full validation, but only partial validation applies here and it's not needed.
+
+#if any of name, email, phone is NOT empty
+
+if S8B.r13.val != '' or S8B.r14.val != '' or S8B.r15.val != '':
+  
+  if S8B.r13.val == '':
+    error("Please fill in the required field", this.r13)  
+  
+  if S8B.r14.val == '':
+    error("Please fill in the required field", this.r14)
+  
+  #invoking email validator function
+  
+  check(S8B.r14.val, this.r14)
+
+  if S8B.r15.val == '':
+    error("Please fill in the required field", this.r15)
+    
+  #invoking phone validator function
+    
+  phoneValidation(S8B.r15.val, this.r15)
+ 
+'''
+  </validate>
+
+  <row label="r1" ss:rowClassNames="name"><br /><font style="color:green; ">Person #1</font> <br /><br />Name: <span id="add">Add Person</span> <span id="remove">Remove Person</span></row>
+  <row label="r2" ss:rowClassNames="email">E-mail Address:</row>
+  <row label="r3" ss:rowClassNames="phone">Phone Number:</row>
+  <row label="r4" ss:rowClassNames="name"><br /><font style="color:green; ">Person #2</font> <br /><br />Name:</row>
+  <row label="r5" ss:rowClassNames="email">E-mail Address:</row>
+  <row label="r6" ss:rowClassNames="phone">Phone Number:</row>
+  <row label="r7" ss:rowClassNames="name"><br /><font style="color:green; ">Person #3</font> <br /><br />Name:</row>
+  <row label="r8" ss:rowClassNames="email">E-mail Address:</row>
+  <row label="r9" ss:rowClassNames="phone">Phone Number:</row>
+  <row label="r10" ss:rowClassNames="name"><br /><font style="color:green; ">Person #4</font> <br /><br />Name:</row>
+  <row label="r11" ss:rowClassNames="email">E-mail Address:</row>
+  <row label="r12" ss:rowClassNames="phone">Phone Number:</row>
+  <row label="r13" ss:rowClassNames="name"><br /><font style="color:green; ">Person #5</font> <br /><br />Name:</row>
+  <row label="r14" ss:rowClassNames="email">E-mail Address:</row>
+  <row label="r15" ss:rowClassNames="phone">Phone Number:</row>
+  <style name="question.after" wrap="ready"><![CDATA[
+$ ('.name').slice(1, 5).hide();
+$ ('.email').slice(1, 5).hide();
+$ ('.phone').slice(1, 5).hide();
+
+let btnAdd = $ ("#add");
+let btnRemove = $ ("#remove");
+
+btnRemove.css("pointer-events", "none");
+btnRemove.css("background-color", "lightgrey");
+let counter = 1;
+
+btnAdd.click(function(){
+  $ ('.name').eq(counter).show(); 
+  $ ('.email').eq(counter).show();
+  $ ('.phone').eq(counter).show();
+  counter += 1;
+  console.log("add counter: " + counter);
+  disableButton();
+});
+
+btnRemove.click(function(){
+  counter -= 1;
+  $ ('.name').eq(counter).hide(); 
+  $ ('.name').eq(counter).find('input').val('');
+  $ ('.email').eq(counter).hide();
+  $ ('.email').eq(counter).find('input').val('');
+  $ ('.phone').eq(counter).hide();
+  $ ('.phone').eq(counter).find('input').val('');
+  console.log("remove counter: " + counter);
+  disableButton();
+})
+
+function disableButton() {
+
+  if (counter == 5) {
+      btnAdd.css("pointer-events", "none");
+      btnAdd.css("background-color", "lightgrey");
+  } else {
+      btnAdd.css("pointer-events", "auto");
+      btnAdd.css("background-color", "#94CE58");  
+  }
+
+  if (counter == 1) {
+      btnRemove.css("pointer-events", "none");
+      btnRemove.css("background-color", "lightgrey");
+  } else {
+      btnRemove.css("pointer-events", "auto");
+      btnRemove.css("background-color", "#94CE58");
+    
+  }
+
+}
+
+
+$ (document ).ready(function() {
+
+  let name1 = $ ('.name').eq(1).find('input').val();
+  let email1 = $ ('.email').eq(1).find('input').val();
+  let phone1 = $ ('.phone').eq(1).find('input').val();
+  
+    if (name1.length > 0 || email1.length > 0 || phone1.length > 0) {
+    
+       $ ('.name').eq(1).show(); 
+       $ ('.email').eq(1).show();
+       $ ('.phone').eq(1).show();
+    
+    } else {
+    
+       $ ('.name').eq(1).hide(); 
+       $ ('.email').eq(1).hide();
+       $ ('.phone').eq(1).hide();
+    
+    }
+    
+  let name2 = $ ('.name').eq(2).find('input').val();
+  let email2 = $ ('.email').eq(2).find('input').val();
+  let phone2 = $ ('.phone').eq(2).find('input').val();
+  
+    if (name2.length > 0 || email2.length > 0 || phone2.length > 0) {
+    
+       $ ('.name').eq(2).show(); 
+       $ ('.email').eq(2).show();
+       $ ('.phone').eq(2).show();
+    
+    } else {
+    
+       $ ('.name').eq(2).hide(); 
+       $ ('.email').eq(2).hide();
+       $ ('.phone').eq(2).hide();
+    
+    }
+    
+  let name3 = $ ('.name').eq(3).find('input').val();
+  let email3 = $ ('.email').eq(3).find('input').val();
+  let phone3 = $ ('.phone').eq(3).find('input').val();
+  
+    if (name3.length > 0 || email3.length > 0 || phone3.length > 0) {
+    
+       $ ('.name').eq(3).show(); 
+       $ ('.email').eq(3).show();
+       $ ('.phone').eq(3).show();
+    
+    } else {
+    
+       $ ('.name').eq(3).hide(); 
+       $ ('.email').eq(3).hide();
+       $ ('.phone').eq(3).hide();
+    
+    }
+    
+  let name4 = $ ('.name').eq(4).find('input').val();
+  let email4 = $ ('.email').eq(4).find('input').val();
+  let phone4 = $ ('.phone').eq(4).find('input').val();
+  
+    if (name4.length > 0 || email4.length > 0 || phone4.length > 0) {
+    
+       $ ('.name').eq(4).show(); 
+       $ ('.email').eq(4).show();
+       $ ('.phone').eq(4).show();
+    
+    } else {
+    
+       $ ('.name').eq(4).hide(); 
+       $ ('.email').eq(4).hide();
+       $ ('.phone').eq(4).hide();
+    
+    }
+    
+  let name5 = $ ('.name').eq(5).find('input').val();
+  let email5 = $ ('.email').eq(5).find('input').val();
+  let phone5 = $ ('.phone').eq(5).find('input').val();
+  
+    if (name5.length > 0 || email5.length > 0 || phone5.length > 0) {
+    
+       $ ('.name').eq(5).show(); 
+       $ ('.email').eq(5).show();
+       $ ('.phone').eq(5).show();
+    
+    } else {
+    
+       $ ('.name').eq(5).hide(); 
+       $ ('.email').eq(5).hide();
+       $ ('.phone').eq(5).hide();
+    
+    }
+
+});
+
+
+// media query for phones - adjust buttons - max width: 420px
+
+  if (window.matchMedia("(max-width: 480px)").matches) { 
+    
+      btnAdd.css("marginLeft", "47px");
+      btnAdd.css("fontSize", "15px");
+      btnRemove.css("fontSize", "15px");
+  }
+]]></style>
+  <style name="question.after"><![CDATA[
+<style type="text/css">
+
+#add, #remove {
+
+ background-color: #94CE58;
+ padding:5px;
+ 
+}
+
+#add {
+
+margin-left:98px;
+
+}
+
+#remove {
+
+margin-left:10.5px;
+
+}
+
+</style>
+]]></style>
+</text>

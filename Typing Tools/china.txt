@@ -1,0 +1,127 @@
+<exec>
+conarr1=[-0.2002745,-0.011734273,0.21200878,0.078518992,1.1523768,0.69241309,0.68089801,0.27143071,0.27586462,-2.8435275,2.8435275,-1.2538458,1.2538458,0.13944911,-0.75070316,0.10066104,-5.7630656]
+conarr2=[-0.11369231,0.25884418,-0.14515187,0.030935756,0.47563021,0.5716471,0.77030947,0.067239826,0.21439777,-1.9942167,1.9942167,-1.2333911,1.2333911,-0.053553036,0.98115099,-0.35911044,-6.1784206]
+conarr3=[0.68988596,-0.25825408,-0.43163188,-0.73136897,-1.8213613,-1.3803879,-1.8840255,-0.81575663,-0.87756194,-0.18236898,0.18236898,-1.8882274,1.8882274,-0.32063704,0.037629351,0.14123117,22.354747]
+conarr4=[-0.37591915,0.01114417,0.36477498,0.62191423,0.19335423,0.11632767,0.43281804,0.47708609,0.38729955,5.0201131,-5.0201131,4.3754643,-4.3754643,0.23474096,-0.26807718,0.11721822,-10.413261]
+
+consubarr1=[-0.19503395,0.082733701,0.11230025,0.23192381,0.3147346,-0.25454312,-0.20563236,1.4294661,2.4160387,1.3422185,-1.3422185,0.093799842,-0.093799842,-0.013787134,-0.005008452,0.0248428,-9.616037]
+consubarr2=[0.19503395,-0.082733701,-0.11230025,-0.23192381,-0.3147346,0.25454312,0.20563236,-1.4294661,-2.4160387,-1.3422185,1.3422185,-0.093799842,0.093799842,0.013787134,0.005008452,-0.0248428,9.616037]
+consubarr3=[-1.2466123,0.27622219,0.97039011,0.35650744,0.16783417,0.86816607,0.25739775,0.18105178,-0.12824624,0.46776639,-0.46776639,-0.1445622,0.1445622,0.12809862,-0.85234868,0.68038851,-2.1236315]
+consubarr4=[1.2466123,-0.27622219,-0.97039011,-0.35650744,-0.16783417,-0.86816607,-0.25739775,-0.18105178,0.12824624,-0.46776639,0.46776639,0.1445622,-0.1445622,-0.12809862,0.85234868,-0.68038851,2.1236315]
+
+ansarr1=[]
+
+if S15.r1:
+  ansarr1.append(1)
+else:
+  ansarr1.append(0)
+if S15.r2:
+  ansarr1.append(1)
+else:
+  ansarr1.append(0)
+if S15.r3:
+  ansarr1.append(1)
+else:
+  ansarr1.append(0)
+
+ansarr1.append(S16.val+1)
+ansarr1.append(S17.r1.val+1)
+ansarr1.append(S17.r2.val+1)
+ansarr1.append(S17.r3.val+1)
+ansarr1.append(S18.r1.val+1)
+ansarr1.append(S18.r2.val+1)
+
+if not(S19.r1):
+  ansarr1.append(1)
+else:
+  ansarr1.append(0)
+if S19.r1:
+  ansarr1.append(1)
+else:
+  ansarr1.append(0)
+if not(S19.r2):
+  ansarr1.append(1)
+else:
+  ansarr1.append(0)
+if S19.r2:
+  ansarr1.append(1)
+else:
+  ansarr1.append(0)
+
+ansarr1.append(S20.r1.val+1)
+ansarr1.append(S20.r2.val+1)
+ansarr1.append(S20.r3.val+1)
+
+ansarr1.append(1)
+
+#SumProducts
+sum1=0
+sum2=0
+sum3=0
+sum4=0
+sum5=0
+sum6=0
+sum7=0
+sum8=0
+
+for x in range(0,len(ansarr1)):
+  sum1=sum1+(ansarr1[x])*(conarr1[x])
+  sum2=sum2+(ansarr1[x])*(conarr2[x])
+  sum3=sum3+(ansarr1[x])*(conarr3[x])
+  sum4=sum4+(ansarr1[x])*(conarr4[x])
+  sum5=sum5+(ansarr1[x])*(consubarr1[x])
+  sum6=sum6+(ansarr1[x])*(consubarr2[x])
+  sum7=sum7+(ansarr1[x])*(consubarr3[x])
+  sum8=sum8+(ansarr1[x])*(consubarr4[x])
+
+arr4=[]
+arr4.append(sum1)
+arr4.append(sum2)
+arr4.append(sum3)
+arr4.append(sum4)
+
+arr5=[]
+arr5.append(sum5)
+arr5.append(sum6)
+
+arr6=[]
+arr6.append(sum7)
+arr6.append(sum8)
+
+max1=max(arr4)
+max2=max(arr5)
+max3=max(arr6)
+
+p.china=0
+if max1==sum1:
+   if max2==sum5:
+     hSegment.val=hSegment.r1.index
+   if max2==sum6:
+     hSegment.val=hSegment.r2.index
+if max1==sum2:
+   hSegment.val=hSegment.r3.index
+if max1==sum3 and p.china==1:
+   if max3==sum7:
+     hSegment.val=hSegment.r6.index
+   if max3==sum8:
+     hSegment.val=hSegment.r7.index
+if max1==sum3 and p.china==0:
+   hSegment.val=hSegment.r4.index
+if max1==sum4:
+   hSegment.val=hSegment.r5.index
+</exec>
+
+<radio 
+  label="hSegment"
+  where="execute,survey,report">
+  <title><font color="red">Hidden question for Classification</font></title>
+  <row label="r1">Vet Med as an Occupation - Set in Their Ways</row>
+  <row label="r2">Vet Med as an Occupation - Open to Change</row>
+  <row label="r3">Pets &amp; People are my Passion</row>
+  <row label="r4">Progressive Providers</row>
+  <row label="r5">Commonsense Caregivers</row>
+  <row label="r6">China Progressive Providers – Personal</row>
+  <row label="r7">China Progressive Providers – Digital</row>
+</radio>
+
+<suspend/>

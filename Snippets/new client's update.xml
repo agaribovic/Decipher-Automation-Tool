@@ -1,0 +1,253 @@
+<number 
+  label="SQ12D"
+  size="3"
+  ss:postText="#"
+  sst="0"
+  verify="range(0,99999)">
+  <title>In the last year, how many patients have you treated in each of line of therapy using each of the following products?</title>
+  <comment>Please enter a whole number
+  <br /><br />
+  <span style="color:#BA0000; font-style: normal;" id="error">Please answer the question.</span>
+  </comment>
+  <exec>
+'''
+input value from the previous questions in hidden rows
+
+# first row
+SQ12D.c1.r1.ival = QHIDCLASS.r1.ival
+SQ12D.c2.r1.ival = QHIDCLASS.r2.ival
+
+# second row
+SQ12D.c1.r2.ival = SQ12A.c1.r8.ival 
+SQ12D.c2.r2.ival = SQ12A.c2.r8.ival
+
+# fourth row
+SQ12D.c1.r4.ival = SQ12A.c1.r9.ival
+SQ12D.c2.r4.ival = SQ12A.c2.r9.ival
+'''
+  </exec>
+
+  <validate>
+x=this.c1.r7.ival
+z=this.c2.r7.ival
+y=this.r7.open
+
+if (x&gt;0 or z&gt;0) and y=="":
+  error(res.otherx, row=this.r7)
+if y!="" and (x==0 and z==0):
+  error(res.othery, row=this.r7)
+  </validate>
+
+  <col label="c1" ss:colClassNames="CoL1"><b># of 2L R/R patients treated with therapy</b></col>
+  <col label="c2" ss:colClassNames="CoL2"><b># of 3L+ R/R patients treated with therapy</b></col>
+  <row label="r1">CAR-T</row>
+  <row label="r2">TCE</row>
+  <row label="r3">Salvage +/- high dose therapy + autologous stem cell transplantation (ASCT)</row>
+  <row label="r4">Salvage Chemotherapy</row>
+  <row label="r5">Monjuvi</row>
+  <row label="r6">Polivy</row>
+  <row label="r7" open="1" openOptional="1" openSize="25" randomize="0">Other (Please specify)</row>
+  <style name="question.after" wrap="ready"><![CDATA[
+// HIDING on the front-end, so data can only be displayed on back-end 
+ 
+$ ('.CoL1').eq(1).css('visibility', 'hidden');
+$ ('.CoL1').eq(2).css('visibility', 'hidden');
+$ ('.CoL1').eq(4).css('visibility', 'hidden');
+
+$ ('.CoL2').eq(1).css('visibility', 'hidden');
+$ ('.CoL2').eq(2).css('visibility', 'hidden');
+$ ('.CoL2').eq(4).css('visibility', 'hidden');
+
+$ ('#SQ12D_r1_left, #SQ12D_r2_left, #SQ12D_r4_left').css('color', '#EDEDED');
+
+$ ('#error').hide();
+
+// POPULATING WITH AND REMOVING 0s
+
+
+$ ('#question_SQ12D').find('input').each(function(index, value) {
+  
+  if (index == 0 || index == 1 || index == 2 || index == 3 || index == 6 || index == 7 || index == 12) 
+    return; 
+  else
+     $ (this).val('0');
+
+});
+
+
+$ ('.RoW8').eq(1).click(function(){
+ 
+ if ( $ ('.RoW8').eq(1).find('input').is(':checked') ) {
+
+     $ ('.CoL1').find('input').each(function(index, value){
+     
+      if (index == 0 || index == 1 || index == 3) 
+        return;
+      else
+        $ (this).val('');
+
+     });
+     
+ }
+ 
+ 
+ else {
+ 
+ 	$ ('.CoL1').find('input').each(function(index, value){
+ 	
+ 	  if (index == 0 || index == 1 || index == 3)
+ 	    return;
+ 	  else   
+         $ (this).val(0);
+
+     });
+ 
+ 
+ }
+
+});
+
+
+$ ('.RoW8').eq(2).click(function(){
+ 
+ if ( $ ('.RoW8').eq(2).find('input').is(':checked') ) {
+
+     $ ('.CoL2').find('input').each(function(index, value){
+     
+       if (index == 0 || index == 1 || index == 3) 
+        return;
+      else
+        $ (this).val('');
+
+     });
+     
+     
+ }
+
+
+ else {
+ 
+ 	$ ('.CoL2').find('input').each(function(index, value){
+ 	
+ 	  if (index == 0 || index == 1 || index == 3)
+ 	    return;
+ 	  else   
+         $ (this).val(0);
+
+     });
+ 
+ 
+ }
+ 
+
+});
+
+
+/*
+
+// Validation - Please answer the question
+
+var sum1 = 0;
+var sum2 = 0;
+
+
+$ ('#btn_continue').click(function(){
+
+ $ ('.CoL1').find('input').each(function(index, value){
+ 
+  if (index == 0 || index == 1 || index == 3) 
+        return;
+   else
+     sum1 += parseInt($ (this).val());
+ 
+ });
+ 
+ 
+ $ ('.CoL2').find('input').each(function(index, value){
+   
+    if (index == 0 || index == 1 || index == 3) 
+        return;
+    else
+     sum2 += parseInt($ (this).val());
+     
+ });
+ 
+ 
+
+ 
+// VALIDATION
+
+// COL 1 
+
+if (sum1 == 0 && !$ ('.RoW8').eq(1).find('input').is(':checked')) {
+        $ ('#error').show();
+        $ ('#btn_continue').prop('disabled', true);
+        $ ('.CoL1').css('background', '#FFEDED');
+
+  
+
+    setTimeout(function() {
+        $ ('#btn_continue').prop('disabled', false);
+
+    }, 2000);
+  
+} 
+
+else if ( sum1 > 0 && $ ('.RoW8').eq(1).find('input').is(':checked') ) {
+
+	$ ('.CoL1').css('background', 'white');
+	
+	 $ ('.CoL1').find('input').each(function(){
+   
+       $ (this).val('');
+ 
+ });
+
+
+}
+
+
+// COL 2 
+
+if (sum2 == 0 && !$ ('.RoW8').eq(2).find('input').is(':checked')) {   
+ 
+        $ ('#error').show();
+        $ ('#btn_continue').prop('disabled', true);
+        $ ('.CoL2').css('background', '#FFEDED');
+
+    
+
+    setTimeout(function() {
+        $ ('#btn_continue').prop('disabled', false);
+
+    }, 2000);
+ 
+ 
+} else if (sum2 > 0 && $ ('.RoW8').eq(2).find('input').is(':checked')) {
+
+	$ ('.CoL2').css('background', 'white');
+	 
+	 $ ('.CoL2').find('input').each(function(){
+   
+       $ (this).val('');
+ 
+ });
+
+
+}
+
+});
+
+*/
+]]></style>
+</number>
+
+<checkbox 
+  label="SQ12D_UNKNOWN"
+  below="SQ12D"
+  keepWith="SQ12D">
+  <title>Unknown</title>
+  <row label="r8" ss:rowClassNames="RoW8">Unknown</row>
+  <col label="c1"><b># of 2L R/R patients treated with therapy</b></col>
+  <col label="c2" ss:colClassNames="CoL2"><b># of 3L+ R/R patients treated with therapy</b></col>
+</checkbox>

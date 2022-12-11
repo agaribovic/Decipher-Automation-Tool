@@ -1,0 +1,116 @@
+<radio 
+  label="S16"
+  shuffle="rows">
+  <title>Please indicate your level of agreement with each of the following statements.</title>
+  <comment>Select one in each row</comment>
+  <row label="r1">The safety profile for the CGRP oral class makes me less likely to prescribe triptans to my migraine patients</row>
+  <row label="r2">The efficacy profile for the CGRP oral class makes me less likely to prescribe triptans to my migraine patients</row>
+  <row label="r3">I anticipate my writing of CGRP oral medications such as Nurtec ODT and Ubrelvy to increase in the next 6 months</row>
+  <row label="r4">I consider myself extremely knowledgeable about all the migraine treatments available</row>
+  <row label="r5">I was extremely hesitant to try Nurtec ODT as a preventive option immediately post approval until my peers had tried the treatment</row>
+  <row label="r6">I have/am likely to prescribe Nurtec ODT as both an acute and preventive treatment for the same patient.</row>
+  <col label="c1"><b>Completely <br /> Disagree</b></col>
+  <col label="c2"><b>2</b></col>
+  <col label="c3"><b>3</b></col>
+  <col label="c4"><b>Neither Agree <br /> nor Disagree <br />4</b></col>
+  <col label="c5"><b>5</b></col>
+  <col label="c6"><b>6</b></col>
+  <col label="c7"><b>Completely <br /> Agree <br /> 7</b></col>
+</radio>
+
+<suspend/>
+
+<exec>
+arr1 = [13.818] 
+arr2 = [-2.411]
+arr3 = [31.780]
+
+coeffarr1 = [422.108, 389.111, 306.137, 228.944, 145.400, 59.929, 0, -428.634, -372.001, -291.316, -213.802, -127.305, -47.441, 0, 6.491, 47.003, -25.375, -6.862, -7.560, -0.219, 0, -23.215, -9.707, -14.910, -12.605, -17.540, 0.464, 0, 10.420, 9.966, 8.548, 0.258, 0.843, 0.087, 0, 9.027, 7.508, 3.345, 3.584, 12.009, -1.048, 0]
+coeffarr2 = [301.403, 283.446, 227.993, 176.008, 114.727, 50.269, 0, -286.583, -248.475, -194.127, -142.251, -79.133, -23.241, 0, 22.760, 64.358, -11.639, -2.013, -4.704, 0.397, 0, -7.384, -7.668, -11.758, -9.935, -16.295, 2.109, 0, 6.350, 9.901, 7.944, 0.037, 1.282, -0.694, 0, 13.846, 3.225, -1.143, 0.334, 9.694, -1.435, 0]
+coeffarr3 = [382.846, 352.258, 270.208, 197.617, 120.369, 41.158, 0, -383.911, -350.103, -271.916, -196.270, -115.470, -42.286, 0, -11.077, 48.102, -37.473, -5.724, -6.780, -0.308, 0, -23.072, -11.995, -14.954, -13.078, -18.322, 0.684, 0, 9.492, 11.037, 9.116, 0.262, 1.187, -1.094, 0, -23.570, -11.612, -2.214, -0.183, 9.381, -1.438, 0] 
+calarr = []
+
+codearr = ['r1','r2','r3','r4','r5','r6']
+
+for x in range(0,len(codearr)):
+	for y in S16.cols:
+		if S16.attr(codearr[x]).val == y.index:
+			num = 1
+		else:
+			num = 0
+		calarr.append(num)
+
+for x in range(0,len(calarr)):
+	pnum1 = float(calarr[x])*float(coeffarr1[x])
+	pnum2 = float(calarr[x])*float(coeffarr2[x])
+	pnum3 = float(calarr[x])*float(coeffarr3[x])
+	arr1.append(pnum1)
+	arr2.append(pnum2)
+	arr3.append(pnum3)
+
+sumarr1 = sum(arr1)
+sumarr2 = sum(arr2)
+sumarr3 = sum(arr3)
+
+import math
+expval1 = math.exp(sumarr1)
+expval2 = math.exp(sumarr2)
+expval3 = math.exp(sumarr3)
+
+sumstep = float(expval1)+float(expval2)+float(expval3)
+segstep = float(1)/(float(1)+float(sumstep))
+
+print("1",expval1,expval2,expval3)
+print("2",sumstep,segstep)
+
+segval1 = float(expval1)*segstep
+segval2 = float(expval2)*segstep
+segval3 = float(expval3)*segstep
+segval4 = segstep
+
+segarr = [segval1, segval2, segval3, segval4]
+
+maxval = max(segarr)
+fval = segarr.index(maxval)
+
+hSeg.val = fval
+
+tarr = [segval1, segval2, segval3, segval4]
+tarr2 = [segval1, segval2, segval3, segval4]
+
+print(tarr)
+print(tarr2)
+
+tarr.remove(maxval)
+
+seg2 = max(tarr)
+fval2 = tarr2.index(seg2)
+
+hSeg2.val = fval2
+</exec>
+
+<suspend/>
+
+<radio 
+  label="hSeg"
+  optional="1"
+  where="execute,survey,report">
+  <title><font style="color:red">First Predicted Segment</font></title>
+  <row label="r1" value="1">Segment 1 from typing tool = Segment B - Brand Splitters</row>
+  <row label="r2" value="2">Segment 2 from typing tool = Segment D  - Nontarget</row>
+  <row label="r3" value="3">Segment 3 from typing tool = Segment A - Advocates</row>
+  <row label="r4" value="4">Segment 4 from typing tool = Segment C - Class Naives</row>
+</radio>
+
+<radio 
+  label="hSeg2"
+  optional="1"
+  where="execute,survey,report">
+  <title><font style="color:red">Second Predicted Segment</font></title>
+  <row label="r1" value="1">Segment 1 from typing tool = Segment B - Brand Splitters</row>
+  <row label="r2" value="2">Segment 2 from typing tool = Segment D  - Nontarget</row>
+  <row label="r3" value="3">Segment 3 from typing tool = Segment A - Advocates</row>
+  <row label="r4" value="4">Segment 4 from typing tool = Segment C - Class Naives</row>
+</radio>
+
+<suspend/>

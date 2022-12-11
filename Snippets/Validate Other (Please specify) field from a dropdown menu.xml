@@ -1,0 +1,243 @@
+<select 
+  label="SQ05">
+  <title>Please provide the state in which the institution of your practice is located.</title>
+  <choice label="ch1">Alabama</choice>
+  <choice label="ch2">Alaska</choice>
+  <choice label="ch3">Arizona</choice>
+  <choice label="ch4">Arkansas</choice>
+  <choice label="ch5">California</choice>
+  <choice label="ch6">Colorado</choice>
+  <choice label="ch7">Connecticut</choice>
+  <choice label="ch8">Delaware</choice>
+  <choice label="ch9">District of Columbia</choice>
+  <choice label="ch10">Florida</choice>
+  <choice label="ch11">Georgia</choice>
+  <choice label="ch12">Hawaii</choice>
+  <choice label="ch13">Idaho</choice>
+  <choice label="ch14">Illinois</choice>
+  <choice label="ch15">Indiana</choice>
+  <choice label="ch16">Iowa</choice>
+  <choice label="ch17">Kansas</choice>
+  <choice label="ch18">Kentucky</choice>
+  <choice label="ch19">Louisiana</choice>
+  <choice label="ch20">Maine</choice>
+  <choice label="ch21">Maryland</choice>
+  <choice label="ch22">Massachusetts</choice>
+  <choice label="ch23">Michigan</choice>
+  <choice label="ch24">Minnesota</choice>
+  <choice label="ch25">Mississippi</choice>
+  <choice label="ch26">Missouri</choice>
+  <choice label="ch27">Montana</choice>
+  <choice label="ch28">Nebraska</choice>
+  <choice label="ch29">Nevada</choice>
+  <choice label="ch30">New Hampshire</choice>
+  <choice label="ch31">New Jersey</choice>
+  <choice label="ch32">New Mexico</choice>
+  <choice label="ch33">New York</choice>
+  <choice label="ch34">North Carolina</choice>
+  <choice label="ch35">North Dakota</choice>
+  <choice label="ch36">Ohio</choice>
+  <choice label="ch37">Oklahoma</choice>
+  <choice label="ch38">Oregon</choice>
+  <choice label="ch39">Pennsylvania</choice>
+  <choice label="ch40">Rhode Island</choice>
+  <choice label="ch41">South Carolina</choice>
+  <choice label="ch42">South Dakota</choice>
+  <choice label="ch43">Tennessee</choice>
+  <choice label="ch44">Texas</choice>
+  <choice label="ch45">Utah</choice>
+  <choice label="ch46">Vermont</choice>
+  <choice label="ch47">Virginia</choice>
+  <choice label="ch48">Washington</choice>
+  <choice label="ch49">West Virginia</choice>
+  <choice label="ch50">Wisconsin</choice>
+  <choice label="ch51">Wyoming</choice>
+</select>
+
+<suspend/>
+
+<select 
+  label="SQ06">
+  <title>Please select the institution where you see most of your patients.
+  <br /><br />
+  <em>This information will not be tied to your individual responses. It is just being collected for classification purposes.</em></title>
+  <choice label="ch10" cond="SQ05.ch22" value="10">BOSTON MEDICAL CENTER - BOSTON</choice>
+  <choice label="ch20" cond="SQ05.ch13" value="20">SAINT LUKES BOISE MEDICAL CENTER</choice>
+  <choice label="ch30" cond="SQ05.ch22" value="30">UMASS MEMORIAL MEDICAL CENTER</choice>
+  <choice label="ch40" cond="SQ05.ch3" value="40">HONOR HEALTH CANCER TRANSPLANT INSTITUTE</choice>
+  <choice label="ch50" cond="SQ05.ch34" value="50">ATRIUM HEALTH WAKE FOREST BAPTIST</choice>
+  <choice label="ch60" cond="SQ05.ch14" value="60">LOYOLA UNIVERSITY HEALTH SYSTEM</choice>
+  <choice label="ch70" cond="SQ05.ch33" value="70">WESTCHESTER COUNTY HEALTHCARE CORPORATION</choice>
+  <choice label="ch80" cond="SQ05.ch33" value="80">NORTH SHORE UNIVERSITY HOSPITAL</choice>
+  <choice label="ch90" cond="SQ05.ch10" value="90">MEMORIAL CANCER INSTITUTE - PEMBROKE PINES</choice>
+  <choice label="ch100" cond="SQ05.ch43" value="100">BAPTIST CENTERS FOR CANCER CARE</choice>
+  <choice label="ch110" cond="SQ05.ch5" value="110">USC NORRIS COMPREHENSIVE CANCER CENTER</choice>
+  <choice label="ch120" cond="SQ05.ch11" value="120">AUGUSTA UNIVERSITY</choice>
+  <choice label="ch130" cond="SQ05.ch26" value="130">SSM HEALTH SAINT LOUIS UNIVERSITY HOSPITAL - SAINT LOUIS</choice>
+  <choice label="ch140" cond="SQ05.ch8" value="140">CHRISTIANA CARE HEALTH SERVICES</choice>
+  <choice label="ch150" cond="SQ05.ch36" value="150">UNIVERSITY OF CINCINNATI MEDICAL CENTER</choice>
+  <choice label="ch160" cond="SQ05.ch33" value="160">NYU LANGONE HEALTH</choice>
+  <choice label="ch170" cond="SQ05.ch18" value="170">NORTON CANCER INSTITUTE SAINT MATTHEWS</choice>
+  <choice label="ch180" cond="SQ05.ch17" value="180">ASCENSION VIA CHRISTI - ST FRANCIS</choice>
+  <choice label="ch190" cond="SQ05.ch49" value="190">WVU HEALTHCARE, INC</choice>
+  <choice label="ch200" cond="SQ05.ch47" value="200">UNIVERSITY OF VIRGINIA CANCER CENTER</choice>
+  <choice label="ch210" cond="SQ05.ch50" value="210">ADVOCATE AURORA HEALTH</choice>
+  <choice label="ch220" cond="SQ05.ch21" value="220">JOHNS HOPKINS MEDICINE</choice>
+  <choice label="ch230" cond="SQ05.ch34" value="230">NOVANT HEALTH PRESBYTERIAN MEDICAL CENTER</choice>
+  <choice label="ch240" cond="SQ05.ch30" value="240">DARTMOUTH-HITCHCOCK MEDICAL CENTER</choice>
+  <choice label="ch250" cond="SQ05.ch43" value="250">METHODIST LE BONHEUR HEALTHCARE UNIVERSITY HOSPITAL</choice>
+  <choice label="ch260" cond="SQ05.ch3" value="260">BANNER UNIVERSITY MEDICAL CENTER TUCSON CAMPUS</choice>
+  <choice label="ch270" cond="SQ05.ch5" value="270">CEDARS-SINAI MEDICAL CENTER</choice>
+  <choice label="ch280" cond="SQ05.ch14" value="280">UNIVERSITY OF ILLINOIS MEDICAL CENTER</choice>
+  <choice label="ch290" cond="SQ05.ch10" value="290">ADVENT HEALTH</choice>
+  <choice label="ch300" cond="SQ05.ch14" value="300">CANCER TREATMENT CENTERS OF AMERICA AT MIDWESTERN REGIONAL MEDICAL CENTER</choice>
+  <choice label="ch310" cond="SQ05.ch43" value="310">VA TENNESSEE VALLEY HEALTH CARE SYSTEM NASHVILLE CAMPUS</choice>
+  <choice label="ch320" cond="SQ05.ch23" value="320">HENRY FORD CANCER INSTITUTE</choice>
+  <choice label="ch330" cond="SQ05.ch4" value="330">UNIVERSITY OF ARKANSAS FOR MEDICAL SCIENCES</choice>
+  <choice label="ch340" cond="SQ05.ch41" value="340">MEDICAL UNIVERSITY OF SOUTH CAROLINA</choice>
+  <choice label="ch350" cond="SQ05.ch14" value="350">RUSH UNIVERSITY MEDICAL CENTER</choice>
+  <choice label="ch360" cond="SQ05.ch37" value="360">OKLAHOMA UNIVERSITY MEDICAL CENTER</choice>
+  <choice label="ch370" cond="SQ05.ch44" value="370">SAINT DAVIDS SOUTH AUSTIN MEDICAL CENTER</choice>
+  <choice label="ch380" cond="SQ05.ch1" value="380">UNIVERSITY OF ALABAMA AT BIRMINGHAM</choice>
+  <choice label="ch390" cond="SQ05.ch15" value="390">FRANCISCAN SAINT FRANCIS HEALTH INDIANAPOLIS</choice>
+  <choice label="ch400" cond="SQ05.ch43" value="400">TRISTAR CENTENNIAL MEDICAL CENTER</choice>
+  <choice label="ch410" cond="SQ05.ch48" value="410">SWEDISH MEDICAL CENTER</choice>
+  <choice label="ch420" cond="SQ05.ch36" value="420">UNIVERSITY HOSPITALS SIEDMAN CANCER CENTER</choice>
+  <choice label="ch430" cond="SQ05.ch9" value="430">GEORGETOWN UNIVERSITY HOSPITAL</choice>
+  <choice label="ch440" cond="SQ05.ch42" value="440">AVERA MCKENNAN HOSP</choice>
+  <choice label="ch450" cond="SQ05.ch44" value="450">MEDICAL CITY DALLAS HOSPITAL</choice>
+  <choice label="ch460" cond="SQ05.ch18" value="460">ADVOCATE LUTHERAN GENERAL HOSPITAL</choice>
+  <choice label="ch470" cond="SQ05.ch44" value="470">HOUSTON METHODIST HOSPITAL</choice>
+  <choice label="ch480" cond="SQ05.ch7" value="480">YALE NEW HAVEN HOSPITAL</choice>
+  <choice label="ch490" cond="SQ05.ch34" value="490">UNIVERSITY OF NORTH CAROLINA HOSPITALS</choice>
+  <choice label="ch500" cond="SQ05.ch36" value="500">THE JEWISH HOSPITAL</choice>
+  <choice label="ch510" cond="SQ05.ch23" value="510">SPECTRUM HEALTH BMT</choice>
+  <choice label="ch520" cond="SQ05.ch10" value="520">UNIVERSITY OF FLORIDA HEALTH</choice>
+  <choice label="ch530" cond="SQ05.ch22" value="530">BETH ISRAEL DEACONESS MEDICAL CENTER EAST CAMPUS</choice>
+  <choice label="ch540" cond="SQ05.ch39" value="540">ALLEGHENY HEALTH NETWORK CANCER INSTITUTE</choice>
+  <choice label="ch550" cond="SQ05.ch39" value="550">THOMAS JEFFERSON UNIVERSITY HOSPITAL</choice>
+  <choice label="ch560" cond="SQ05.ch6" value="560">UNIVERSITY OF COLORADO CANCER CENTER</choice>
+  <choice label="ch570" cond="SQ05.ch45" value="570">LDS INTERMOUNTAIN HOSPITAL</choice>
+  <choice label="ch580" cond="SQ05.ch31" value="580">RUTGERS CANCER CENTER INSTITUTE</choice>
+  <choice label="ch590" cond="SQ05.ch44" value="590">UT SOUTHWESTERN MEDICAL CENTER</choice>
+  <choice label="ch600" cond="SQ05.ch18" value="600">UNIVERSITY OF KENTUCKY ALBERT B CHANDLER MEDICAL CENTER</choice>
+  <choice label="ch610" cond="SQ05.ch5" value="610">UC DAVIS CANCER CENTER</choice>
+  <choice label="ch620" cond="SQ05.ch39" value="620">FOX CHASE CANCER CENTER - PHILADELPHIA</choice>
+  <choice label="ch630" cond="SQ05.ch33" value="630">MOUNT SINAI MEDICAL CENTER</choice>
+  <choice label="ch640" cond="SQ05.ch39" value="640">PENN STATE CANCER INSTITUTE</choice>
+  <choice label="ch650" cond="SQ05.ch3" value="650">MAYO CLINIC HOSPITAL</choice>
+  <choice label="ch660" cond="SQ05.ch15" value="660">INDIANA UNIVERSITY CANCER CENTER</choice>
+  <choice label="ch670" cond="SQ05.ch16" value="670">UNIVERSITY OF IOWA HOSPITALS AND CLINICS</choice>
+  <choice label="ch680" cond="SQ05.ch33" value="680">COLUMBIA UNIVERSITY MEDICAL CENTER</choice>
+  <choice label="ch690" cond="SQ05.ch11" value="690">NORTHSIDE HOSPITAL CANCER CENTER</choice>
+  <choice label="ch700" cond="SQ05.ch47" value="700">VIRGINIA COMMONWEALTH MEDICAL CENTER</choice>
+  <choice label="ch710" cond="SQ05.ch33" value="710">MONTEFIORE MEDICAL CENTER MOSES DIVISION HOSPITAL</choice>
+  <choice label="ch720" cond="SQ05.ch5" value="720">UCSD HEALTH</choice>
+  <choice label="ch730" cond="SQ05.ch24" value="730">UNIVERSITY OF MINNESOTA MEDICAL CENTER</choice>
+  <choice label="ch740" cond="SQ05.ch10" value="740">MAYO CLINIC HOSPITAL JACKSONVILLE</choice>
+  <choice label="ch750" cond="SQ05.ch23" value="750">UNIVERSITY OF MICHIGAN HOSPITAL</choice>
+  <choice label="ch760" cond="SQ05.ch34" value="760">LEVINE CANCER INSTITUTE</choice>
+  <choice label="ch770" cond="SQ05.ch45" value="770">UNIVERSITY OF UTAH HUNTSMAN CANCER INSTITUTE</choice>
+  <choice label="ch780" cond="SQ05.ch50" value="780">FROEDTERT &amp; MEDICAL COLLEGE OF WISCONSIN</choice>
+  <choice label="ch790" cond="SQ05.ch33" value="790">NEW YORK PRESBYTERIAN WEILL CORNELL MEDICAL CENTER</choice>
+  <choice label="ch800" cond="SQ05.ch14" value="800">NORTHWESTERN UNIV ROBERT H. LURIE CANCER CENTER</choice>
+  <choice label="ch810" cond="SQ05.ch33" value="810">ROSWELL PARK CANCER INSTITUTE</choice>
+  <choice label="ch820" cond="SQ05.ch44" value="820">METHODIST HEALTHCARE SYSTEM OF SAN ANTONIO, LTD, LLP</choice>
+  <choice label="ch830" cond="SQ05.ch3" value="830">BANNER GATEWAY MEDICAL CENTER</choice>
+  <choice label="ch840" cond="SQ05.ch11" value="840">EMORY HEALTHCARE</choice>
+  <choice label="ch850" cond="SQ05.ch36" value="850">THE CLEVELAND CLINIC FOUNDATION</choice>
+  <choice label="ch860" cond="SQ05.ch50" value="860">UNIVERSITY OF WISCONSIN HOSPITAL AND CLINICS</choice>
+  <choice label="ch870" cond="SQ05.ch44" value="870">BAYLOR T. BOONE PICKENS CANCER HOSPITAL - DALLAS</choice>
+  <choice label="ch880" cond="SQ05.ch5" value="880">UCLA</choice>
+  <choice label="ch890" cond="SQ05.ch34" value="890">DUKE UNIVERSITY MEDICAL CENTER</choice>
+  <choice label="ch900" cond="SQ05.ch5" value="900">UNIVERSITY OF CALIFORNIA SAN FRANCISCO MEDICAL CENTER AT PARNASSUS</choice>
+  <choice label="ch910" cond="SQ05.ch31" value="910">HACKENSACK UNIVERSITY MEDICAL CENTER</choice>
+  <choice label="ch920" cond="SQ05.ch28" value="920">UNIVERSITY OF NEBRASKA MEDICAL CENTER</choice>
+  <choice label="ch930" cond="SQ05.ch6" value="930">CBCI PRESBYTERIAN ST. LUKE</choice>
+  <choice label="ch940" cond="SQ05.ch39" value="940">UPMC HILLMAN CANCER CENTER</choice>
+  <choice label="ch950" cond="SQ05.ch21" value="950">UNIVERSITY OF MARYLAND MEDICAL CENTER - BALTIMORE</choice>
+  <choice label="ch960" cond="SQ05.ch39" value="960">UNIVERSITY OF PENNSYLVANIA - MEDICAL GROUP</choice>
+  <choice label="ch970" cond="SQ05.ch33" value="970">MEMORIAL SLOAN KETTERING CANCER CENTER</choice>
+  <choice label="ch980" cond="SQ05.ch33" value="980">UNIVERSITY OF ROCHESTER MEDICAL CENTER</choice>
+  <choice label="ch990" cond="SQ05.ch38" value="990">OREGON HEALTH AND SCIENCE UNIVERSITY HOSPITAL</choice>
+  <choice label="ch1000" cond="SQ05.ch10" value="1000">SYLVESTER COMPREHENSIVE CANCER CENTER - MIAMI</choice>
+  <choice label="ch1010" cond="SQ05.ch24" value="1010">MAYO CLINIC</choice>
+  <choice label="ch1020" cond="SQ05.ch48" value="1020">SEATTLE CANCER CARE ALLIANCE</choice>
+  <choice label="ch1030" cond="SQ05.ch5" value="1030">STANFORD HEALTH CARE</choice>
+  <choice label="ch1040" cond="SQ05.ch43" value="1040">VANDERBILT UNIVERSITY MEDICAL CENTER</choice>
+  <choice label="ch1050" cond="SQ05.ch5" value="1050">CITY OF HOPE NATIONAL MEDICAL CENTER</choice>
+  <choice label="ch1060" cond="SQ05.ch23" value="1060">BARBARA ANN KARMANOS CANCER INSTITUTE - DETROIT</choice>
+  <choice label="ch1070" cond="SQ05.ch26" value="1070">SITEMAN CANCER CENTER</choice>
+  <choice label="ch1080" cond="SQ05.ch36" value="1080">THE OHIO STATE UNIVERSITY COMPREHENSIVE CANCER CENTER</choice>
+  <choice label="ch1090" cond="SQ05.ch17" value="1090">THE UNIVERSITY OF KANSAS HOSPITAL</choice>
+  <choice label="ch1100" cond="SQ05.ch22" value="1100">MASSACHUSETTS GENERAL HOSPITAL CANCER CENTER</choice>
+  <choice label="ch1110" cond="SQ05.ch22" value="1110">DANA FARBER CANCER INSTITUTE - BOSTON</choice>
+  <choice label="ch1120" cond="SQ05.ch44" value="1120">UNIVERSITY OF TEXAS MD ANDERSON CANCER CENTER</choice>
+  <choice label="ch1130" cond="SQ05.ch14" value="1130">THE UNIVERSITY OF CHICAGO MEDICAL CENTER</choice>
+  <choice label="ch1140" cond="SQ05.ch10" value="1140">MOFFITT CANCER CENTER</choice>
+  <choice label="ch1150" value="1150">Other</choice>
+  <choice label="ch999" value="1160">Prefer not to disclose</choice>
+</select>
+
+<text 
+  label="SQ06_OTHER"
+  size="40">
+  <title>Please name the other institution where you see most of your patients.</title>
+  <comment><span style="color:#BA0000; font-style: normal;" id="error">Please fill in the missing info.</span></comment>
+  <style name="question.after" wrap="ready"><![CDATA[
+// Show Other (Please specify) question
+
+$ ('#question_SQ06_OTHER').hide();
+
+$ ('#question_SQ06').find('select').change(function() {
+
+    let getVal = $ ('#question_SQ06:last').find('select').val();
+    
+    if (getVal == 114) {
+        $ ('#question_SQ06_OTHER').show(1000);
+
+    } else {
+        $ ('#question_SQ06_OTHER').hide(1000);
+        $ ('#question_SQ06_OTHER').find('input').val("");
+        $ ('#error').hide();
+        $ ('#question_SQ06_OTHER').css('background', 'white');
+    }
+});
+
+// Validation
+
+$ ('#error').hide();
+
+$ ("#btn_continue").click(function() {
+
+    if ($ ('#question_SQ06_OTHER').css('display') == 'block' && !$ ('#question_SQ06_OTHER').find('input').val()) {
+        $ ('#error').show();
+        $ ('#btn_continue').prop('disabled', true);
+        $ ('#question_SQ06_OTHER').css('background', '#FFEDED');
+
+    }
+
+    setTimeout(function() {
+        $ ('#btn_continue').prop('disabled', false);
+
+    }, 2000);
+});
+]]></style>
+</text>
+
+<suspend/>
+
+<radio 
+  label="SQ06_HID"
+  where="execute,survey,report">
+  <title><font style="color:red">ATC vs NON-ATC</font></title>
+  <exec>
+if SQ06.ch999 or SQ06.ch1150:
+  SQ06_HID.val = SQ06_HID.r2.index
+else:
+  SQ06_HID.val = SQ06_HID.r1.index
+  </exec>
+
+  <row label="r1">ATC</row>
+  <row label="r2">NON-ATC</row>
+</radio>

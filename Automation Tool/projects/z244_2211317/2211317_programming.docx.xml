@@ -1,0 +1,455 @@
+
+  ------------  
+<condition label="Disp1" cond='Q01.r2'>Conditional Disposition 1 </condition>
+<condition label="Disp2" cond='Q02.r1'>Conditional Disposition 2 </condition>
+<condition label="Disp3" cond='Q03.r2'>Conditional Disposition 3 </condition>
+<condition label="Disp4" cond='Q05.r2'>Conditional Disposition 4 </condition>
+<condition label="Disp5" cond='Q06.r1'>Conditional Disposition 5 </condition>
+<condition label="Disp6" cond='Q07.r5'>Conditional Disposition 6 </condition>
+<condition label="Disp7" cond='Q08.r2 or Q08.r3'>Conditional Disposition 7 </condition>
+<condition label="Disp8" cond='not Q09.r1.check("3-30")'>Conditional Disposition 8 </condition>
+<condition label="Disp9" cond='Q10.r7'>Conditional Disposition 9 </condition>
+<condition label="Disp10" cond='Q12.r1.ival lt 70'>Conditional Disposition 10 </condition>
+<condition label="Disp11" cond='Q13.r1.ival lt 5 or Q13.r1.ival lt 15'>Conditional Disposition 11 </condition>
+<condition label="Disp12" cond='Q14.sum lt 15'>Conditional Disposition 12 </condition>
+<condition label="Disp13" cond='CNT2.r2'>Conditional Disposition 13 </condition>
+<condition label="Disp14" cond='OUTRO1.r2'>Conditional Disposition 14 </condition>
+
+  ------------  
+
+<row label="r1" value="1">Q01 </row>
+<row label="r2" value="2">Q02 </row>
+<row label="r3" value="3">Q03@end </row>
+<row label="r4" value="4">Q05 </row>
+<row label="r5" value="5">Q06 </row>
+<row label="r6" value="6">Q07 </row>
+<row label="r7" value="7">Q08 </row>
+<row label="r8" value="8">Q09@end </row>
+<row label="r9" value="9">Q10@end </row>
+<row label="r10" value="10">Q12@end </row>
+<row label="r11" value="11">Q13 </row>
+<row label="r12" value="12">Q14 </row>
+<row label="r13" value="13">CNT2 </row>
+<row label="r14" value="14">OUTRO1 </row>
+
+  ------------  
+
+
+<res label='errOEMin'>Please enter more text.</res>
+<exec when='init'>
+# Checking OE='Open End' Question Length
+# [oemin: 5]
+def OEMinChk(strChk, maxOE):
+	if len(str(strChk.val)) lt maxOE:
+		error(res.errOEMin)
+</exec>
+
+<radio
+	label='Q01'>
+	<title>
+		For this 60-minute interview, you will be asked to view online materials using a link that will be shared with you. In order to view the online materials clearly, you must have either a desktop monitor or full-sized laptop screen. A smartphone screen, tablet, iPad or netbook will not suffice. Will you have access to both a phone and a full-size computer screen at the same time for this conversation?
+<br/><br/>
+	</title>
+	<comment>Single answer only</comment>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<note> Original Cond=Q01.r2</note>
+<term label='Term1' cond="(processTerms('Disp1') )"> Terminate Q01 </term>
+<suspend/>
+
+<radio
+	label='Q02'>
+	<title>
+		Are either you or any member of your family currently affiliated with the Food and Drug Administration (FDA), a pharmaceutical or healthcare company, market research firm, or advertising agency as a paid consultant or researcher?
+	</title>
+	<comment>Single answer only</comment>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<note> Original Cond=Q02.r1</note>
+<term label='Term2' cond="(processTerms('Disp2') )"> Terminate Q02 </term>
+<suspend/>
+
+<radio
+	label='Q03'>
+	<title>
+		Have you taken part in market research on the subject of <b>Muscle-invasive bladder cancer</b> in the past 3 months?
+	</title>
+	<comment>Single answer only</comment>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<note> Original Cond=Q03.r2</note>
+<term label='Term3' cond="(processTerms('Disp3')  and (QHidStage.r2))"> Terminate Q03 </term>
+<suspend/>
+
+<radio
+	label='Q04'>
+	<title>
+		Are you currently a government employee (federal, state, local)?
+	</title>
+	<comment>Single answer only</comment>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<suspend/>
+
+<radio
+	label='Q05'
+	cond='Q04.r1'>
+	<title>
+		Thank you for indicating that you are employed by the government.  Regulations exist stating that an honorarium or enticement cannot be paid to government employees to participate in market research.  Your opinion is valuable to us.  Do you choose to continue and complete the survey without payment?
+<br/><br/> 
+<br/><br/>
+	</title>
+	<comment>Single answer only</comment>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<note> Original Cond=Q05.r2</note>
+<term label='Term4' cond="((Q04.r1) and processTerms('Disp4') )"> Terminate Q05 </term>
+<suspend/>
+
+<radio
+	label='Q06'>
+	<title>
+		Do you reside, practice, work in a medical capacity or licensed to prescribe drugs in Vermont even for only a limited time or any sort of regular frequency -- for example, one day per year, or one week every three years?
+	</title>
+	<comment>Single answer only</comment>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<note> Original Cond=Q06.r1</note>
+<term label='Term5' cond="(processTerms('Disp5') )"> Terminate Q06 </term>
+<suspend/>
+
+<radio
+	label='Q07'>
+	<title>
+		What is your primary medical specialty?
+	</title>
+	<comment>Single answer only</comment>
+	<row label='r1'>Medical Oncology</row>
+	<row label='r2'>Hematology Oncology</row>
+	<row label='r3'>Urology</row>
+	<row label='r4'>Urological Oncology</row>
+	<row label='r5'>Other</row>
+</radio>
+
+
+<note> Original Cond=Q07.r5</note>
+<term label='Term6' cond="(processTerms('Disp6') )"> Terminate Q07 </term>
+<suspend/>
+
+<suspend/>
+
+<exec>
+
+if Q07.r1 or Q07.r2 :
+    Q07HID.val = Q07HID.r1.index
+if Q07.r3 or Q07.r4 :
+    Q07HID.val = Q07HID.r2.index
+
+</exec>
+
+<suspend/>
+
+<radio
+	label = "Q07HID"
+	optional = "1"
+	where = "execute,survey,report">
+	<title>Recorded from question Q07</title>
+	  <row label = 'r1'><B>Onc</B></row>
+	  <row label = 'r2'><B>Uro</B></row>
+</radio>
+
+<suspend/>
+
+<radio
+	label='Q08'>
+	<title>
+		Are you board certified or board-eligible in your area of specialty?
+	</title>
+	<comment>Single answer only</comment>
+	<row label='r1'>Board certified</row>
+	<row label='r2'>Board eligible</row>
+	<row label='r3'>Neither</row>
+</radio>
+
+
+<note> Original Cond=Q08.r2 or Q08.r3</note>
+<term label='Term7' cond="(processTerms('Disp7') )"> Terminate Q08 </term>
+<suspend/>
+
+<number
+	label='Q09'
+	rowLegend='right'
+	size='5'
+	grouping='cols'
+	optional='0'>
+	<title>
+		How many years have you been practicing since qualifying for your specialty post-residency?
+	</title>
+	<comment>Enter whole number</comment>
+	<row label='r1'>(Write in # of years)</row>
+</number>
+
+
+<suspend/>
+
+<note> Original Cond=not Q09.r1.check("3-30")</note>
+<term label='Term8' cond="(processTerms('Disp8')  and (QHidStage.r2) )"> Terminate Q09teratend </term>
+<suspend/>
+
+<radio
+	label='Q10'>
+	<title>
+		Which type of hospital do you currently work in?
+	</title>
+	<comment>Single answer only</comment>
+	<row label='r1'>A community-based solo or group private practice</row>
+	<row label='r2'>A community-based outpatient oncology center or clinic that is free standing and independent or affiliated with a community non-teaching hospital</row>
+	<row label='r3'>An inpatient facility in a community non-teaching hospital</row>
+	<row label='r4'>An academic-based solo or group practice (i.e., affiliated with an academic medical institution and/or teaching hospital)</row>
+	<row label='r5'>An academic-based outpatient oncology center or clinic that is affiliated with an academic or teaching hospital</row>
+	<row label='r6'>An inpatient facility in an academic or teaching hospital</row>
+	<row label='r7'>Other</row>
+</radio>
+
+
+<note> Original Cond=Q10.r7</note>
+<term label='Term9' cond="(processTerms('Disp9')  and (QHidStage.r2))"> Terminate Q10 </term>
+<suspend/>
+
+<suspend/>
+
+<exec>
+
+if Q10.r1 or Q10.r2 or Q10.r3 :
+    Q10HID.val = Q10HID.r1.index
+if Q10.r4 or Q10.r5 or Q10.r6 :
+    Q10HID.val = Q10HID.r2.index
+
+</exec>
+
+<suspend/>
+
+<radio
+	label = "Q10HID"
+	optional = "1"
+	where = "execute,survey,report">
+	<title>Recorded from question Q10</title>
+	  <row label = 'r1'>Community</row>
+	  <row label = 'r2'>Academic</row>
+</radio>
+
+<suspend/>
+
+<radio
+	label='Q11'
+	cond='Q07HID.r2'>
+	<title>
+		  Are you a member of a Large Urology Group Practice Association (LUGPA)? 
+<br/><br/>
+	</title>
+	<comment>Single answer only</comment>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<suspend/>
+
+<number
+	label='Q12'
+	rowLegend='right'
+	size='5'
+	grouping='cols'
+	optional='0'>
+	<title>
+		What percent of your professional time is spent in direct patient care as opposed to academic or administrative duties?
+	</title>
+	<comment>Enter whole number</comment>
+	<row label='r1'>(Write in %)</row>
+</number>
+
+
+<suspend/>
+
+<note> Original Cond=Q12.r1.ival lt 70</note>
+<term label='Term10' cond="(processTerms('Disp10')  and (QHidStage.r2) )"> Terminate Q12teratend </term>
+<suspend/>
+
+<number
+	label='Q13'
+	rowLegend='left'
+	size='5'
+	grouping='cols'
+	optional='0'
+	ss:listDisplay='0'>
+	<title>
+		How many unique bladder cancer patients do you personally manage and/or make treatment decisions for during the last 3 months?
+	</title>
+	<comment>Enter whole number</comment>
+	<row label='r1'>Non-muscle invasive bladder cancer (NMIBC)</row>
+	<row label='r2'>Muscle-invasive bladder cancer (MIBC)</row>
+	<row label='r3'>Metastatic urothelial carcinoma</row>
+</number>
+
+
+<suspend/>
+
+<note> Original Cond=Q13.r1.ival lt 5 or Q13.r1.ival lt 15</note>
+<term label='Term11' cond="(processTerms('Disp11') )"> Terminate Q13ter </term>
+<suspend/>
+
+<number
+	label='Q14'
+	rowLegend='left'
+	size='5'
+	grouping='cols'
+	optional='0'
+	ss:listDisplay='0'>
+	<title>
+		Of your   <b>${Q13.r2.ival} </b>patients with <b>MIBC</b> that you have seen in the past 3 months, how many of them are in the following stages?
+	</title>
+	<comment>Enter whole number</comment>
+	<row label='r1'>Stage II</row>
+	<row label='r2'>Stage III</row>
+	<row label='r3'>Stage IV (M0)</row>
+</number>
+
+
+<suspend/>
+
+<note> Original Cond=Q14.sum lt 15</note>
+<term label='Term12' cond="(processTerms('Disp12') )"> Terminate Q14ter </term>
+<suspend/>
+
+<radio
+	label='Q15'
+	cond='Q07HID.r2'>
+	<title>
+		  For your MIBC patients, which of the following best describes your involvement in their treatment?
+<br/><br/>
+	</title>
+	<comment>Single answer only</comment>
+	<row label='r1'>Prescribing systemic treatment but refer out to other specialists for cystectomy</row>
+	<row label='r2'>Involved in/perform cystectomy but refer out to other specialists for prescribing systemic treatment</row>
+	<row label='r3'>Prescribing systemic treatment <b>and</b> involved in/perform cystectomy</row>
+	<row label='r4'>Refer out for systemic treatment <b>AND</b> cystectomy</row>
+</radio>
+
+
+<suspend/>
+
+<radio
+	label='RespCons1'>
+	<title>
+		<b><u>US Only - Respondent Consent to Participate</u></b>  
+<br/><br/><b>Project Number:</b> 22423
+<br/><br/>Nature of Project: Branding Science on behalf of a major pharmaceutical company
+<br/><br/><b>Subject and purpose of market research study: </b>
+<br/><br/><b>Methodology and Approach: </b>
+<br/><br/>If we are asking you to use a link during the interview, please check the link at least 15 mins before the interview and contact the agency if you are having any difficulty. This will ensure a prompt start to the interview. Thank you.
+<br/><br/><b><u>Fieldwork</u></b>  
+<br/><br/><b>Location/Address: </b>  Web-assisted TDI  
+<br/><br/><b>Duration: </b>  60 minutes
+<br/><br/>Agreement and Signature 
+<br/><br/>Thank you for agreeing to participate in this Market Research study conducted by Branding Science on behalf of a pharmaceutical company. 
+<br/><br/>Any information you provide us with will be treated as confidential, it will be combined with feedback from others like yourself. The aim of this market research is to gain your views and is not intended to be promotional and no one will try to sell you anything. Your information will only be used for this purpose and will not be passed to any third party without your permission.
+<br/><br/>We ask you to review and agree to the following statements prior to participating in the interview.
+	</title>
+	<row label='r1'>I confirm that I am happy to take part in this market research interview voluntarily and know that I may terminate the interview or withhold information if I so wish. I understand that I can withdraw my consent at any point.<br/><br/>I understand that all data from this interview will only be used for market research purposes.<br/><br/>I will treat all information presented to me during this study as confidential. Any information presented during the course of this research is done solely to explore reactions to such information and should therefore be assumed to be hypothetical. The research presented should not be used to influence decisions outside this market research.</row>
+	<row label='r2'>I consent to my interview being audio for analysis purposes by Branding Science. Branding Science staff may be based outside the USA. Adequate data protection measures will be put in place to comply with Federal and State Data Protection Laws. All staff have confirmed their agreement to follow Observer Guidelines.</row>
+	<row label='r3'>I consent to people from the Sponsoring Company watching my interview live in person. This is to help them to understand the market research better. All staff have confirmed their agreement to follow Observer Guidelines.</row>
+	<row label='r4'>I consent to people from Sponsoring Company watching / listening to my interview live from their offices. This is to help them to understand the market research better. Sponsoring company staff may be based outside USA. Adequate data protection measures will be put in place to comply with the Federal and State Data Protection Laws. All staff have confirmed their agreement to follow Observer Guidelines.</row>
+	<row label='r5'>I consent to people from the Sponsoring Company to have access to my interview recording. This is to help them to understand the market research better. All staff have confirmed their agreement to follow Observer Guidelines.</row>
+	<row label='r6'>We may want to further explore your responses to some of the questions answered. Would you be prepared to be re-contacted by<b> Opinionsite within 3 months?</b></row>
+	<col label='c1' >Yes</col>
+	<col label='c2' >No</col>
+</radio>
+
+
+<suspend/>
+
+<radio
+	label='CNT2'>
+	<title>
+		I understand that Branding Science and/or the Sponsoring Company commissioning the research may wish to keep a copy of the recordings from this research. If I give permission, Branding Science and/or the Sponsoring Company staff who may be based outside  USA, will be given access to my interview. NO sales approach will ever be made as a result of this permission. I do not need to make a decision about this now as I will have an opportunity at the end of the interview/group discussion to decide if I am happy for the audio/video recording to be released. If I agree, I will be asked to sign an additional form at the end of the interview which will give me more information about the intended use of the recording.
+<br/><br/>I understand that there may be support personnel assisting during the interview, including simultaneous translators and technical support personnel from Civicom for audio/video streaming and web cam interviews. Such personnel have signed confidentiality agreements.
+<br/><br/><b>PHYSICIAN PAYMENT SUNSHINE ACT </b>
+<br/><br/>I understand that Federal and certain State laws, along with comparable company policies, may require that the pharmaceutical sponsor report any payment received by me for my participation in the study, if the pharmaceutical sponsor is aware of my identity. If the pharmaceutical sponsor recognizes me by name, I can either allow my name, and the amount of any payments made to me for participation in the market research to be released and reported as per the Sunshine Act requirements or I can agree to forfeit any potential payments for my participation in this study.<br/><br/> <b>By signing this consent form I agree to participate in the research/interview under these conditions.</b>
+<br/><br/><b>ADVERSE EVENT REPORTING </b>
+<br/><br/>We are required to pass on to our client details of adverse events/product complaints pertaining to their products that are mentioned during the course of market research. This will be solely for drug safety to fulfil their obligation to the regulatory authorities.
+<br/><br/>Although this is a market research interview and what you say will, of course, be treated in confidence, should you raise during the discussion an adverse event in a patient or patients, we will need to report this even if it has already been reported by you directly to the company or the regulatory authorities. 
+<br/><br/>In such a situation you will be asked whether or not you are willing to waive the confidentiality given to you under the Market Research Codes of conduct specifically in relation to that adverse event/ product complaint. Everything else you say during the course of the interview will continue to remain confidential, and you will still have the option to remain anonymous if you so wish.”
+<br/><br/><b>DRUG SAFETY</b>
+<br/><br/>I understand that the drug safety department of the pharmaceutical company commissioning the research may require that my participation information be available for review. This will be solely for drug safety to fulfil their obligation to the regulatory authorities.
+<br/><br/>In order to fulfil this obligation we will keep the audio recording of your interview for up to 10 years for drug safety purposes only. Your name is not associated with the recording. We will keep the audio secure with restricted access. After 10 years the audio recording will be securely destroyed.
+<br/><br/>By signing this consent form I agree to participate in the research/interview under these conditions.
+	</title>
+	<row label='r1'>I have read, understand and accept the statements contained in the ‘Consent to Participate' form and consent to participate with the interview on the basis of these statements</row>
+	<row label='r2'>I do not agree</row>
+</radio>
+
+
+<note> Original Cond=CNT2.r2</note>
+<term label='Term13' cond="(processTerms('Disp13') )"> Terminate CNT2 </term>
+<suspend/>
+
+<radio
+	label='RespPerAlow1'>
+	<title>
+		Respondent Permission Allowing Access to Recordings
+<br/><br/>Project Number:  <b>22423</b> 
+<br/><br/>Project Title: <b>Muscle-Invasive Bladder Cancer Landscape Research</b>
+<br/><br/>Commissioning Company: <b>Pharmaceutical company</b>
+<br/><br/>Agency Name <b>BRANDING SCIENCE</b>
+<br/><br/>Date(s) of Research <b>w/o 12/12/2022 – w/o 1/9/2022</b>
+<br/><br/>Location of Research: <b>USA; Online Web-Assisted Telephone Interviews</b>
+<br/><br/>Branding Science is an independent Market Research company who are responsible for this research.
+<br/><br/>The different purposes which the footage may be used for have been detailed below. Please select those that you agree with and those that you don't agree with.
+<br/><br/>Please be assured that, regardless of how you agree the footage to be used:<ul>
+<br/><br/><li/>It will not be linked to your name or contact details and no attempt will be made to reverse the anonymization 
+<li/>No sales approaches will ever be made to you as a consequence of the company having this tape
+<li/>Adequate data protection measures will be put in place to comply with the Data Protection Laws of the country in which the interview took place. Also, that those listening to the recordings will adhere to Market Research Guidelines of the country in which the interview took place.
+<li/>The recordings will be kept for two (2) years and after that it will be destroyed.</ul>
+	</title>
+	<row label='r1'>I understand that the purpose(s) of Branding Science market researchers having access is:<br> <b>For analysis purposes, and to be part of the report and presentation of results</b></row>
+	<row label='r2'>I understand that the purpose(s) of <b>sponsoring pharmaceutical company</b> having access is: <br/>For internal training and inform development of communication materials<br/>The people in the client Sponsoring Company who will listen to or view the recordings will be in the following functions/roles: <br/><b>Market research, marketing, clinical and sales force team</b></row>
+	<col label='c1' >Agree</col>
+	<col label='c2' >Don't agree</col>
+</radio>
+
+
+<suspend/>
+
+<radio
+	label='OUTRO1'>
+	<title>
+		You have the right to withdraw your footage should you change your mind as to how you agree to your footage to be used. Please contact <b>Adam Engleberg</b> at Branding Science <a href="mailto:<b>Adam.Engleberg@branding-science.com</b>" target="_blank" rel="noopener"><span style="color:blue;"><b>Adam.Engleberg@branding-science.com</b></span></a>
+<br/><br/>I give permission for the video recordings of today's session to be used as stated above. I understand that some viewers maybe based outside the European Economic Area ("EEA") or the country where the interview took place. 
+<br/><br/>By signing this consent form I agree to participate in the research/interview under these conditions.
+	</title>
+	<row label='r1'>I have read, understand and accept the statements contained in the ‘Consent to Participate' form and consent to participate with the interview on the basis of these statements</row>
+	<row label='r2'>I do not agree</row>
+</radio>
+
+
+<note> Original Cond=OUTRO1.r2</note>
+<term label='Term14' cond="(processTerms('Disp14') )"> Terminate OUTRO1 </term>
+<suspend/>

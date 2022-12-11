@@ -1,0 +1,161 @@
+<radio 
+  label="progHoverOverCSS"
+  cond="0"
+  optional="1"
+  where="none">
+  <title>Hidden- Css used for hover over</title>
+  <row label="r2">&lt;style type="text/css"&gt;
+.autosave-restart {
+    display: none;
+}
+.grid.grid-table-mode .col-legend {
+    vertical-align: bottom;
+}
+
+\@media screen and (max-width: 800px) and (min-width: 650px){
+.question-text img, .answers-list img, .comment-text img{
+max-width: 600px;
+}
+}
+\@media screen and (max-width: 649px) and (min-width: 350px){
+.question-text img, .answers-list img, .comment-text img{
+max-width: 300px;
+}
+}
+\@media screen and (max-width: 349px){
+.question-text img, .answers-list img, .comment-text img{
+max-width: 250px;
+}
+}
+.phonepackage, .offertype, .tooldiv
+{
+border-style:solid;
+border-width:1px;
+background-color: white;
+font-weight:normal;
+/*font-family:arial;*/
+display:none;
+position:fixed;
+z-index:31;
+}
+.phonename
+{
+font-size:10px;
+font-weight:bold;
+}
+
+.phonetypetitle
+{
+font-size:11px;
+font-weight:bold;
+}
+.hoverlabel
+{
+cursor:pointer;
+//border-bottom:1px dashed;
+}
+
+.phonepackage, .offertype, .tooldiv
+{
+width:250px;
+color:#000000;
+font-style:normal;
+}
+.phonepackage, .offertype, .tooldiv
+{
+padding:2px;
+}
+.hyper{
+color:blue;
+text-decoration:underline;
+cursor:pointer;
+}
+.whitehyper{
+color:white;
+text-decoration:underline;
+cursor:pointer;
+}
+    &lt;/style&gt;
+    
+    &lt;script type="text/javascript"&gt;
+function showTooltip(e,id){
+if (!e) var e = window.event;
+var element;
+if (e.srcElement) element = e.srcElement;
+else element = e.target;
+var scrollAmount;
+var scrollAmtLeft;
+
+if (window.pageYOffset != undefined) scrollAmount = window.pageYOffset ;
+else scrollAmount = document.documentElement.scrollTop;
+if (window.pageXOffset != undefined)  scrollAmtLeft = window.pageXOffset ;
+else scrollAmtLeft = document.documentElement.scrollLeft;
+scrollAmount = 0;
+//alert("scrollAmount" + scrollAmount)
+
+x = e.clientX + scrollAmtLeft;
+y = e.clientY + scrollAmount;
+//console.log("e.clientX " + e.clientX);
+//console.log("e.target.id " + e.target.id);
+var divHeight = parseInt(y) + parseInt(document.getElementById(id).clientHeight);
+var divWidth = parseInt(y) + parseInt(document.getElementById(id).clientWidth);
+var screenHeight = parseInt(document.documentElement.clientHeight) + scrollAmount;
+var screenWidth = parseInt(document.documentElement.clientWidth) + scrollAmtLeft;
+var nonScrollHeight = parseInt(document.documentElement.clientHeight);
+var nonScrollWidth = parseInt(document.documentElement.clientWidth);
+//alert("Screen width = " + screenWidth);
+document.getElementById(id).style.display = "block";
+var actualHeight = parseInt(document.getElementById(id).clientHeight)
+var actualWidth = parseInt(document.getElementById(id).clientWidth)
+var xOffset = 50;
+var yOffset = 5;
+var buffer = 3;
+
+
+//alert('scroll height ' + parseInt(nonScrollHeight));
+//alert('div height ' + parseInt(y + yOffset + actualHeight + buffer));
+//if (y + yOffset + actualHeight + scrollAmount + buffer &gt; screenHeight){
+if (parseInt(y + yOffset + actualHeight + buffer) &gt; screenHeight){
+if (parseInt(y - actualHeight - buffer - yOffset) &gt; 0) document.getElementById(id).style.top = parseInt(y - actualHeight - yOffset) + "px";
+else document.getElementById(id).style.top = parseInt(screenHeight - actualHeight) + "px";
+}
+else document.getElementById(id).style.top = parseInt(y+yOffset) + "px";
+
+//alert("document.getElementById(id).style.top" + document.getElementById(id).style.top)
+
+//document.getElementById(id).style.top = parseInt(y+yOffset) + "px";
+//if (x + xOffset + actualWidth + buffer &gt; screenWidth){
+
+if (parseInt(x + actualWidth + xOffset + buffer) &gt; screenWidth){
+//alert('0 check ' + parseInt(x - actualWidth - buffer - xOffset));
+if (parseInt(x - actualWidth - buffer - xOffset) &gt; 0) document.getElementById(id).style.left =  parseInt(x - actualWidth - xOffset)+ "px";
+else document.getElementById(id).style.left =  parseInt(screenWidth - actualWidth)+ "px";
+}
+else document.getElementById(id).style.left = parseInt(x+xOffset) + "px";
+//alert('left ' + document.getElementById(id).style.left);
+
+}    
+function hideToolTip(id){
+document.getElementById(id).style.display = "none";
+}    
+    &lt;/script&gt;</row>
+</radio>
+
+<suspend/>
+
+<radio 
+  label="SCR_S52">
+  <title>Of those <font style="color:red">value from a previous question</font> adult patients that you managed in the last three months, approximately what proportion of <u>screening eligible patients</u> did you recommend cancer screening for the following tumor types?
+  ${progHoverOverCSS.r2.text}
+  </title>
+  <comment>Select one in each row</comment>
+  <col label="c1"><b>Did not</b> recommend cancer screening</col>
+  <col label="c2">Recommended cancer screening to <b>some</b> of the eligible patients</col>
+  <col label="c3">Recommended cancer screening to <b>most</b> of the eligible patients</col>
+  <col label="c4">Recommended cancer screening to <b>all</b> the eligible patients</col>
+  <row label="r1"><div class="tooldiv" id="hoID1"><b>Screening eligible patients for colorectal cancer (CRC)</b> are defined as patients between the ages of <b><u>45 - 75</u></b> who are at <b><u>average</u></b> risk for CRC</div><span onmouseout="hideToolTip(&amp;quot;hoID1&amp;quot;)" onmouseover="showTooltip(event,&amp;quot;hoID1&amp;quot;)" onclick="showTooltip(event,&amp;quot;hoID1&amp;quot;)" class="hoverlabel"><u>Colorectal cancer</u></span></row>
+  <row label="r2"><div class="tooldiv" id="hoID2"><b>Screening eligible patients for breast cancer</b> are defined as female patients between the ages of <b><u>40-75</u></b> who are at <b><u>average</u></b> risk for breast cancer</div><span onmouseout="hideToolTip(&amp;quot;hoID2&amp;quot;)" onmouseover="showTooltip(event,&amp;quot;hoID2&amp;quot;)" onclick="showTooltip(event,&amp;quot;hoID2&amp;quot;)" class="hoverlabel"><u>Breast cancer</u></span></row>
+  <row label="r3"><div class="tooldiv" id="hoID3"><b>Screening eligible patients for lung cancer</b> are defined as patients between the ages of <b><u>50-80</u></b> who are at <b><u>high</u></b> risk of lung cancer based on a 20-pack year smoking history, and who currently smoke or have quit in the past 15 years</div><span onmouseout="hideToolTip(&amp;quot;hoID3&amp;quot;)" onmouseover="showTooltip(event,&amp;quot;hoID3&amp;quot;)" onclick="showTooltip(event,&amp;quot;hoID3&amp;quot;)" class="hoverlabel"><u>Lung cancer</u> <br /> <em>(please consider high risk screening eligible patients for lung cancer)</em></span></row>
+  <row label="r4"><div class="tooldiv" id="hoID4"><b>Screening eligible patients for prostate cancer</b> are defined as male patients between the ages of <b><u>55-70</u></b> who are at <b><u>average</u></b> risk for prostate cancer </div><span onmouseout="hideToolTip(&amp;quot;hoID4&amp;quot;)" onmouseover="showTooltip(event,&amp;quot;hoID4&amp;quot;)" onclick="showTooltip(event,&amp;quot;hoID4&amp;quot;)" class="hoverlabel"><u>Prostate cancer</u></span></row>
+  <row label="r5"><div class="tooldiv" id="hoID5"><b>Screening eligible patients for cervical cancer</b> are defined as female patients between the ages of <b><u>21-65</u></b> who are at <b><u>average</u></b> risk for cervical cancer</div><span onmouseout="hideToolTip(&amp;quot;hoID5&amp;quot;)" onmouseover="showTooltip(event,&amp;quot;hoID5&amp;quot;)" onclick="showTooltip(event,&amp;quot;hoID5&amp;quot;)" class="hoverlabel"><u>Cervical cancer</u></span></row>
+</radio>

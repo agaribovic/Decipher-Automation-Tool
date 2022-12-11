@@ -1,0 +1,292 @@
+
+  ------------  
+<condition label="Disp1" cond='S1.r3'>Conditional Disposition 1 </condition>
+<condition label="Disp2" cond='S2.r2'>Conditional Disposition 2 </condition>
+<condition label="Disp3" cond='S5a.r3'>Conditional Disposition 3 </condition>
+<condition label="Disp4" cond='S10.r4 or S10.r5'>Conditional Disposition 4 </condition>
+<condition label="Disp5" cond='S11.but(S11.c1,S11.c2,S11.c3).count lt 3'>Conditional Disposition 5 </condition>
+<condition label="Disp6" cond='not (S12.r1.c1 or S12.r2.c1 or S12.r3.c1)'>Conditional Disposition 6 </condition>
+
+  ------------  
+
+<row label="r1" value="1">S1 </row>
+<row label="r2" value="2">S2 </row>
+<row label="r3" value="3">S5a </row>
+<row label="r4" value="4">S10 </row>
+<row label="r5" value="5">S11 </row>
+<row label="r6" value="6">S12 </row>
+
+  ------------  
+
+
+<res label='errOEMin'>Please enter more text.</res>
+<exec when='init'>
+# Checking OE='Open End' Question Length
+# [oemin: 5]
+def OEMinChk(strChk, maxOE):
+	if len(str(strChk.val)) lt maxOE:
+		error(res.errOEMin)
+</exec>
+
+<radio
+	label='INTRO1'>
+	<title>
+		<b>Project Goal</b>
+<br/><br/>The goal of this study is to understand current and anticipated specialty pharmacy trends/dynamics including opportunities and risks associated with use of specialty pharmacy dispensing for physician administered (Medical Benefit) products, with a focus on oncology.
+<br/><br/><b>General Disclosures</b><ul>
+<br/><br/><li/>This research is sponsored by a pharmaceutical company whose identity will not be made known to you, and your identity will not be made known to the sponsor
+<li/>Your responses will be used by Blue Matter for market research purposes only. The purpose of conducting this study is not to sell or promote anything to you, but rather to understand your views.
+<li/>Your responses will be collated with other respondents and presented to the sponsor in anonymous form 
+<li/>Your responses will be otherwise confidential and will not be used for any other purposes or disclosed to any third party without your approval
+<li/>This interview will require approximately 60 minutes to complete
+<li/>You may withdraw from the market research at any time, and you will have the right to withhold information, i.e., not answer a question should you wish to</ul>
+	</title>
+</radio>
+
+
+<suspend/>
+
+<radio
+	label='S1'>
+	<title>
+		How would you best describe your current position (i.e., what is your job title)?
+	</title>
+	<row label='r1'>Medical Director</row>
+	<row label='r2'>CMO</row>
+	<row label='r3' open='1'  openSize='25'  randomize='0' >Other, please specify</row>
+</radio>
+
+
+<note> Original Cond=S1.r3</note>
+<term label='Term1' cond="(processTerms('Disp1') )"> Terminate S1 </term>
+<suspend/>
+
+<radio
+	label='S2'>
+	<title>
+		Do you have knowledge and understanding of your health plan's / PBM's network agreements with specialty pharmacy providers, including reimbursement methodology archetypes?
+	</title>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<note> Original Cond=S2.r2</note>
+<term label='Term2' cond="(processTerms('Disp2') )"> Terminate S2 </term>
+<suspend/>
+
+<radio
+	label='S3'>
+	<title>
+		At your organization, what is your level of involvement in decision making related to coverage policies that influence specialty pharmacy dispensing management for physician administered products that are typically covered under Medical Benefit and traditionally reimbursed under a "Buy-and-bill model?”
+	</title>
+	<row label='r1'>Very Involved</row>
+	<row label='r2'>Involved</row>
+	<row label='r3'>Not Involved</row>
+</radio>
+
+
+<suspend/>
+
+<radio
+	label='S4'>
+	<title>
+		How many years of experience do you have in your current role?
+	</title>
+	<row label='r1'><3 years</row>
+	<row label='r2'>3 – 5 years</row>
+	<row label='r3'>6 – 10 years</row>
+	<row label='r4'>>= 10 years</row>
+</radio>
+
+
+<suspend/>
+
+<radio
+	label='S5'>
+	<title>
+		In your current role, do you have purview over all organization lives?
+	</title>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<suspend/>
+
+<radio
+	label='S5a'
+	cond='S5.r2'>
+	<title>
+		In your role, which of the following do you have purview over:
+	</title>
+	<row label='r1'>Commerical lives</row>
+	<row label='r2'>Medicare Advantage Lives</row>
+	<row label='r3' open='1'  openSize='25'  randomize='0' >Other, please specify book of business</row>
+</radio>
+
+
+<note> Original Cond=S5a.r3</note>
+<term label='Term3' cond="((S5.r2) and processTerms('Disp3') )"> Terminate S5a </term>
+<suspend/>
+
+<radio
+	label='S6'>
+	<title>
+		How would you best describe your organization?
+	</title>
+	<row label='r1'>Regional / local health plan (<10 states)</row>
+	<row label='r2'>National / Super regional health plan (>= 10 states)</row>
+	<row label='r3'>Pharmacy Benefit Manager (PBM)</row>
+</radio>
+
+
+<suspend/>
+
+<radio
+	label='S7'>
+	<title>
+		Does your health plan have a pharmacy benefit manager (PBM) affiliated with it?
+	</title>
+	<row label='r1' open='1'  openSize='25'  randomize='0' >Yes. Please specify name:</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<suspend/>
+
+<number
+	label='S8'
+	rowLegend='right'
+	size='5'
+	grouping='cols'
+	optional='0'>
+	<title>
+		What is the approximate number of medical benefit lives covered by your current organization?
+	</title>
+	<validate>
+
+x=this.r1.ival                
+y=this.r1.open                
+if x&gt;0 and y=='':                
+	error(res.otherx)                
+if y!='' and x==0:                
+	error(res.othery);
+	</validate>
+	<row label='r1' open='1'  openSize='25'  openOptional='1'  optional='1'  randomize='0' >(please specify)</row>
+</number>
+
+
+<suspend/>
+
+<number
+	label='S9'
+	amount='100'
+	ss:postText='%'
+	verify='range(0,100)'
+	rowLegend='left'
+	uses='autosum.5'
+	size='5'
+	grouping='cols'
+	autosum:prefill='0'
+	ss:listDisplay='0'>
+	<title>
+		What is the distribution of lives across books of business?   
+<br/><br/>
+	</title>
+	<validate>
+
+x=this.r5.ival                
+y=this.r5.open                
+if x&gt;0 and y=='':                
+	error(res.otherx)                
+if y!='' and x==0:                
+	error(res.othery);
+	</validate>
+	<comment>(Please enter your responses in the table below, the total must equal to 100%)</comment>
+	<row label='r1'>Commercial</row>
+	<row label='r2'>Medicare Advantage</row>
+	<row label='r3'>Managed Medicaid</row>
+	<row label='r4'>Health Exchange</row>
+	<row label='r5' open='1'  openSize='25'  openOptional='1'  optional='1'  randomize='0' >Other (please specify):</row>
+	<col label='c1' ><b>Lives distribution across books of business</b></col>
+</number>
+
+
+<suspend/>
+
+<radio
+	label='S10'>
+	<title>
+		Which statement best describes your primary role as it relates to your organization's coverage decision making process?
+	</title>
+	<row label='r1'>Voting member of the P&amp;T committee</row>
+	<row label='r2'>Non-voting member of the P&amp;T committee but my opinion is sought during the review process</row>
+	<row label='r3'>Non-voting member of the P&amp;T committee but I am very knowledgeable about how and why my organization makes coverage decisions</row>
+	<row label='r4'>Non-voting member of the P&amp;T Committee and generally not involved or knowledgeable regarding my organization's coverage decision making process</row>
+	<row label='r5' open='1'  openSize='25'  randomize='0' >Other (please specify):</row>
+</radio>
+
+
+<note> Original Cond=S10.r4 or S10.r5</note>
+<term label='Term4' cond="(processTerms('Disp4') )"> Terminate S10 </term>
+<suspend/>
+
+<radio
+	label='S11'>
+	<title>
+		On the scale of 1 to 5 with 5 being very involved, rate your level of involvement for the following responsibilities in your current role.
+	</title>
+	<row label='r1'>Policy development</row>
+	<row label='r2'>Formulary development</row>
+	<row label='r3'>Specialty Pharmacy dispensing mandates</row>
+	<row label='r4'>Manufacturer / supplier contracting (i.e., negotiating drug pricing, drug rebates)</row>
+	<row label='r5'>Clinical assessment</row>
+	<row label='r6'>Utilization management</row>
+	<row label='r7' open='1'  openSize='25'  randomize='0' >Other (please specify):</row>
+	<col label='c1' >1 <br/>Very uninvolved</col>
+	<col label='c2' ><b>2  Uninvolved</b></col>
+	<col label='c3' ><b>3  Neither involved nor uninvolved</b></col>
+	<col label='c4' >4 <br/>Involved</col>
+	<col label='c5' ><b>5  Very involved</b></col>
+</radio>
+
+
+<suspend/>
+
+<note> Original Cond=S11.but(S11.c1,S11.c2,S11.c3).count lt 3</note>
+<term label='Term5' cond="(processTerms('Disp5') )"> Terminate S11ter </term>
+<suspend/>
+
+<radio
+	label='S12'>
+	<title>
+		Does your health plan(s) mandate following dispensing models for any traditional medical benefit physician administered products? (Please place an "x” in the cells that are applicable. If "other” is selected, please explain)  Specialty Pharmacy Dispensing Model Mandates
+	</title>
+	<row label='r1'><b>White Bagging:</b> When a provider uses an external specialty pharmacy to ship drugs directly to the site of care for administration</row>
+	<row label='r2'><b>Clear Bagging:</b> When a hospital internal specialty pharmacy prepares drugs for administration at a hospital outpatient or inpatient site of care</row>
+	<row label='r3'><b>Brown Bagging: </b>When a patient receives their drug directly from a specialty pharmacy or retail pharmacy and brings it to a healthcare provider for administration</row>
+	<col label='c1' >Yes</col>
+	<col label='c2' >No</col>
+	<col label='c3' >I am not aware</col>
+	<col label='c4' >Other</col>
+</radio>
+
+
+<suspend/>
+
+<note> Original Cond=not (S12.r1.c1 or S12.r2.c1 or S12.r3.c1)</note>
+<term label='Term6' cond="(processTerms('Disp6') )"> Terminate S12ter </term>
+<suspend/>
+
+<radio
+	label='S13'>
+	<title>
+		This research will be audio recorded for notetaking and analysis purposes only. The recording will remain the property of Blue Matter. Do you consent to record the discussion?
+	</title>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<suspend/>

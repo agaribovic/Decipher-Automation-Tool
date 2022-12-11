@@ -1,0 +1,192 @@
+<block label="TypingTool" builder:title="Typing tool for Job# 2211275" sst="0">
+  <radio 
+   label="T0">
+    <title>[pipe: TTOOL_TXT]</title>
+    <comment>Select one in each row</comment>
+    <row label="r1">It would be ideal to have a <b>generalized myasthenia gravis</b> medication that doesn't increase my treatment burden, but I am willing to do nearly anything it takes to stay active and achieve greater symptom control</row>
+    <row label="r2">I am willing to give up some activities and/or social interactions to maintain adequate symptom control and avoid additional side effects</row>
+    <row label="r3">I would like additional symptom control that would allow me to participate in more activities and social interactions as long as I am not adding treatments with significant side effects</row>
+    <row label="r4">I have mild <b>generalized myasthenia gravis</b> symptoms that are controlled with minimal medication or alternative treatments</row>
+    <row label="r5">I desire more freedom from my treatment and wish I could have more time in between doses</row>
+    <row label="r6">My current treatment does not do enough to prevent me from being hospitalized</row>
+    <col label="c1"><b>Does not describe me at all <br /> 1</b></col>
+    <col label="c2"><b>2</b></col>
+    <col label="c3"><b>3</b></col>
+    <col label="c4"><b>4</b></col>
+    <col label="c5"><b>5</b></col>
+    <col label="c6"><b>6</b></col>
+    <col label="c7"><b>Describes me completely <br /> 7</b></col>
+  </radio>
+
+  <suspend/>
+
+  <exec>
+#STEP 1: Collect Response Data and Store into QHidRaw
+#Intercept Constant = 1
+
+#QS17_1
+QHidRaw.r1.val=T0.r1.val+1
+
+#QS17_2
+QHidRaw.r2.val=T0.r2.val+1
+
+#QS17_3
+QHidRaw.r3.val=T0.r3.val+1
+
+#QS17_4
+QHidRaw.r4.val=T0.r4.val+1
+
+#QS17_5
+QHidRaw.r5.val=T0.r5.val+1
+
+#QS16
+QHidRaw.r6.val=T0.r6.val+1
+  </exec>
+
+  <suspend/>
+
+  <number 
+   label="QHidRaw"
+   size="3"
+   ss:listDisplay="0"
+   where="execute,survey,report">
+    <title><strong>Hidden question to store the Response Data</strong></title>
+    <row label="r1">T0_1 =</row>
+    <row label="r2">T0_2 =</row>
+    <row label="r3">T0_3 =</row>
+    <row label="r4">T04 =</row>
+    <row label="r5">T0_5 =</row>
+    <row label="r6">T0_6 =</row>
+  </number>
+
+  <suspend/>
+
+  <exec>
+#QHidProbability
+#intercept Array is to store intercept constants
+#seg Arrays are for storing Segment Coefficients
+interceptArr=[0, -209.7891605, 44.33773295]
+segA=[0, 0, 0, 0, 0, 0]
+segB=[17.25960334, 0.498666924, 13.71363159, -0.264967152, -0.168898617, 0.175210124]
+segC=[-1.198099459, -2.575471988, -0.612707264, 0.68213102, -2.27075403, -12.40183606]
+
+sumA=0
+sumB=0
+sumC=0
+
+#ans Array is for storing Input Values from QHidRaw			
+ansArr=[]
+for eachRow in QHidRaw.rows:
+  ansArr.append(eachRow.val)
+print "ansArr=",ansArr
+
+#STEP 2: For each segment, multiply each question's Input Value from STEP 1 with its respective coefficient i.e. Product of Input Value and Coefficients for all questions
+#(ansArr[i])*(segXX[i])=Product of Input Value and Coefficients for all questions
+for i in range(0,len(ansArr)):
+  sumA+=(ansArr[i])*(segA[i])
+  sumB+=(ansArr[i])*(segB[i])
+  sumC+=(ansArr[i])*(segC[i])
+
+#STEP 3: For each segment, calculate the sum of the intercept and the products calculated in STEP 3
+#sum variables are to store the sum of the intercept and the products calculated in STEP 3
+sumA+=interceptArr[0]
+sumB+=interceptArr[1]
+sumC+=interceptArr[2]
+
+#STEP 3: Exponentiate the sums for each segment
+sumA=math.exp(sumA)
+sumB=math.exp(sumB)
+sumC=math.exp(sumC)
+
+#STEP 4: Compute Segment Probability
+#Note: Adding Intercept constant=1 here
+probSegA=(sumA / (sumA+sumB+sumC+1))
+probSegB=(sumB / (sumA+sumB+sumC+1))
+probSegC=(sumC / (sumA+sumB+sumC+1))
+
+QHidProbability.r1.c1.val = probSegA
+QHidProbability.r2.c1.val = probSegB
+QHidProbability.r3.c1.val = probSegC
+
+QHidProbability.r1.c2.val = int(round(probSegA*100))
+QHidProbability.r2.c2.val = int(round(probSegB*100))
+QHidProbability.r3.c2.val = int(round(probSegC*100))
+  </exec>
+
+  <suspend/>
+
+  <float 
+   label="QHidProbability"
+   size="15"
+   ss:listDisplay="0"
+   where="execute,survey,report">
+    <title><strong>Hidden question to store Segment Probability</strong></title>
+    <row label="r1">Probability for Segment A</row>
+    <row label="r2">Probability for Segment B</row>
+    <row label="r3">Probability for Segment C</row>
+    <col label="c1">Raw Probability</col>
+    <col label="c2" ss:colClassNames="col92">Probability %</col>
+    <style name="question.after" wrap="ready"><![CDATA[
+$ (".col92").find("input:text").parent().append("%");
+e.preventDefault();
+]]></style>
+  </float>
+
+  <suspend/>
+
+  <exec>
+#STEP 5: Assign Segment Based on Probability
+
+#prob Array is for storing Probabilities calculated in STEP 4
+probArr=[]
+for eachRow in QHidProbability.rows:
+  probArr.append(eachRow.c1.val)
+print "probArr=",probArr
+
+if QHidRaw.sum gt 0:
+	if max(probArr)==QHidProbability.r1.c1.ival:
+		QHidSegment.val=QHidSegment.r1.index
+	elif max(probArr)==QHidProbability.r2.c1.ival:
+		QHidSegment.val=QHidSegment.r2.index
+	elif max(probArr)==QHidProbability.r3.c1.ival:
+		QHidSegment.val=QHidSegment.r3.index
+    
+if QHidRaw.sum gt 0:
+
+    maxval = max(probArr)
+    probArr.remove(maxval)
+
+    if max(probArr)==QHidProbability.r1.c1.ival:
+       QHidSegment2.val=QHidSegment2.r1.index
+    elif max(probArr)==QHidProbability.r2.c1.ival:
+       QHidSegment2.val=QHidSegment2.r2.index
+    elif max(probArr)==QHidProbability.r3.c1.ival:
+       QHidSegment2.val=QHidSegment2.r3.index
+  </exec>
+
+  <suspend/>
+
+  <radio 
+   label="QHidSegment"
+   optional="1"
+   ss:listDisplay="0"
+   where="execute,survey,report">
+    <title><strong>Most Likely Segment:</strong></title>
+    <row label="r1">Segment A</row>
+    <row label="r2">Segment B</row>
+    <row label="r3">Segment C</row>
+  </radio>
+
+  <radio 
+   label="QHidSegment2"
+   optional="1"
+   ss:listDisplay="0"
+   where="execute,survey,report">
+    <title><strong>2<sup>nd</sup> Most Likely Segment:</strong></title>
+    <row label="r1">Segment A</row>
+    <row label="r2">Segment B</row>
+    <row label="r3">Segment C</row>
+  </radio>
+
+  <suspend/>
+</block>

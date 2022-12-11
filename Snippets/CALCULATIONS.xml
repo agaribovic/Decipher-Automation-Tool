@@ -1,0 +1,191 @@
+<number 
+  label="Q5"
+  size="3"
+  ss:postText="#"
+  sst="0">
+  <title>You previously mentioned that you currently manage <font style="color:red">value from a previous question</font> adult metastatic NSCLC patients. Of these patients, how many are of the following types?
+<br /><br />
+<em>
+Please provide an answer for: 
+<br /><br />
+<ul>
+<li />all the patients you currently manage, and
+<li />those patients you currently manage who were newly diagnosed within the past 3 months
+</ul>
+</em></title>
+  <comment>Please enter a whole number</comment>
+  <validate>
+#TOTAL
+
+if Q5.c1.r2.ival + Q5.c1.r3.ival + Q5.c1.r4.ival != Q5.c1.r1.ival:
+  error(res.value_equal %Q5.c1.r1.ival, col=Q5.c1)
+  
+elif Q5.c2.r2.ival + Q5.c2.r3.ival + Q5.c2.r4.ival != Q5.c2.r1.ival:
+  error(res.value_equal %Q5.c2.r1.ival, col=Q5.c2)
+
+#ROW1
+
+'''
+if Q5.c1.r1.ival gt Q4.c1.r2.ival:
+  error(res.value_greater %Q4.c1.r2.ival, row=Q5.r1, col=Q5.c1)
+elif Q5.c2.r1.ival gt Q4.c1.r2.ival:
+  error(res.value_greater %Q4.c1.r2.ival, row=Q5.r1, col=Q5.c2)
+'''
+
+#ROW2 ROW3
+
+if Q5.c1.r2.ival gt Q5.c1.r1.ival:
+  error(res.value_greater %Q5.c1.r1.ival)
+elif Q5.c1.r3.ival gt Q5.c1.r1.ival:
+  error(res.value_greater %Q5.c1.r1.ival)
+  </validate>
+
+  <row label="r1">Stage IV patients</row>
+  <row label="r2">Stage IV patients receiving first line therapy (1L)</row>
+  <row label="r3">Stage IV patients receiving second line or later (2L+) therapy</row>
+  <row label="r4">Stage IV patients not receiving systemic therapy</row>
+  <col label="c1" ss:colClassNames="COL1"><b>Number of metastatic NSCLC patients I currently manage</b></col>
+  <col label="c2" ss:colClassNames="COL2"><b>Number of metastatic NSCLC patients I currently manage who were <u>newly diagnosed within the past 3 months</u></b></col>
+  <style cond="1" name="question.after" wrap="ready"><![CDATA[
+$ ('.empty.empty-left.empty-top.unused').each(function() {
+    $ (this).attr('class', 'cell nonempty col-legend');
+    $ (this).html('<center><b>Treatments</b></center>');
+});
+
+// COL 1
+
+$ (".COL1").eq(4).find('input').prop( "readonly", true);
+$ (".COL1").eq(4).find('input').css( "backgroundColor", "#ecf0f1");
+
+// AUTOSUM FEATURE
+
+$ ('.COL1').on('input', function() {
+
+let total = 0;
+var total2=0;
+
+    $ ('.COL1').find('input').each(function(index) {
+      if(index==0)
+        total=$ (this).val();
+        if (index != 3 && index!=0)
+            total2=total2+Number($ (this).val());
+    });
+
+    var diff=total-total2;
+    if( diff>0 )
+      $ ('.COL1').eq(4).find('input').val(diff);
+    else
+      $ ('.COL1').eq(4).find('input').val(0);     
+
+});
+
+// COL 2
+
+$ (".COL2").eq(4).find('input').prop( "readonly", true);
+$ (".COL2").eq(4).find('input').css( "backgroundColor", "#ecf0f1");
+
+$ ('.COL2').on('input', function() {
+
+let totalCol2 = 0;
+var total2Col2=0;
+
+    $ ('.COL2').find('input').each(function(index) {
+      if(index==0)
+        totalCol2=$ (this).val();
+        if (index != 3 && index!=0)
+            //totalCol2 -= Number($ (this).val());
+            total2Col2=total2Col2+Number($ (this).val());
+    });
+
+    var diff2=totalCol2-total2Col2;
+    console.log("totalCol2="+totalCol2);
+    console.log("total2Col2="+total2Col2);
+    console.log("diff2="+diff2);
+    if( diff2>0 )
+      $ ('.COL2').eq(4).find('input').val(diff2);
+    else
+      $ ('.COL2').eq(4).find('input').val(0);     
+
+});
+]]></style>
+</number>
+
+<suspend/>
+
+<exec when="init">
+def validateOther(qid,otherCodes):
+  for xr in otherCodes:
+    if getattr(qid,xr).sum gt 0 and getattr(qid,xr).open=="":
+      error(res.ErrOpen,getattr(qid,xr))
+    if getattr(qid,xr).sum lt 1 and getattr(qid,xr).open!="":
+      error(res.ErrVal,getattr(qid,xr))
+</exec>
+
+<suspend/>
+
+<number 
+  label="Q6"
+  optional="0"
+  shuffle="rows"
+  size="3"
+  ss:listDisplay="0"
+  ss:postText="%">
+  <title>Please think about your ${Q5.c2.r2.ival} newly diagnosed metastatic (Stage IV) NSCLC patients in the past 3 months who are being treated in a first-line (1L) treatment setting with systemic therapy.
+<br /><br />
+Of these 1L patients, how many are currently tested for the following biomarkers or mutations?</title>
+  <comment>Enter a percent for each cell</comment>
+  <validate>
+validateOther(this,['r10'])
+  </validate>
+
+  <row label="r1">EGFR Mutation</row>
+  <row label="r2">ALK Mutation</row>
+  <row label="r3">PD-L1 Expression</row>
+  <row label="r4">MET</row>
+  <row label="r5">RET</row>
+  <row label="r6">ROS-1</row>
+  <row label="r7">KRAS</row>
+  <row label="r8">NTRK</row>
+  <row label="r9">BRAF</row>
+  <row label="r10" open="1" openOptional="1" openSize="25" optional="1" randomize="0">Any other biomarker (please specify)</row>
+  <col label="c1"><b>Percent of Patients Tested Today</b></col>
+  <style cond="1" name="question.after" wrap="ready"><![CDATA[
+$ ('.empty.empty-left.empty-top.unused').each(function() {
+  $ (this).attr('class', 'cell nonempty col-legend');
+  $ (this).html('<center><b>Biomarkers / Mutations</b></center>');
+});
+]]></style>
+</number>
+
+<suspend/>
+
+<float 
+  label="Q6_CALCULATION"
+  optional="0"
+  shuffle="rows"
+  size="3"
+  ss:listDisplay="0"
+  where="execute,survey,report">
+  <title>Please think about your ${Q5.c2.r2.ival} newly diagnosed metastatic (Stage IV) NSCLC patients in the past 3 months who are being treated in a first-line (1L) treatment setting with systemic therapy.
+<br /><br />
+Of these 1L patients, how many are currently tested for the following biomarkers or mutations?</title>
+  <comment>Enter a percent for each cell</comment>
+  <exec>
+num=Q5.c2.r2.val
+for xr in Q6_CALCULATION.rows:
+    if Q6.attr(xr.label).c1.val is not None:
+    xr.c1.val=(float(Q6.attr(xr.label).c1.val)/float(100.0))*float(num)
+  </exec>
+
+  <row label="r1">EGFR Mutation</row>
+  <row label="r2">ALK Mutation</row>
+  <row label="r3">PD-L1 Expression</row>
+  <row label="r4">MET</row>
+  <row label="r5">RET</row>
+  <row label="r6">ROS-1</row>
+  <row label="r7">KRAS</row>
+  <row label="r8">NTRK</row>
+  <row label="r9">BRAF</row>
+  <row label="r10" open="1" openOptional="1" openSize="25" optional="1" randomize="0">Any other biomarker (please specify)</row>
+  <col label="c1"><b>Number of Patients</b></col>
+</float>

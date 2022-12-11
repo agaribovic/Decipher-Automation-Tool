@@ -1,0 +1,81 @@
+<radio 
+  label="SEGMENT"
+  sst="0"
+  where="execute,survey,report">
+  <title>SEGMENT TYPE</title>
+  <comment>Please enter a whole number</comment>
+  <exec>
+import math
+
+TT2val = TT2.val
+TT4val = TT4.val
+TT5val = TT5.r3.val
+TT6val = TT6.r1.val
+TT7val = TT7.r1.val
+
+
+segAintercept = 0.1569638
+segBintercept = -0.237976
+segCintercept = 0.0810123
+
+
+TT2segA = [	0,	0.375698,	-0.240597,	0,	-0.148552,	0.151714,	1.0606762	]
+TT2segB = [	0,	-0.827347,	-0.027979,	0,	0.0842841,	0.1671643,	-1.365772	]
+TT2segC = [	0,	0.4516494,	0.2685755,	0,	0.0642676,	-0.318878,	0.3050957	]
+
+
+TT4segA = [	-0.319214,	-0.455431,	0.6499234,	-0.109886,	0.1285926,	0.016887,	1.2365616	]
+TT4segB = [	0.0924721,	0.8349108,	-1.375798,	0.131902,	-0.230239,	0.2338386,	-0.618281	]
+TT4segC = [	0.2267415,	-0.37948,	0.7258748,	-0.022016,	0.1016468,	-0.250726,	-0.618281	]  
+
+
+TT5segA = [	-0.725391,	2.7962671	]
+TT5segB = [	0.3626957,	-1.398134	]
+TT5segC = [	0.3626957,	-1.398134	]
+
+TT6segA = [	-1.08116,	-1.577193,	-0.936753,	0,	-0.201417,	0.599916,	1.0980011	]
+TT6segB = [	0.006927,	0.3849069,	0.4112603,	0,	0.0494927,	0.2575882,	-0.053163	]
+TT6segC = [	1.074233,	1.1922865,	0.5254927,	0,	0.1519241,	-0.857504,	-1.044838	]
+
+
+TT7segA = [	-0.1815,	-1.349015,	0.0456375,	-0.765412,	0.2824819,	0.1170053,	0.7178257	]
+TT7segB = [	-0.1815,	0.2076202,	-0.966606,	0.1403539,	-0.224386,	0.6881699,	0.4400797	]
+TT7segC = [	0.3629997,	1.1413947,	0.9209682,	0.6250577,	-0.058096,	-0.805175,	-1.157905	]
+
+
+sumA = 0.0 + segAintercept + TT2segA[TT2val] + TT4segA[TT4val] + TT5segA[TT5val] + TT6segA[TT6val] + TT7segA[TT7val]
+sumB = 0.0 + segBintercept + TT2segB[TT2val] + TT4segB[TT4val] + TT5segB[TT5val] + TT6segB[TT6val] + TT7segB[TT7val]
+sumC = 0.0 + segCintercept + TT2segC[TT2val] + TT4segC[TT4val] + TT5segC[TT5val] + TT6segC[TT6val] + TT7segC[TT7val]
+
+segAintercept = 0.1569638
+segBintercept = -0.237976
+segCintercept = 0.0810123
+
+# print(TT2val	,	 TT2segA[TT2val] 	,	 TT2segB[TT2val] 	,	 TT2segC[TT2val] 	)
+# print(TT4val	,	 TT4segA[TT4val] 	,	 TT4segB[TT4val] 	,	 TT4segC[TT4val] 	)
+# print(TT5val	,	 TT5segA[TT5val] 	,	 TT5segB[TT5val] 	,	 TT5segC[TT5val] 	)
+# print(TT6val	,	 TT6segA[TT6val] 	,	 TT6segB[TT6val] 	,	 TT6segC[TT6val] 	)
+# print(TT7val	,	 TT7segA[TT7val]	,	 TT7segB[TT7val]	,	 TT7segC[TT7val]	)
+
+
+SEG = [sumA, sumB, sumC]
+MAX = sumA
+MAXValue = 1
+i=0
+for value in SEG:
+    i=i+1
+    if value gt MAX:
+        MAX = value
+        MAXValue = i
+
+SEGMENT.val=MAXValue-1
+# print(SEG)
+  </exec>
+
+  <row label="r1">SEGMENT A</row>
+  <row label="r2">SEGMENT B</row>
+  <row label="r3">SEGMENT C</row>
+  <row label="r4">undefined</row>
+</radio>
+
+<suspend/>

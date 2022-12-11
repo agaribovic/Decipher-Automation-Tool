@@ -1,0 +1,160 @@
+<block label="TypingTool" builder:title="Typing Tool for Job# 2209126" sst="0">
+  <exec>
+#STEP 1: Collect Response Data and Store into QHidRaw; Calculate Scaled Value
+#Intercept Constant = 1
+
+#s6b_01
+QHidRaw.r1.c1.val=S6.r1.ival
+QHidRaw.r1.c2.val=(float(S6.r1.ival)-0.0)/(100.0-0.0)
+
+#s10_02
+QHidRaw.r2.c1.val=S8.r1.ival
+QHidRaw.r2.c2.val=(float(S8.r1.ival)-40.0)/(100.0-40.0)
+
+#q10_01
+QHidRaw.r3.c1.val=S12.ival+1
+QHidRaw.r3.c2.val=(float(S12.ival+1)-1.0)/(7.0-1.0)
+
+#q27_02
+QHidRaw.r4.c1.val=S13.r1.ival+1
+QHidRaw.r4.c2.val=(float(S13.r1.ival+1)-1.0)/(7.0-1.0)
+
+#q46a_04
+QHidRaw.r5.c1.val=S13.r2.ival+1
+QHidRaw.r5.c2.val=(float(S13.r2.ival+1)-1.0)/(7.0-1.0)
+
+#q7_06
+QHidRaw.r6.c1.val=S13.r3.ival+1
+QHidRaw.r6.c2.val=(float(S13.r3.ival+1)-1.0)/(7.0-1.0)
+
+#q44_01
+QHidRaw.r7.c1.val=S14.r1.ival+1
+QHidRaw.r7.c2.val=(float(S14.r1.ival+1)-1.0)/(7.0-1.0)
+  </exec>
+
+  <suspend/>
+
+  <float 
+   label="QHidRaw"
+   size="10"
+   ss:listDisplay="0"
+   surveyDisplay="desktop"
+   where="execute,survey,report">
+    <title><strong>Hidden question to store the Response Data</strong></title>
+    <row label="r1">s6b_01 =</row>
+    <row label="r2">s10_02 =</row>
+    <row label="r3">q10_01 =</row>
+    <row label="r4">q27_02 =</row>
+    <row label="r5">q46a_04 =</row>
+    <row label="r6">q7_06 =</row>
+    <row label="r7">q44_01 =</row>
+    <col label="c1"><strong>Respondent <br />Input</strong></col>
+    <col label="c2"><strong>Scaled <br />Value</strong></col>
+  </float>
+
+  <suspend/>
+
+  <exec>
+#QHidProbability
+#intercept Array is to store intercept constants
+#seg Arrays are for storing Segment Coefficients
+interceptArr=[-2.796351262,-1.693383989,-0.7460097227,5.235744974]
+segA=[0.4162050323,-1.104798592,2.029293429,2.084704726,2.068694139,0.3784461108,2.217661699]
+segB=[2.173526972,2.217729363,0.1488233049,1.400734849,-1.435127645,-0.6688313744,0.06533873445]
+segC=[-1.024232627,0.9483128875,-2.294798953,-2.546433203,-1.570211987,3.699314615,-0.2121576186]
+segD=[-1.565499377,-2.061243658,0.1166822186,-0.9390063718,0.936645493,-3.408929352,-2.070842815]
+
+sumA=0.0
+sumB=0.0
+sumC=0.0
+sumD=0.0
+
+#STEP 2: For each segment, multiply each row's Scaled Input Value from STEP 1 with its respective coefficient i.e. Product of Scaled Input Value and Coefficients for all rows
+#(QHidRaw[i])*(segXX[i])=Product of Scaled Input Value and Coefficients for all rows
+for eachRow in QHidRaw.rows:
+	sumA=sumA+(eachRow.c2.val)*(segA[eachRow.index])
+	sumB=sumB+(eachRow.c2.val)*(segB[eachRow.index])
+	sumC=sumC+(eachRow.c2.val)*(segC[eachRow.index])
+	sumD=sumD+(eachRow.c2.val)*(segD[eachRow.index])
+
+#STEP 3: For each segment, calculate the sum of the intercept and the products calculated in STEP 3
+#sum variables are to store the sum of the intercept and the products calculated in STEP 3
+sumA=sumA+interceptArr[0]
+sumB=sumB+interceptArr[1]
+sumC=sumC+interceptArr[2]
+sumD=sumD+interceptArr[3]
+
+sumArray=[sumA,sumB,sumC,sumD]
+
+#STEP 4: Calculate LOGIT for each segment
+logitA=1/(1+math.exp(-1*sumA))
+logitB=1/(1+math.exp(-1*sumB))
+logitC=1/(1+math.exp(-1*sumC))
+logitD=1/(1+math.exp(-1*sumD))
+
+logitArray=[logitA,logitB,logitC,logitD]
+
+for eachRow in QPROB.rows:
+    eachRow.c1.val=(sumArray[eachRow.index])
+    eachRow.c2.val=(logitArray[eachRow.index])
+
+#STEP 5: Add the LOGIT of all segments
+logitABCD=logitA+logitB+logitC+logitD
+
+#STEP 4: Compute Segment Probability
+for eachRow in QPROB.rows:
+	eachRow.c3.val=int(round((logitArray[eachRow.index]/logitABCD)*100))
+  </exec>
+
+  <suspend/>
+
+  <float 
+   label="QPROB"
+   size="15"
+   ss:listDisplay="0"
+   where="execute,survey,report">
+    <title><strong>Hidden question to store Segment Scores</strong></title>
+    <row label="r1">Probability for Segment A</row>
+    <row label="r2">Probability for Segment B</row>
+    <row label="r3">Probability for Segment C</row>
+    <row label="r4">Probability for Segment D</row>
+    <col label="c1"><strong>Sum</strong></col>
+    <col label="c2"><strong>LOGIT</strong></col>
+    <col label="c3"><strong>PROB (%)</strong></col>
+  </float>
+
+  <suspend/>
+
+  <exec>
+#STEP 5: Allocate the segment based on highest score
+
+#prob Array is for storing segment probability calculated in STEP 4
+probArr=[]
+for eachRow in QPROB.rows:
+	probArr.append(eachRow.c3.val)
+print "probArr=",probArr
+
+maxProb=max(probArr)
+
+#Allocate the segment based on highest score
+for eachRow in QPROB.rows:
+	if eachRow.c3.val == maxProb:
+		QSegment.val=QSegment.rows[eachRow.index].index
+  </exec>
+
+  <suspend/>
+
+  <radio 
+   label="QSegment"
+   optional="1"
+   ss:listDisplay="0"
+   where="execute,survey,report">
+    <title><strong>Hidden question to allocate the segment based on highest probability</strong>.</title>
+    <row label="r1">Segment A</row>
+    <row label="r2">Segment B</row>
+    <row label="r3">Segment C</row>
+    <row label="r4">Segment D</row>
+  </radio>
+
+  <suspend/>
+</block>

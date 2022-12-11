@@ -1,0 +1,135 @@
+<res label="answer_mandatory">Please answer the question.</res>
+
+<suspend/>
+
+<text 
+  label="S13A"
+  size="1"
+  ss:postText="%"
+  sst="0"
+  surveyDisplay="desktop">
+  <title>In a typical month, to what proportion of your moderate to severe <b>SLE patients-- including your LN patients</b> --do you prescribe the following treatments- either alone or in combination?</title>
+  <comment><p id="error_message" style="color:#C83535; display:none">The sum of your answer(s) cannot be less than <b>100</b>.</p></comment>
+  <validate>
+if S13.c1.sum == 0 and not(S13A.r8):
+	error(res.answer_mandatory, col=S13.c1)
+	error(res.answer_mandatory, col=S13A.c1) 
+  
+x=S13.c1.r7.ival
+y=S13A.r7.open
+if x&gt;0 and y=="":
+  error(res.otherx, col=S13.c1, row=this.r7)
+if y!="" and x==0:
+  error(res.othery, col=S13.c1, row=this.r7)
+  </validate>
+
+  <row label="r1">Oral steroids</row>
+  <row label="r2">Injectable/infused steroids</row>
+  <row label="r3">Topical Steroids</row>
+  <row label="r4">Oral DMARDs</row>
+  <row label="r5">Immunosuppressants</row>
+  <row label="r6">Biologic DMARDs</row>
+  <row label="r7" open="1" openOptional="1" openSize="25" optional="1" randomize="0">Other (Please specify)</row>
+  <noanswer label="r8">No prescription drug treatment</noanswer>
+  <row label="r9" ss:rowClassNames="lastRow">--</row>
+  <col label="c1" ss:colClassNames="ExampleCol"><b>Example</b></col>
+  <style cond="1" name="question.after" wrap="ready"><![CDATA[
+$ ('.empty.empty-left.empty-top.unused').each(function() {
+    $ (this).attr('class', 'cell nonempty col-legend');
+    $ (this).html('<center><b>Treatments</b></center>');
+});
+
+$ ('.lastRow').css('text-align', 'center'); 
+
+// EXAMPLE COLUMN
+
+$ ('.ExampleCol .post-text').hide();
+$ ('.ExampleCol .text-input').slice(1, 5).hide();
+$ ('.NumberCol input').eq(8).hide();
+
+// HIDDEN VALUE FOR EXAMPLE COLUMN ROW 7
+
+$ ('.ExampleCol .text-input').val('--');
+$ ('.ExampleCol .text-input').css('opacity', '0');
+
+$ ('.ExampleCol').eq(1).text('Prednisone');
+$ ('.ExampleCol').eq(2).text('Dexamethasome, Triamcinolone');
+$ ('.ExampleCol').eq(3).text('Hydrocortisone, Bethamethasone, Clobetasol');
+$ ('.ExampleCol').eq(4).text('Methotrexate, Azathioprine');
+$ ('.ExampleCol').eq(5).text('Rheumatrex (methotrexate), Cellcept (mycophenolate mofetil), cyclosporine, Prograf (tacrolimus)');
+$ ('.ExampleCol').eq(6).text('Rituximab, Benlysta (belimumab), Saphnelo (anifrolimab), Lupkynis (voclorsporin)');
+$ ('.ExampleCol').eq(8).text('--');
+
+$ ('.NumberCol').eq(8).html("Total: <span style='color:red'>" + 0 + "</span>%");
+$ ('.NumberCol').eq(8).css('background-color', '#ECF0F1');
+
+$ ('.ExampleCol').css('background-color', '#EDEDED');
+$ ('.ExampleCol').eq(8).css('background-color', '#ECF0F1');
+$ ('#-grid-cell-1-9-1').css('background-color', '#ECF0F1');
+
+
+const submitButton = $ ("#btn_continue");
+const error_message = $ ("#error_message");
+
+// AUTOSUM FEATURE
+
+$ ('.NumberCol').on('input', function() {
+
+    let total = 0;
+
+    $ ('.NumberCol').find('input').each(function(index) {
+        if (index != 7)
+            total += Number($ (this).val());
+    });
+
+    if (total >= 100)
+        $ ('.NumberCol').eq(8).html("Total: <span style='color:black'>" + total + "</span>%");
+    else
+        $ ('.NumberCol').eq(8).html("Total: <span style='color:red'>" + total + "</span>%");
+
+
+    // VALIDATION
+
+    submitButton.click(function() {
+
+        if (total < 100 && $ ('input[type=checkbox]').prop('checked') == false) {
+            submitButton.prop('disabled', true);
+            error_message.show();
+            $ ('.NumberCol').find('input').css('background-color', '#FFEDED');
+            setTimeout(function() {
+                submitButton.prop('disabled', false);
+            }, 2000);
+
+        } else {
+            submitButton.prop('disabled', false);
+            error_message.hide();
+        }
+
+
+    });
+
+
+});
+]]></style>
+</text>
+
+<number 
+  label="S13"
+  keepWith="S13A"
+  rightOf="S13A"
+  size="3"
+  ss:postText="%"
+  verify="range(0,100)">
+  <title>In a typical month, to what proportion of your moderate to severe <b>SLE patients-- including your LN patients</b> --do you prescribe the following treatments- either alone or in combination?</title>
+  <comment>Please be as specific as possible</comment>
+  <row label="r1">Oral steroids</row>
+  <row label="r2">Injectable/infused steroids</row>
+  <row label="r3">Topical Steroids</row>
+  <row label="r4">Oral DMARDs</row>
+  <row label="r5">Immunosuppressants</row>
+  <row label="r6">Biologic DMARDs</row>
+  <row label="r7">Other (Please specify)</row>
+  <noanswer label="r8">No prescription drug treatment</noanswer>
+  <row label="r9">Total</row>
+  <col label="c1" ss:colClassNames="NumberCol"><b>% of Patients</b></col>
+</number>

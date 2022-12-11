@@ -1,0 +1,75 @@
+<exec when="init">
+def zipCodeFile(fname, zipHeader):
+  try:
+      zipCodesData = File( "%s/%s" % (gv.survey.path, fname), zipHeader)
+  except IOError:
+      zipCodesData = ""
+  return zipCodesData
+</exec>
+
+<exec when="init">
+#This is creating a variable (ZIPCODES) that contains our zip code database.
+ZIPCODES = zipCodeFile("DB_2204115_ZIPCODES.dat", "ZipCodes")
+counter = 0
+</exec>
+
+<text 
+  label="S11"
+  optional="0"
+  rowLegend="left"
+  size="5"
+  sst="0">
+  <title>What is the zip code for this medical practice?</title>
+  <comment>Please check and confirm that Zip Code is correct.</comment>
+  <validate>
+if counter == 0:
+  if len(str(S11.r1.ival)) lt 4 or len(str(S11.r1.ival)) gt 5:
+    error("Please enter a valid ZIP code.", row=this.r1)
+  counter +=1
+  </validate>
+
+  <row label="r1">ZIP:</row>
+</text>
+
+<style name="button.continue" with="S11"><![CDATA[
+<input type="submit" name="continue" id="btn_continue" class="button continue" value="CONFIRM ZIP CODE" />
+]]></style>
+<suspend/>
+
+<exec>
+# eliminate 0 (zero) from the beginning if there are only 4 digits
+
+newZip = ''
+
+if len(str(S11.r1.ival)) == 5 and str(S11.r1.ival[0]) == '0':
+  newZip = S11.val[1:]
+else:
+  newZip = S11.val
+
+RECORD = ZIPCODES.get( newZip )
+
+if not(RECORD):
+  setMarker("zipInvalidTerm")
+</exec>
+
+<suspend/>
+
+<term label="te13" cond="(processTerms('Disp13') and (QHidStage.r2))">Terminate S12 @END</term>
+
+<text 
+  label="S12"
+  autosuggest:answerKey="FullName"
+  autosuggest:filename="names.dat"
+  autosuggest:uniqueKey="identifier"
+  optional="0"
+  size="25"
+  uses="autosuggest.2">
+  <title>Please select the name of the healthcare provider (e.g., physician, nurse practitioner, physician assistant) in your practice from the drop-down menu below. If you do not see the name of a healthcare provider in your medical practice in the menu below, please select “Not in the list”. If you do not wish to answer this question, select “Prefer not to answer.”</title>
+  <comment>Be specific</comment>
+  <col label="c1">ID</col>
+  <col label="c2">Text</col>
+  <noanswer label="n1">Not in the list</noanswer>
+  <noanswer label="n2">Prefer not to answer</noanswer>
+</text>
+
+<suspend/>

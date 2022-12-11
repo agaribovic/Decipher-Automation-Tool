@@ -1,0 +1,212 @@
+<select 
+  label="S7"
+  ss:listDisplay="0">
+  <title>Have you personally been involved in any of the following (academic) activities, in the last 3 years?</title>
+  <comment><p id="error_message" style="color:red; display:none">Please fill in the required field(s).</p></comment>
+  <row label="r1">Article published in international journal (sole or co-author) in last 3 years within the area of narcolepsy type 1 (NT1) (narcolepsy with cataplexy)?</row>
+  <row label="r2">Presented scientific paper at a nationally-recognized speciality conference, international conference or symposia in last 3 years within the area of Narcolepsy?</row>
+  <row label="r3">Currently or recently (in last 3 years) been a lead investigator in clinical trial research within the area of Narcolepsy?</row>
+  <row label="r4">Served on published guideline committee for narcolepsy in last 8 years?</row>
+  <choice label="ch1" ss:choiceClassNames="chYes">Yes</choice>
+  <choice label="ch2">No</choice>
+  <style cond="1" name="question.after" wrap="ready"><![CDATA[
+$ ('.numberRow1, .numberRow2, .numberRow3').hide();
+
+$ ('select').on('change', function() {
+
+
+    if ($ ('.chYes').eq(0).is(':selected')) 
+       $ ('.numberRow1').show(1000);
+    else
+       $ ('.numberRow1').hide(1000);  
+       
+    if ($ ('.chYes').eq(1).is(':selected')) 
+       $ ('.numberRow2').show(1000);
+    else
+       $ ('.numberRow2').hide(1000);
+       
+    if ($ ('.chYes').eq(2).is(':selected')) 
+       $ ('.numberRow3').show(1000);
+    else
+       $ ('.numberRow3').hide(1000);
+  
+});  
+
+const submitButton = $ ("#btn_continue");
+const error_message = $ ("#error_message");
+
+
+submitButton.click(function(){
+
+let empty = 0;
+
+
+// FIRST ROW
+
+if ($ ('.chYes').eq(0).is(':selected') && !$ ('.numberRow1').eq(1).find('input').val() ) {
+    error_message.show();
+  submitButton.prop('disabled', true);
+  $ ('.numberRow1').eq(1).css('background-color', '#FFEDED');
+  setTimeout(function(){ submitButton.prop('disabled', false); }, 2000);
+  empty += 1;
+} 
+
+else 
+  $ ('.numberRow1').eq(1).css('background-color', 'white');
+
+
+// SECOND ROW
+
+if ($ ('.chYes').eq(1).is(':selected') && !$ ('.numberRow2').eq(1).find('input').val() ) {
+    error_message.show();
+  submitButton.prop('disabled', true);
+  $ ('.numberRow2').eq(1).css('background-color', '#FFEDED');
+  setTimeout(function(){ submitButton.prop('disabled', false); }, 2000);
+  empty += 1;
+} 
+
+else 
+  $ ('.numberRow2').eq(1).css('background-color', 'white');
+
+
+// THIRD ROW
+
+if ($ ('.chYes').eq(2).is(':selected') && !$ ('.numberRow3').eq(1).find('input').val() ) {
+    error_message.show();
+  submitButton.prop('disabled', true);
+  $ ('.numberRow3').eq(1).css('background-color', '#FFEDED');
+  setTimeout(function(){ submitButton.prop('disabled', false); }, 2000);
+  empty += 1;
+} 
+
+else 
+  $ ('.numberRow3').eq(1).css('background-color', 'white');
+
+
+
+// RESULT
+
+if(empty > 0) {
+  submitButton.prop('disabled', true);
+  error_message.show();
+} else {
+  submitButton.prop('disabled', false);
+  error_message.hide();
+}
+
+
+    
+
+});
+]]></style>
+</select>
+
+<number 
+  label="S7B"
+  below="S7"
+  keepWith="S7"
+  size="3"
+  ss:postText="#">
+  <title>Have you personally been involved in any of the following (academic) activities, in the last 3 years?</title>
+  <comment>Please enter a whole number</comment>
+  <row label="r1" ss:rowClassNames="numberRow1">In the last 3 years, how many peer-reviewed articles / publications have you authored / published?</row>
+  <row label="r2" ss:rowClassNames="numberRow2">How many times have you presented scientific articles at a conference or symposia in the last 3 years (face to face / virtual) in narcolepsy?</row>
+  <row label="r3" ss:rowClassNames="numberRow3">How many times have you been a lead investigator in clinical trial research in the last 3 years in the area of narcolepsy?</row>
+</number>
+
+<suspend/>
+
+<radio 
+  label="country"
+  cond="True"
+  where="execute,survey,report">
+  <title>Hidden Question: FOR TESTING ONLY: Please select the country/language to be tested. This will be autopunched from "cnt" value in URL.</title>
+  <comment>Select one</comment>
+  <row label="r1">US / English</row>
+  <row label="r2">France / French</row>
+  <row label="r3">Germany / German</row>
+  <row label="r4">Italy / Italian</row>
+  <row label="r5">Spain / Spanish</row>
+  <row label="r6">UK / English</row>
+  <row label="r7">Portugal / Portuguese</row>
+  <row label="r8">Canada / English</row>
+</radio>
+
+<suspend/>
+
+<radio 
+  label="S12"
+  builderHint="{&quot;rocochoName&quot;:&quot;radiogrid&quot;}"
+  rowLegend="both">
+  <title>Please indicate where on the following scales you would rank yourself:</title>
+  <comment>Select one</comment>
+  <row label="r1">Early adopter of novel treatments</row>
+  <row label="r2">Confident and hopeful about the availability of novel therapies</row>
+  <col label="c1">1</col>
+  <col label="c2">2</col>
+  <col label="c3">3</col>
+  <col label="c4">4</col>
+  <col label="c5">5</col>
+  <col label="c6">6</col>
+  <style cond="1" name="question.after" wrap="ready"><![CDATA[
+//TRANSLATION TEXT
+
+$ ('tr.row-elements:nth-child(1) > th:nth-child(8)').each(function() {
+
+\@if country.r1 or country.r6 or country.r8 
+  $ (this).html('Apprehensive about novel treatments');
+
+\@elif country.r2  
+  $ (this).html('Appréhension des nouveaux traitements');
+
+\@elif country.r3  
+  $ (this).html('Beunruhigt bei neuen Behandlungen');
+\@endif
+
+});
+
+$ ('tr.row-elements:nth-child(2) > th:nth-child(8)').each(function() {
+
+\@if country.r1 or country.r6 or country.r8
+  $ (this).html('Uncertain about the impact and differentiation of novel therapies');
+
+\@elif country.r2
+  $ (this).html('Incertitude quant à l'impact et à la différenciation des nouvelles thérapies');
+
+\@elif country.r3
+  $ (this).html('Unsicher in Bezug auf die Wirkung und die Differenzierung neuer Behandlungen');
+\@endif
+
+});
+]]></style>
+</radio>
+
+<suspend/>
+
+<exec>
+p.S12term = False
+counter = 0
+
+for row in S12.rows:
+  if (row.c1 or row.c2 or row.c3):
+    counter += 1
+
+if counter != 2:
+  p.S12term = True
+</exec>
+
+<suspend/>
+
+<radio 
+  label="S4C_A"
+  fir="off"
+  ss:listDisplay="1"
+  uses="leftright.1">
+  <title>Please share the end date (month and year) of any clinical trials you have completed.</title>
+  <row label="r1" rightLegend="bla bla">Early adopter of novel treatments</row>
+  <row label="r2" rightLegend="bla blabla bla">Confident and hopeful about the availability of novel therapies</row>
+  <row label="r3" rightLegend="bla blabla bla">Early adopter of novel treatments</row>
+  <row label="r4" rightLegend="bla blabla blabla blabla bla">Confident and hopeful about the availability of novel therapies</row>
+  <col label="c1">1</col>
+  <col label="c2">2</col>
+</radio>

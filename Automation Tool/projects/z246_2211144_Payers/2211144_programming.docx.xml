@@ -1,0 +1,510 @@
+
+  ------------  
+<condition label="Disp1" cond='INTRO1.r2'>Conditional Disposition 1 </condition>
+<condition label="Disp2" cond='INTRO2.r2'>Conditional Disposition 2 </condition>
+<condition label="Disp3" cond='INTRO3.r2'>Conditional Disposition 3 </condition>
+<condition label="Disp4" cond='S1UK.r5'>Conditional Disposition 4 </condition>
+<condition label="Disp5" cond='not S2.r2'>Conditional Disposition 5 </condition>
+<condition label="Disp6" cond='S3UK.r3'>Conditional Disposition 6 </condition>
+<condition label="Disp7" cond='S4.r2'>Conditional Disposition 7 </condition>
+<condition label="Disp8" cond='not S6.r2'>Conditional Disposition 8 </condition>
+<condition label="Disp9" cond='not(S7UK.r1.c4 or S7UK.r1.c5 or S7UK.r2.c4 or S7UK.r2.c5 or S7UK.r3.c4 or S7UK.r3.c5 or S7UK.r4.c4 or S7UK.r4.c5 or S7UK.r5.c4 or S7UK.r5.c5) or not(S7UK.r6.c4 or S7UK.r6.c5)'>Conditional Disposition 9 </condition>
+<condition label="Disp10" cond='S8UK.r1.c2 or S8UK.r2.c2 or S8UK.r3.c2 or S8UK.r4.c2'>Conditional Disposition 10 </condition>
+<condition label="Disp11" cond='S9UK.r1'>Conditional Disposition 11 </condition>
+<condition label="Disp12" cond='S10UK.r1'>Conditional Disposition 12 </condition>
+<condition label="Disp13" cond='(S1US.r1 and country.de) or (S1US.r2 and country.us) or S1US.r3'>Conditional Disposition 13 </condition>
+<condition label="Disp14" cond='S3US.r2 or S3US.r3 or S3US.r4'>Conditional Disposition 14 </condition>
+<condition label="Disp15" cond='not S5US.r2'>Conditional Disposition 15 </condition>
+<condition label="Disp16" cond='S7US.r3'>Conditional Disposition 16 </condition>
+<condition label="Disp17" cond='S8US.r2 or S8US.r3 or S8US.r4 or S8US.r5'>Conditional Disposition 17 </condition>
+<condition label="Disp18" cond='(S9US.but(S9US.c1, S9US.c2, S9US.c3).count lt 1) or (S9US.but(S9US.c1, S9US.c2, S9US.c3).count lt 2 and (S9US.r7.c4 or S9US.r7.c5))'>Conditional Disposition 18 </condition>
+<condition label="Disp19" cond='S10US.r1.c2 or S10US.r2.c2 or S10US.r3.c2 or S10US.r4.c2'>Conditional Disposition 19 </condition>
+<condition label="Disp20" cond='S11US.r1'>Conditional Disposition 20 </condition>
+<condition label="Disp21" cond='S12US.r1'>Conditional Disposition 21 </condition>
+
+  ------------  
+
+<row label="r1" value="1">INTRO1 </row>
+<row label="r2" value="2">INTRO2 </row>
+<row label="r3" value="3">INTRO3 </row>
+<row label="r4" value="4">S1UK@end </row>
+<row label="r5" value="5">S2@end </row>
+<row label="r6" value="6">S3UK </row>
+<row label="r7" value="7">S4UK </row>
+<row label="r8" value="8">S6UK </row>
+<row label="r9" value="9">S7UK </row>
+<row label="r10" value="10">S8UK </row>
+<row label="r11" value="11">S9UK </row>
+<row label="r12" value="12">S10UK </row>
+<row label="r13" value="13">S1US </row>
+<row label="r14" value="14">S3US </row>
+<row label="r15" value="15">S5US </row>
+<row label="r16" value="16">S7US </row>
+<row label="r17" value="17">S8US </row>
+<row label="r18" value="18">S9 </row>
+<row label="r19" value="19">S10US </row>
+<row label="r20" value="20">S11US </row>
+<row label="r21" value="21">S12US </row>
+
+  ------------  
+
+
+<res label='errOEMin'>Please enter more text.</res>
+<exec when='init'>
+# Checking OE='Open End' Question Length
+# [oemin: 5]
+def OEMinChk(strChk, maxOE):
+	if len(str(strChk.val)) lt maxOE:
+		error(res.errOEMin)
+</exec>
+
+<radio
+	label='INTRO1'>
+	<title>
+		<b>Privacy</b> <br/><br/>Any information you provide us with will be treated as confidential. It will be combined with feedback from others like yourself. You will remain anonymous unless you give permission to be identified. 
+<br/><br/>Your information will only be used for market research purposes only and will not be passed to any other organisation without your permission. 
+<br/><br/>You have the right to refuse to answer questions or withdraw at any time. For more information about your rights please see our privacy notice, it is available at <u>https:/<a href="https:///www.brainsandcheek.com/privacy-policy-respondents</u>" target="_blank" rel="noopener"><span style="color:blue;">/www.brainsandcheek.com/privacy-policy-respondents</u></span></a>
+<br/><br/>We need your consent in order for us to collect and use any information about you. We won't keep any personal data you give us for longer than 12 months for analysis purposes.
+<br/><br/>The interview/duo will be listened to live via online platform and audio recorded for analysis purposes. The recording will only be available to Brains and Cheek company &amp; end client.
+	</title>
+	<row label='r1'>I wish to continue</row>
+	<row label='r2'>I want to quit now</row>
+</radio>
+
+
+<note> Original Cond=INTRO1.r2</note>
+<term label='Term1' cond="(processTerms('Disp1') )"> Terminate INTRO1 </term>
+<suspend/>
+
+<radio
+	label='INTRO2'>
+	<title>
+		<b>WE would like to reassure you that:</b> <br/><br/>We will comply with all EU and UK laws protecting your personal data and the British Healthcare Business Intelligence Association/Market Research Society/European Pharmaceutical Market research Association (EPhMRA) guidelines. The research is strictly non-promotional. Any information you provide us with will be treated as confidential.
+<br/><br/><b>Confidentiality: </b><br/><br/>You will also be shown a product profile. These materials are being shown for market research purposes only and not for promotional purposes. The information that you see may or may not be in its final form. The information that you shall see is confidential. In order to participate in the interview, you agree not to disclose it to anyone else.
+	</title>
+	<row label='r1'>I wish to continue</row>
+	<row label='r2'>I want to quit now</row>
+</radio>
+
+
+<note> Original Cond=INTRO2.r2</note>
+<term label='Term2' cond="(processTerms('Disp2') )"> Terminate INTRO2 </term>
+<suspend/>
+
+<radio
+	label='INTRO3'>
+	<title>
+		<b>Adverse events reporting: HCPs</b><br/><br/>We are required to pass on to our client details of adverse events/product complaints pertaining to their products that are mentioned during the interview. If this happens, we will need to collect details and report the event, even if you have already done so via the MHRA's 'Yellow Card' system. You will be asked whether you consent to us passing your details to the client company's drug safety department for their follow up, but you may choose to remain anonymous. This will have no impact on the confidentiality and anonymity associated with the interview itself.
+	</title>
+	<row label='r1'>I wish to continue</row>
+	<row label='r2'>I want to quit now</row>
+</radio>
+
+
+<note> Original Cond=INTRO3.r2</note>
+<term label='Term3' cond="(processTerms('Disp3') )"> Terminate INTRO3 </term>
+<suspend/>
+
+<radio
+	label='S1UK'>
+	<title>
+		<b>What is your  role/job title ?</b>
+	</title>
+	<comment>Single code</comment>
+	<row label='r1'>Head / Director of Commissioning</row>
+	<row label='r2'>Head of Strategic Commissioning / Strategic Senior Manager</row>
+	<row label='r3'>Commissioning Manager / Integrated Commissioning Manager</row>
+	<row label='r4'>Head of Strategic Commissioning</row>
+	<row label='r5' open='1'  openSize='25'  randomize='0' >Other, please specify -</row>
+</radio>
+
+
+<note> Original Cond=S1UK.r5</note>
+<term label='Term4' cond="(processTerms('Disp4')  and (QHidStage.r2))"> Terminate S1UK </term>
+<suspend/>
+
+<checkbox
+	label='S2UK'
+	atleast='1'>
+	<title>
+		<b>Which therapy areas fall within your remit?</b>
+	</title>
+	<comment>Select all that apply</comment>
+	<row label='r1'>Prostate cancer screening including PSA test –</row>
+	<row label='r2'>Further prostate cancer diagnostic biomarker tests (e.g. combined blood based or urine biomarker tests, algorithms or scores) –</row>
+	<row label='r3'>Radiological investigations for prostate cancer diagnosis including MRI</row>
+	<row label='r4'>Prostate cancer biopsy –</row>
+	<row label='r5'>Prostate cancer treatment / management –</row>
+	<row label='r6'>Other</row>
+</checkbox>
+
+
+<suspend/>
+
+<note> Original Cond=not S2.r2</note>
+<term label='Term5' cond="(processTerms('Disp5')  and (QHidStage.r2) )"> Terminate S2teratend </term>
+<suspend/>
+
+<checkbox
+	label='S3UK'
+	atleast='1'>
+	<title>
+		<b>Which, if any, of the following apply specifically to you and your professional role, in relation to prostate cancer biomarker testing?</b>
+	</title>
+	<comment>Select all that apply</comment>
+	<row label='r1'>I am a primary decision-maker in the commissioning/approval of whether to publicly fund/reimburse prostate cancer biomarker tests (e.g. PSA)</row>
+	<row label='r2'>I influence decision-making in the commissioning/approval of whether to publicly fund/reimburse prostate cancer biomarker tests (e.g. PSA)</row>
+	<row label='r3'>I am not a decision-maker or an influencer in the commissioning / approval of whether to publicly fund/reimburse prostate cancer biomarker tests (e.g. PSA)</row>
+	<row label='r4'>I have been a primary decision maker in preparing national guidelines for prostate cancer biomarker tests in the past five years</row>
+</checkbox>
+
+
+<note> Original Cond=S3UK.r3</note>
+<term label='Term6' cond="(processTerms('Disp6') )"> Terminate S3UK </term>
+<suspend/>
+
+<checkbox
+	label='S4UK'
+	atleast='1'>
+	<title>
+		<b>Do you sit on any national, regional or local level committees which discuss the commissioning and / or approval of prostate cancer biomarker tests?</b>
+	</title>
+	<comment>Select all that apply</comment>
+	<row label='r1' open='1'  openSize='25'  randomize='0' ><b>International level committee</b><br/><br/>e.g. HTA (Health Technology Assessment) Roundtable, <b>please specify</b>  CONTINUE only if also select CODE b</row>
+	<col label='c1' >Commissioning and / or funding and / or deciding on use of prostate cancer biomarker tests</col>
+</checkbox>
+
+
+<suspend/>
+
+<note> Original Cond=S4.r2</note>
+<term label='Term7' cond="(processTerms('Disp7') )"> Terminate S4UKter </term>
+<suspend/>
+
+<number
+	label='S5UK'
+	rowLegend='right'
+	size='5'
+	grouping='cols'
+	optional='0'>
+	<title>
+		<b>What is the size of the patient population your remit relating to prostate cancer diagnosis covers?</b>
+	</title>
+	<comment>Number entry</comment>
+	<row label='r1'>enter number of patients in the population covered</row>
+</number>
+
+
+<suspend/>
+
+<checkbox
+	label='S6UK'
+	atleast='1'>
+	<title>
+		<b>If a new prostate cancer blood based biomarker test were to become available, would you be involved in deciding whether it is commissioned/reimbursed/funded? If yes, would that be at a national, regional or local level?</b>
+	</title>
+	<comment>Select all that apply</comment>
+	<row label='r1'>Yes, at an international level</row>
+	<row label='r2'>Yes, at a national level</row>
+	<row label='r3'>c. Yes, at a regional level – CONTINUE only if code b selected. HOLD if b not selected]</row>
+	<row label='r4'>Yes, at a local level</row>
+	<row label='r5' randomize='0'  exclusive='1' >No</row>
+</checkbox>
+
+
+<suspend/>
+
+<note> Original Cond=not S6.r2</note>
+<term label='Term8' cond="(processTerms('Disp8') )"> Terminate S6UKter </term>
+<suspend/>
+
+<radio
+	label='S7UK'>
+	<title>
+		<b>Please select the statement which most closely matches your level of knowledge about the following prostate cancer tests:</b>
+	</title>
+	<row label='r1'>Total PSA    SEE BELOW</row>
+	<row label='r2'>Free PSA    SEE BELOW</row>
+	<row label='r3'>Complexed PSA    SEE BELOW</row>
+	<row label='r4'><b>p2PSA</b>  SEE BELOW</row>
+	<row label='r5' open='1'  openSize='25'  randomize='0' >Combined blood based  biomarker/ algorithm e.g. Beckman Prostate Health Index  , 4K score test, Stockholm3 testPLEASE SPECIFY WHICH  SEE BELOW</row>
+	<row label='r6'><b>MRI for prostate cancer </b>  SEE BELOW</row>
+	<col label='c1' ><b>1</b><br/>= Not aware / Aware but very limited knowledge</col>
+	<col label='c2' ><b>2</b><br/>= Low level of knowledge: occasionally or previously involved in evaluating</col>
+	<col label='c3' ><b>3</b><br/> = Moderate level of knowledge: Regularly involved in evaluating</col>
+	<col label='c4' ><b>4</b><br/> = High level of knowledge: Frequently involved in evaluating and decision making</col>
+	<col label='c5' ><b>5</b><br/>= Very high level of knowledge: Involved frequently and in-depth in  evaluating and decision making</col>
+</radio>
+
+
+<suspend/>
+
+<note> Original Cond=not(S7UK.r1.c4 or S7UK.r1.c5 or S7UK.r2.c4 or S7UK.r2.c5 or S7UK.r3.c4 or S7UK.r3.c5 or S7UK.r4.c4 or S7UK.r4.c5 or S7UK.r5.c4 or S7UK.r5.c5) or not(S7UK.r6.c4 or S7UK.r6.c5)</note>
+<term label='Term9' cond="(processTerms('Disp9') )"> Terminate S7UKter </term>
+<suspend/>
+
+<radio
+	label='S8UK'>
+	<title>
+		<b>Are you familiar with and willing to answer questions about the following aspects of prostate cancer test approval / commissioning?</b>
+	</title>
+	<row label='r1'>Which prostate cancer biomarkers (including PSA) are currently reimbursed / funded in your country /region and why  CLOSE</row>
+	<row label='r2'><b>Besides</b> total PSA / freePSA, which combined blood based prostate cancer biomarker tests / algorithms / scores are currently reimbursed in your country /region and why  CLOSE</row>
+	<row label='r3'>Reimbursement/funding requirements for any prostate cancer blood based biomarker tests / combined biomarker test that is to be offered in the future  CLOSE</row>
+	<row label='r4'>Reimbursement for MRI for prostate cancer diagnosis  CLOSE</row>
+	<col label='c1' >i) Able and willing to answer questions about this</col>
+	<col label='c2' >ii) Prefer not to answer questions about this</col>
+</radio>
+
+
+<suspend/>
+
+<note> Original Cond=S8UK.r1.c2 or S8UK.r2.c2 or S8UK.r3.c2 or S8UK.r4.c2</note>
+<term label='Term10' cond="(processTerms('Disp10') )"> Terminate S8UKter </term>
+<suspend/>
+
+<radio
+	label='S9UK'>
+	<title>
+		<b>Do you currently work as a paid investigator, researcher, or consultant for a pharmaceutical firm, advertising agency or marketing research firm?</b>
+	</title>
+	<comment>Only a speaker in a symposium or in a congress, or participating in clinical trials = No</comment>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<note> Original Cond=S9UK.r1</note>
+<term label='Term11' cond="(processTerms('Disp11') )"> Terminate S9UK </term>
+<suspend/>
+
+<radio
+	label='S10UK'>
+	<title>
+		<b>When was the last time you participated in a market research study relating to prostate cancer?</b>
+	</title>
+	<comment>Single code</comment>
+	<row label='r1'>In the last 1 month</row>
+	<row label='r2'>More than 1 month ago</row>
+	<row label='r3'>Never</row>
+</radio>
+
+
+<note> Original Cond=S10UK.r1</note>
+<term label='Term12' cond="(processTerms('Disp12') )"> Terminate S10UK </term>
+<suspend/>
+
+<radio
+	label='S1US'>
+	<title>
+		<b>Do you currently have a professional role within a health insurance or private company funding health services?</b>
+	</title>
+	<comment>Single code</comment>
+	<row label='r1'>Yes, with a commercial private health insurer (e.g. USA Kaiser, United Healthcare (UHC), Blue Cross)</row>
+	<row label='r2'>Yes, with a public health insurer (e.g. USA: Medicaid / Germany: Barmer, DAK Gesundheit, HEK Hanseatische Krankenkasse, Hkk, Techniker Krankenkasse TK, Innungskrankenkassen IKK)</row>
+	<row label='r3'>No</row>
+</radio>
+
+
+<suspend/>
+
+<note> Original Cond=(S1US.r1 and country.de) or (S1US.r2 and country.us) or S1US.r3</note>
+<term label='Term13' cond="(processTerms('Disp13') )"> Terminate S1USter </term>
+<suspend/>
+
+<textarea
+	label='S2US'
+	optional='0'
+	height='3'
+	width='50'>
+	<title>
+		<b>Please describe the main function of this company you work for</b> 
+<br/><br/> 
+<br/><br/>
+	</title>
+</textarea>
+
+
+<suspend/>
+
+<radio
+	label='S3US'>
+	<title>
+		<b>Is the health insurance provided by your company:</b>
+	</title>
+	<comment>Single code</comment>
+	<row label='r1'>National</row>
+	<row label='r2'>State/Federal</row>
+	<row label='r3'>Regional</row>
+	<row label='r4'>Local</row>
+</radio>
+
+
+<note> Original Cond=S3US.r2 or S3US.r3 or S3US.r4</note>
+<term label='Term14' cond="(processTerms('Disp14') )"> Terminate S3US </term>
+<suspend/>
+
+<radio
+	label='S4US'>
+	<title>
+		<b>What is your  role/job title ?</b>
+	</title>
+	<comment>Single code</comment>
+	<row label='r1'>Head / Director of Commissioning</row>
+	<row label='r2'>Commissioning Manager</row>
+	<row label='r3'>Head of Purchasing</row>
+	<row label='r4'>Purchasing Manager</row>
+	<row label='r5'>Purchasing Officer</row>
+	<row label='r6'>CEO (Chief Executive Officer)</row>
+	<row label='r7'>COO (Chief Operating Officer)</row>
+	<row label='r8'>CFO (Chief Financial Officer)</row>
+	<row label='r9'>VP (Vice President)</row>
+	<row label='r10' open='1'  openSize='25'  randomize='0' >Other, please specify</row>
+</radio>
+
+
+<suspend/>
+
+<checkbox
+	label='S5US'
+	atleast='1'>
+	<title>
+		<b>Which therapy areas fall within your remit?</b>
+	</title>
+	<comment>Select all that apply</comment>
+	<row label='r1'>Prostate cancer screening including PSA test</row>
+	<row label='r2'>Further prostate cancer diagnostic biomarker tests (e.g. combined blood based or urine biomarker tests, algorithms or scores)</row>
+	<row label='r3'>Radiological investigations for prostate cancer diagnosis including MRI</row>
+	<row label='r4'>Prostate cancer biopsy</row>
+	<row label='r5'>Prostate cancer treatment / management</row>
+	<row label='r6'>Other</row>
+</checkbox>
+
+
+<suspend/>
+
+<note> Original Cond=not S5US.r2</note>
+<term label='Term15' cond="(processTerms('Disp15') )"> Terminate S5USter </term>
+<suspend/>
+
+<radio
+	label='S6US'>
+	<title>
+		S6US. <b>How many subscribers does your role relating to prostate cancer diagnostics cover [i.e. how many patients are reimbursed by your insurance policies for prostate cancer tests?</b>[number][comment: Number entry]
+	</title>
+	<row label='r1'>enter number of patients covered</row>
+</radio>
+
+
+<suspend/>
+
+<checkbox
+	label='S7US'
+	atleast='1'>
+	<title>
+		<b>Which, if any, of the following apply specifically to you and your professional role, in relation to prostate cancer biomarker testing?</b>
+	</title>
+	<comment>Select all that apply</comment>
+	<row label='r1'>I am a primary decision-maker in the commissioning/approval of whether to reimburse prostate cancer biomarker tests (e.g. PSA)</row>
+	<row label='r2'>I influence decision-making in the commissioning/approval of whether to reimburse prostate cancer biomarker tests (e.g. PSA)</row>
+	<row label='r3'>I am not a decision-maker or an influencer in the commissioning / approval of whether to reimburse prostate cancer biomarker tests (e.g. PSA</row>
+</checkbox>
+
+
+<note> Original Cond=S7US.r3</note>
+<term label='Term16' cond="(processTerms('Disp16') )"> Terminate S7US </term>
+<suspend/>
+
+<radio
+	label='S8US'>
+	<title>
+		<b>If a new prostate cancer  blood based  biomarker test were to become available, would you be involved in deciding whether it is reimbursed by your organization? If yes, would that be at a national, regional or local level?</b>
+	</title>
+	<comment>Single code</comment>
+	<row label='r1'>Yes, at a national level</row>
+	<row label='r2'>Yes, at a federal level</row>
+	<row label='r3'>Yes, at a regional level</row>
+	<row label='r4'>Yes, at a local level</row>
+	<row label='r5'>No</row>
+</radio>
+
+
+<note> Original Cond=S8US.r2 or S8US.r3 or S8US.r4 or S8US.r5</note>
+<term label='Term17' cond="(processTerms('Disp17') )"> Terminate S8US </term>
+<suspend/>
+
+<radio
+	label='S9US'>
+	<title>
+		<b>Please select the statement which most closely matches your level of knowledge about the following prostate cancer blood tests:</b>
+	</title>
+	<row label='r1'>Total PSA    CONTINUE ONLY IF SCORE 4 OR 5 FOR 1 or more of CODES a-f</row>
+	<row label='r2'>Free PSA    CONTINUE ONLY IF SCORE 4 OR 5 FOR 1 or more of CODES a-f</row>
+	<row label='r3'>Complexed PSA    CONTINUE ONLY IF SCORE 4 OR 5 FOR 1 or more of CODES a-f</row>
+	<row label='r4'><b>p2PSA</b>  CONTINUE ONLY IF SCORE 4 OR 5 FOR 1 or more of CODES a-f</row>
+	<row label='r5'><b>MRI for prostate cancer </b>  CONTINUE ONLY IF SCORE 4 OR 5 FOR 1 or more of CODES a-f</row>
+	<row label='r6' open='1'  openSize='25'  randomize='0' >Combined blood based  biomarker/algorithm e.g. Beckman Prostate Health Index  , 4K score test, Stockholm3 testPLEASE SPECIFY WHICH  CONTINUE ONLY IF SCORE 4 OR 5 FOR CODES b or c</row>
+	<col label='c1' ><b></b>1=<br/>= Not aware / Aware but very limited knowledge</col>
+	<col label='c2' ><b>2</b>=<br/>= Low level of knowledge: occasionally or previously involved in evaluating</col>
+	<col label='c3' ><b>3</b>=<br/> = Moderate level of knowledge: Regularly involved in evaluating</col>
+	<col label='c4' ><b>4</b>=<br/> = High level of knowledge: Frequently involved in evaluating and decision making</col>
+	<col label='c5' ><b>5</b>=<br/>= Very high level of knowledge: Involved frequently and in-depth in  evaluating and decision making</col>
+</radio>
+
+
+<suspend/>
+
+<note> Original Cond=(S9US.but(S9US.c1, S9US.c2, S9US.c3).count lt 1) or (S9US.but(S9US.c1, S9US.c2, S9US.c3).count lt 2 and (S9US.r7.c4 or S9US.r7.c5))</note>
+<term label='Term18' cond="(processTerms('Disp18') )"> Terminate S9ter </term>
+<suspend/>
+
+<radio
+	label='S10US'>
+	<title>
+		<b>Are you familiar with and willing to answer questions about prostate cancer test approval and reimbursement? </b>
+	</title>
+	<row label='r1'>Which prostate cancer biomarkers including PSA are currently reimbursed by your company and why  CLOSE</row>
+	<row label='r2'><b>Besides</b> free PSA / total PSA, which combined prostate cancer biomarker tests / algorithms / scores are currently reimbursed by your company and why  CLOSE</row>
+	<row label='r3'>Requirements for any prostate cancer biomarker tests / combined tests that is to be offered in the future  CLOSE</row>
+	<row label='r4'>Reimbursement for MRI for prostate cancer diagnosis  CLOSE</row>
+	<col label='c1' >i) Able and willing to answer questions about this</col>
+	<col label='c2' >ii) Prefer not to answer questions about this</col>
+</radio>
+
+
+<suspend/>
+
+<note> Original Cond=S10US.r1.c2 or S10US.r2.c2 or S10US.r3.c2 or S10US.r4.c2</note>
+<term label='Term19' cond="(processTerms('Disp19') )"> Terminate S10USter </term>
+<suspend/>
+
+<radio
+	label='S11US'>
+	<title>
+		Do you currently work as a paid investigator, researcher, or consultant for a pharmaceutical firm, advertising agency or marketing research firm?
+	</title>
+	<comment>Only a speaker in a symposium or in a congress, or participating in clinical trials = No</comment>
+	<row label='r1'>Yes</row>
+	<row label='r2'>No</row>
+</radio>
+
+
+<note> Original Cond=S11US.r1</note>
+<term label='Term20' cond="(processTerms('Disp20') )"> Terminate S11US </term>
+<suspend/>
+
+<radio
+	label='S12US'>
+	<title>
+		When was the last time you participated in a market research study relating to prostate cancer?
+	</title>
+	<comment>Single code</comment>
+	<row label='r1'>In the last 1 month</row>
+	<row label='r2'>More than 1 month ago</row>
+	<row label='r3'>Never</row>
+</radio>
+
+
+<note> Original Cond=S12US.r1</note>
+<term label='Term21' cond="(processTerms('Disp21') )"> Terminate S12US </term>
+<suspend/>

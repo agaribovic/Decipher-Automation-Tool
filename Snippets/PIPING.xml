@@ -1,0 +1,430 @@
+<checkbox 
+  label="S4B"
+  atleast="1">
+  <title>Which of the following types of trials have you participated in?</title>
+  <comment>Select all that apply</comment>
+  <row label="r1">Cancer</row>
+  <row label="r2">Epilepsy</row>
+  <row label="r3">Psoriasis</row>
+  <row label="r4">Rheumatoid Arthritis</row>
+  <row label="r5">Lupus</row>
+  <row label="r6">Multiple Sclerosis</row>
+  <row label="r7">Diabetes (Type 1 or Type 2)</row>
+  <row label="r8">Inflammatory Bowel Disease (IBD), including Crohn's Disease or Ulcerative Colitis (UC)</row>
+  <row label="r9">Chronic Pain</row>
+  <row label="r10">Neuropathic Pain</row>
+  <row label="r11">Chronic Heart Disease</row>
+  <row label="r12">Hemophilia</row>
+  <row label="r13">Atrial Fibrillation</row>
+  <row label="r14">Atopic Dermatitis</row>
+  <row label="r15">Parkinson's Disease</row>
+  <row label="r16">Osteoarthritis</row>
+  <row label="r17">Hyperlipidemia</row>
+  <row label="r18">Cardiomyopathy</row>
+  <row label="r19">Huntington's Disease</row>
+  <row label="r20">Sickle Cell Disease</row>
+  <row label="r21">Chronic kidney disease or failure (CKD)</row>
+  <row label="r22">Thrombotic Disorders (e.g., pulmonary embolism, deep venous thrombosis)</row>
+  <row label="r23">Non-Alcoholic Fatty Liver Disease &amp; Non-Alcoholic Steatohepatitis (NAFLD &amp; NASH)</row>
+  <row label="r24">Vaccine ___</row>
+  <row label="r25">COVID-19</row>
+  <row label="r26">Other vaccine</row>
+  <row label="r27" open="1" openSize="25" randomize="0">Other clinical trial (Please specify)</row>
+</checkbox>
+
+<suspend/>
+
+<text 
+  label="S4C_A">
+  <title>Please share the end date (month and year) of any clinical trials you have completed.</title>
+  <row label="r1" cond="(S4B.r1)">Cancer</row>
+  <row label="r2" cond="(S4B.r2)">Epilepsy</row>
+  <row label="r3" cond="(S4B.r3)">Psoriasis</row>
+  <row label="r4" cond="(S4B.r4)">Rheumatoid Arthritis</row>
+  <row label="r5" cond="(S4B.r5)">Lupus</row>
+  <row label="r6" cond="(S4B.r6)">Multiple Sclerosis</row>
+  <row label="r7" cond="(S4B.r7)">Diabetes (Type 1 or Type 2)</row>
+  <row label="r8" cond="(S4B.r8)">Inflammatory Bowel Disease (IBD), including Crohn's Disease or Ulcerative Colitis (UC)</row>
+  <row label="r9" cond="(S4B.r9)">Chronic Pain</row>
+  <row label="r10" cond="(S4B.r10)">Neuropathic Pain</row>
+  <row label="r11" cond="(S4B.r11)">Chronic Heart Disease</row>
+  <row label="r12" cond="(S4B.r12)">Hemophilia</row>
+  <row label="r13" cond="(S4B.r13)">Atrial Fibrillation</row>
+  <row label="r14" cond="(S4B.r14)">Atopic Dermatitis</row>
+  <row label="r15" cond="(S4B.r15)">Parkinson's Disease</row>
+  <row label="r16" cond="(S4B.r16)">Osteoarthritis</row>
+  <row label="r17" cond="(S4B.r17)">Hyperlipidemia</row>
+  <row label="r18" cond="(S4B.r18)">Cardiomyopathy</row>
+  <row label="r19" cond="(S4B.r19)">Huntington's Disease</row>
+  <row label="r20" cond="(S4B.r20)">Sickle Cell Disease</row>
+  <row label="r21" cond="(S4B.r21)">Chronic kidney disease or failure (CKD)</row>
+  <row label="r22" cond="(S4B.r22)">Thrombotic Disorders (e.g., pulmonary embolism, deep venous thrombosis)</row>
+  <row label="r23" cond="(S4B.r23)">Non-Alcoholic Fatty Liver Disease &amp; Non-Alcoholic Steatohepatitis (NAFLD &amp; NASH)</row>
+  <row label="r24" cond="(S4B.r24)">Vaccine for ${S3.r25.text}</row>
+  <row label="r25" cond="(S4B.r25)">COVID-19</row>
+  <row label="r26" cond="(S4B.r26)">Other vaccine</row>
+  <row label="r27" cond="(S4B.r27)" randomize="0">${S4B.r27.open}</row>
+  <col label="c1" ss:colClassNames="S4C_A_COL"><b>Trial Type</b></col>
+  <style cond="1" name="question.after" wrap="ready"><![CDATA[
+$ ('.empty.empty-left.empty-top.unused').each(function() {
+  $ (this).attr('class', 'cell nonempty col-legend');
+  $ (this).html('<center><b>Trial Type</b></center>');
+});
+
+$ ('.S4C_A_COL').hide();
+]]></style>
+</text>
+
+<select 
+  label="S4C_B"
+  keepWith="S4C_A"
+  rightOf="S4C_A">
+  <title>Please share the end date (month and year) of any clinical trials you have completed.</title>
+  <row label="r1" cond="(S4B.r1)">Cancer</row>
+  <row label="r2" cond="(S4B.r2)">Epilepsy</row>
+  <row label="r3" cond="(S4B.r3)">Psoriasis</row>
+  <row label="r4" cond="(S4B.r4)">Rheumatoid Arthritis</row>
+  <row label="r5" cond="(S4B.r5)">Lupus</row>
+  <row label="r6" cond="(S4B.r6)">Multiple Sclerosis</row>
+  <row label="r7" cond="(S4B.r7)">Diabetes (Type 1 or Type 2)</row>
+  <row label="r8" cond="(S4B.r8)">Inflammatory Bowel Disease (IBD), including Crohn's Disease or Ulcerative Colitis (UC)</row>
+  <row label="r9" cond="(S4B.r9)">Chronic Pain</row>
+  <row label="r10" cond="(S4B.r10)">Neuropathic Pain</row>
+  <row label="r11" cond="(S4B.r11)">Chronic Heart Disease</row>
+  <row label="r12" cond="(S4B.r12)">Hemophilia</row>
+  <row label="r13" cond="(S4B.r13)">Atrial Fibrillation</row>
+  <row label="r14" cond="(S4B.r14)">Atopic Dermatitis</row>
+  <row label="r15" cond="(S4B.r15)">Parkinson's Disease</row>
+  <row label="r16" cond="(S4B.r16)">Osteoarthritis</row>
+  <row label="r17" cond="(S4B.r17)">Hyperlipidemia</row>
+  <row label="r18" cond="(S4B.r18)">Cardiomyopathy</row>
+  <row label="r19" cond="(S4B.r19)">Huntington's Disease</row>
+  <row label="r20" cond="(S4B.r20)">Sickle Cell Disease</row>
+  <row label="r21" cond="(S4B.r21)">Chronic kidney disease or failure (CKD)</row>
+  <row label="r22" cond="(S4B.r22)">Thrombotic Disorders (e.g., pulmonary embolism, deep venous thrombosis)</row>
+  <row label="r23" cond="(S4B.r23)">Non-Alcoholic Fatty Liver Disease &amp; Non-Alcoholic Steatohepatitis (NAFLD &amp; NASH)</row>
+  <row label="r24" cond="(S4B.r24)">Vaccine for ${S3.r25.text}</row>
+  <row label="r25" cond="(S4B.r25)">COVID-19</row>
+  <row label="r26" cond="(S4B.r26)">Other vaccine</row>
+  <row label="r27" cond="(S4B.r27)" randomize="0">${S4B.r27.open}</row>
+  <choice label="ch1">1950</choice>
+  <choice label="ch2">1951</choice>
+  <choice label="ch3">1952</choice>
+  <choice label="ch4">1953</choice>
+  <choice label="ch5">1954</choice>
+  <choice label="ch6">1955</choice>
+  <choice label="ch7">1956</choice>
+  <choice label="ch8">1957</choice>
+  <choice label="ch9">1958</choice>
+  <choice label="ch10">1959</choice>
+  <choice label="ch11">1960</choice>
+  <choice label="ch12">1961</choice>
+  <choice label="ch13">1962</choice>
+  <choice label="ch14">1963</choice>
+  <choice label="ch15">1964</choice>
+  <choice label="ch16">1965</choice>
+  <choice label="ch17">1966</choice>
+  <choice label="ch18">1967</choice>
+  <choice label="ch19">1968</choice>
+  <choice label="ch20">1969</choice>
+  <choice label="ch21">1970</choice>
+  <choice label="ch22">1971</choice>
+  <choice label="ch23">1972</choice>
+  <choice label="ch24">1973</choice>
+  <choice label="ch25">1974</choice>
+  <choice label="ch26">1975</choice>
+  <choice label="ch27">1976</choice>
+  <choice label="ch28">1977</choice>
+  <choice label="ch29">1978</choice>
+  <choice label="ch30">1979</choice>
+  <choice label="ch31">1980</choice>
+  <choice label="ch32">1981</choice>
+  <choice label="ch33">1982</choice>
+  <choice label="ch34">1983</choice>
+  <choice label="ch35">1984</choice>
+  <choice label="ch36">1985</choice>
+  <choice label="ch37">1986</choice>
+  <choice label="ch38">1987</choice>
+  <choice label="ch39">1988</choice>
+  <choice label="ch40">1989</choice>
+  <choice label="ch41">1990</choice>
+  <choice label="ch42">1991</choice>
+  <choice label="ch43">1992</choice>
+  <choice label="ch44">1993</choice>
+  <choice label="ch45">1994</choice>
+  <choice label="ch46">1995</choice>
+  <choice label="ch47">1996</choice>
+  <choice label="ch48">1997</choice>
+  <choice label="ch49">1998</choice>
+  <choice label="ch50">1999</choice>
+  <choice label="ch51">2000</choice>
+  <choice label="ch52">2001</choice>
+  <choice label="ch53">2002</choice>
+  <choice label="ch54">2003</choice>
+  <choice label="ch55">2004</choice>
+  <choice label="ch56">2005</choice>
+  <choice label="ch57">2006</choice>
+  <choice label="ch58">2007</choice>
+  <choice label="ch59">2008</choice>
+  <choice label="ch60">2009</choice>
+  <choice label="ch61">2010</choice>
+  <choice label="ch62">2011</choice>
+  <choice label="ch63">2012</choice>
+  <choice label="ch64">2013</choice>
+  <choice label="ch65">2014</choice>
+  <choice label="ch66">2015</choice>
+  <choice label="ch67">2016</choice>
+  <choice label="ch68">2017</choice>
+  <choice label="ch69">2018</choice>
+  <choice label="ch70">2019</choice>
+  <choice label="ch71">2020</choice>
+  <choice label="ch72">2021</choice>
+  <choice label="ch73">Currently in Trial</choice>
+  <col label="c1"><b>End Year</b></col>
+</select>
+
+<select 
+  label="S4C_C"
+  keepWith="S4C_A"
+  rightOf="S4C_A">
+  <title>Please share the end date (month and year) of any clinical trials you have completed.</title>
+  <row label="r1" cond="(S4B.r1)">Cancer</row>
+  <row label="r2" cond="(S4B.r2)">Epilepsy</row>
+  <row label="r3" cond="(S4B.r3)">Psoriasis</row>
+  <row label="r4" cond="(S4B.r4)">Rheumatoid Arthritis</row>
+  <row label="r5" cond="(S4B.r5)">Lupus</row>
+  <row label="r6" cond="(S4B.r6)">Multiple Sclerosis</row>
+  <row label="r7" cond="(S4B.r7)">Diabetes (Type 1 or Type 2)</row>
+  <row label="r8" cond="(S4B.r8)">Inflammatory Bowel Disease (IBD), including Crohn's Disease or Ulcerative Colitis (UC)</row>
+  <row label="r9" cond="(S4B.r9)">Chronic Pain</row>
+  <row label="r10" cond="(S4B.r10)">Neuropathic Pain</row>
+  <row label="r11" cond="(S4B.r11)">Chronic Heart Disease</row>
+  <row label="r12" cond="(S4B.r12)">Hemophilia</row>
+  <row label="r13" cond="(S4B.r13)">Atrial Fibrillation</row>
+  <row label="r14" cond="(S4B.r14)">Atopic Dermatitis</row>
+  <row label="r15" cond="(S4B.r15)">Parkinson's Disease</row>
+  <row label="r16" cond="(S4B.r16)">Osteoarthritis</row>
+  <row label="r17" cond="(S4B.r17)">Hyperlipidemia</row>
+  <row label="r18" cond="(S4B.r18)">Cardiomyopathy</row>
+  <row label="r19" cond="(S4B.r19)">Huntington's Disease</row>
+  <row label="r20" cond="(S4B.r20)">Sickle Cell Disease</row>
+  <row label="r21" cond="(S4B.r21)">Chronic kidney disease or failure (CKD)</row>
+  <row label="r22" cond="(S4B.r22)">Thrombotic Disorders (e.g., pulmonary embolism, deep venous thrombosis)</row>
+  <row label="r23" cond="(S4B.r23)">Non-Alcoholic Fatty Liver Disease &amp; Non-Alcoholic Steatohepatitis (NAFLD &amp; NASH)</row>
+  <row label="r24" cond="(S4B.r24)">Vaccine for ${S3.r25.text}</row>
+  <row label="r25" cond="(S4B.r25)">COVID-19</row>
+  <row label="r26" cond="(S4B.r26)">Other vaccine</row>
+  <row label="r27" cond="(S4B.r27)" randomize="0">${S4B.r27.open}</row>
+  <choice label="ch1">January</choice>
+  <choice label="ch2">February</choice>
+  <choice label="ch3">March</choice>
+  <choice label="ch4">April</choice>
+  <choice label="ch5">May</choice>
+  <choice label="ch6">June</choice>
+  <choice label="ch7">July</choice>
+  <choice label="ch8">August</choice>
+  <choice label="ch9">September</choice>
+  <choice label="ch10">October</choice>
+  <choice label="ch11">November</choice>
+  <choice label="ch12">December</choice>
+  <choice label="ch13">Currently in Trial</choice>
+  <col label="c1"><b>End Month</b></col>
+</select>
+
+<suspend/>
+
+<exec>
+#term if at least one year between 2015-2021 is not selected
+
+p.S4Cterm = False
+counter = 0
+
+for xr in S4C_B.rows:
+  if xr.displayed:
+    for i, xc in enumerate(S4C_B.choices):
+      if xr.attr(xc.label):
+        print(i, xc.text)
+        if i ge 65:
+          counter += 1
+          
+if counter == 0:
+  p.S4Cterm = True          
+
+
+        
+# punch S5_B
+for xr in S4C_B.rows:
+  if xr.displayed:
+    for xc in S4C_B.choices:
+      if xr.attr(xc.label):
+        S5_B.attr(xr.label).c1.val=xc.text
+        
+# punch S5_C
+for xr in S4C_C.rows:
+  if xr.displayed:
+    for xc in S4C_C.choices:
+      if xr.attr(xc.label):
+        S5_C.attr(xr.label).c1.val=xc.text
+</exec>
+
+<suspend/>
+
+<exec>
+del p.S4Cterm
+</exec>
+
+<text 
+  label="S5_A">
+  <title>Was any medical information collected from you during the following trial(s) (e.g., bloodwork or other lab testing results, scan and biopsy information, etc.) <u>provided back to you at the end of the trial by the clinical trial</u> team or sponsor?</title>
+  <row label="r1" cond="(S4B.r1)">Cancer</row>
+  <row label="r2" cond="(S4B.r2)">Epilepsy</row>
+  <row label="r3" cond="(S4B.r3)">Psoriasis</row>
+  <row label="r4" cond="(S4B.r4)">Rheumatoid Arthritis</row>
+  <row label="r5" cond="(S4B.r5)">Lupus</row>
+  <row label="r6" cond="(S4B.r6)">Multiple Sclerosis</row>
+  <row label="r7" cond="(S4B.r7)">Diabetes (Type 1 or Type 2)</row>
+  <row label="r8" cond="(S4B.r8)">Inflammatory Bowel Disease (IBD), including Crohn's Disease or Ulcerative Colitis (UC)</row>
+  <row label="r9" cond="(S4B.r9)">Chronic Pain</row>
+  <row label="r10" cond="(S4B.r10)">Neuropathic Pain</row>
+  <row label="r11" cond="(S4B.r11)">Chronic Heart Disease</row>
+  <row label="r12" cond="(S4B.r12)">Hemophilia</row>
+  <row label="r13" cond="(S4B.r13)">Atrial Fibrillation</row>
+  <row label="r14" cond="(S4B.r14)">Atopic Dermatitis</row>
+  <row label="r15" cond="(S4B.r15)">Parkinson's Disease</row>
+  <row label="r16" cond="(S4B.r16)">Osteoarthritis</row>
+  <row label="r17" cond="(S4B.r17)">Hyperlipidemia</row>
+  <row label="r18" cond="(S4B.r18)">Cardiomyopathy</row>
+  <row label="r19" cond="(S4B.r19)">Huntington's Disease</row>
+  <row label="r20" cond="(S4B.r20)">Sickle Cell Disease</row>
+  <row label="r21" cond="(S4B.r21)">Chronic kidney disease or failure (CKD)</row>
+  <row label="r22" cond="(S4B.r22)">Thrombotic Disorders (e.g., pulmonary embolism, deep venous thrombosis)</row>
+  <row label="r23" cond="(S4B.r23)">Non-Alcoholic Fatty Liver Disease &amp; Non-Alcoholic Steatohepatitis (NAFLD &amp; NASH)</row>
+  <row label="r24" cond="(S4B.r24)">Vaccine for ${S3.r25.text}</row>
+  <row label="r25" cond="(S4B.r25)">COVID-19</row>
+  <row label="r26" cond="(S4B.r26)">Other vaccine</row>
+  <row label="r27" cond="(S4B.r27)">${S4B.r27.open}</row>
+  <col label="c1" ss:colClassNames="S5_A_COL"><b>Trial Type</b></col>
+  <style cond="1" name="question.after" wrap="ready"><![CDATA[
+$ ('.empty.empty-left.empty-top.unused').each(function() {
+  $ (this).attr('class', 'cell nonempty col-legend');
+  $ (this).html('<center><b>Trial Type</b></center>');
+});
+
+$ ('.S5_A_COL').hide();
+$ ('.S5_B_COL').find('input:text').css({'background-color':'#E8E8E8', 'text-align':'center'});
+$ ('.S5_B_COL').find('input:text').attr('readonly',true);
+
+$ ('.S5_C_COL').find('input:text').css({'background-color':'#E8E8E8', 'text-align':'center'});
+$ ('.S5_C_COL').find('input:text').attr('readonly',true);
+]]></style>
+</text>
+
+<text 
+  label="S5_B"
+  keepWith="S5_A"
+  rightOf="S5_A"
+  size="5">
+  <title>Was any medical information collected from you during the following trial(s) (e.g., bloodwork or other lab testing results, scan and biopsy information, etc.) <u>provided back to you at the end of the trial by the clinical trial</u> team or sponsor?</title>
+  <row label="r1" cond="(S4B.r1)">Cancer</row>
+  <row label="r2" cond="(S4B.r2)">Epilepsy</row>
+  <row label="r3" cond="(S4B.r3)">Psoriasis</row>
+  <row label="r4" cond="(S4B.r4)">Rheumatoid Arthritis</row>
+  <row label="r5" cond="(S4B.r5)">Lupus</row>
+  <row label="r6" cond="(S4B.r6)">Multiple Sclerosis</row>
+  <row label="r7" cond="(S4B.r7)">Diabetes (Type 1 or Type 2)</row>
+  <row label="r8" cond="(S4B.r8)">Inflammatory Bowel Disease (IBD), including Crohn's Disease or Ulcerative Colitis (UC)</row>
+  <row label="r9" cond="(S4B.r9)">Chronic Pain</row>
+  <row label="r10" cond="(S4B.r10)">Neuropathic Pain</row>
+  <row label="r11" cond="(S4B.r11)">Chronic Heart Disease</row>
+  <row label="r12" cond="(S4B.r12)">Hemophilia</row>
+  <row label="r13" cond="(S4B.r13)">Atrial Fibrillation</row>
+  <row label="r14" cond="(S4B.r14)">Atopic Dermatitis</row>
+  <row label="r15" cond="(S4B.r15)">Parkinson's Disease</row>
+  <row label="r16" cond="(S4B.r16)">Osteoarthritis</row>
+  <row label="r17" cond="(S4B.r17)">Hyperlipidemia</row>
+  <row label="r18" cond="(S4B.r18)">Cardiomyopathy</row>
+  <row label="r19" cond="(S4B.r19)">Huntington's Disease</row>
+  <row label="r20" cond="(S4B.r20)">Sickle Cell Disease</row>
+  <row label="r21" cond="(S4B.r21)">Chronic kidney disease or failure (CKD)</row>
+  <row label="r22" cond="(S4B.r22)">Thrombotic Disorders (e.g., pulmonary embolism, deep venous thrombosis)</row>
+  <row label="r23" cond="(S4B.r23)">Non-Alcoholic Fatty Liver Disease &amp; Non-Alcoholic Steatohepatitis (NAFLD &amp; NASH)</row>
+  <row label="r24" cond="(S4B.r24)">Vaccine for ${S3.r25.text}</row>
+  <row label="r25" cond="(S4B.r25)">COVID-19</row>
+  <row label="r26" cond="(S4B.r26)">Other vaccine</row>
+  <row label="r27" cond="(S4B.r27)" randomize="0">${S4B.r27.open}</row>
+  <col label="c1" size="15" ss:colClassNames="S5_B_COL"><b>End Year</b></col>
+</text>
+
+<text 
+  label="S5_C"
+  keepWith="S5_A"
+  rightOf="S5_A"
+  size="5">
+  <title>Was any medical information collected from you during the following trial(s) (e.g., bloodwork or other lab testing results, scan and biopsy information, etc.) <u>provided back to you at the end of the trial by the clinical trial</u> team or sponsor?</title>
+  <row label="r1" cond="(S4B.r1)">Cancer</row>
+  <row label="r2" cond="(S4B.r2)">Epilepsy</row>
+  <row label="r3" cond="(S4B.r3)">Psoriasis</row>
+  <row label="r4" cond="(S4B.r4)">Rheumatoid Arthritis</row>
+  <row label="r5" cond="(S4B.r5)">Lupus</row>
+  <row label="r6" cond="(S4B.r6)">Multiple Sclerosis</row>
+  <row label="r7" cond="(S4B.r7)">Diabetes (Type 1 or Type 2)</row>
+  <row label="r8" cond="(S4B.r8)">Inflammatory Bowel Disease (IBD), including Crohn's Disease or Ulcerative Colitis (UC)</row>
+  <row label="r9" cond="(S4B.r9)">Chronic Pain</row>
+  <row label="r10" cond="(S4B.r10)">Neuropathic Pain</row>
+  <row label="r11" cond="(S4B.r11)">Chronic Heart Disease</row>
+  <row label="r12" cond="(S4B.r12)">Hemophilia</row>
+  <row label="r13" cond="(S4B.r13)">Atrial Fibrillation</row>
+  <row label="r14" cond="(S4B.r14)">Atopic Dermatitis</row>
+  <row label="r15" cond="(S4B.r15)">Parkinson's Disease</row>
+  <row label="r16" cond="(S4B.r16)">Osteoarthritis</row>
+  <row label="r17" cond="(S4B.r17)">Hyperlipidemia</row>
+  <row label="r18" cond="(S4B.r18)">Cardiomyopathy</row>
+  <row label="r19" cond="(S4B.r19)">Huntington's Disease</row>
+  <row label="r20" cond="(S4B.r20)">Sickle Cell Disease</row>
+  <row label="r21" cond="(S4B.r21)">Chronic kidney disease or failure (CKD)</row>
+  <row label="r22" cond="(S4B.r22)">Thrombotic Disorders (e.g., pulmonary embolism, deep venous thrombosis)</row>
+  <row label="r23" cond="(S4B.r23)">Non-Alcoholic Fatty Liver Disease &amp; Non-Alcoholic Steatohepatitis (NAFLD &amp; NASH)</row>
+  <row label="r24" cond="(S4B.r24)">Vaccine for ${S3.r25.text}</row>
+  <row label="r25" cond="(S4B.r25)">COVID-19</row>
+  <row label="r26" cond="(S4B.r26)">Other vaccine</row>
+  <row label="r27" cond="(S4B.r27)" randomize="0">${S4B.r27.open}</row>
+  <col label="c1" size="15" ss:colClassNames="S5_C_COL"><b>End Month</b></col>
+</text>
+
+<select 
+  label="S5_D"
+  keepWith="S5_A"
+  rightOf="S5_A">
+  <title>Was any medical information collected from you during the following trial(s) (e.g., bloodwork or other lab testing results, scan and biopsy information, etc.) <u>provided back to you at the end of the trial by the clinical trial</u> team or sponsor?</title>
+  <row label="r1" cond="(S4B.r1)">Cancer</row>
+  <row label="r2" cond="(S4B.r2)">Epilepsy</row>
+  <row label="r3" cond="(S4B.r3)">Psoriasis</row>
+  <row label="r4" cond="(S4B.r4)">Rheumatoid Arthritis</row>
+  <row label="r5" cond="(S4B.r5)">Lupus</row>
+  <row label="r6" cond="(S4B.r6)">Multiple Sclerosis</row>
+  <row label="r7" cond="(S4B.r7)">Diabetes (Type 1 or Type 2)</row>
+  <row label="r8" cond="(S4B.r8)">Inflammatory Bowel Disease (IBD), including Crohn's Disease or Ulcerative Colitis (UC)</row>
+  <row label="r9" cond="(S4B.r9)">Chronic Pain</row>
+  <row label="r10" cond="(S4B.r10)">Neuropathic Pain</row>
+  <row label="r11" cond="(S4B.r11)">Chronic Heart Disease</row>
+  <row label="r12" cond="(S4B.r12)">Hemophilia</row>
+  <row label="r13" cond="(S4B.r13)">Atrial Fibrillation</row>
+  <row label="r14" cond="(S4B.r14)">Atopic Dermatitis</row>
+  <row label="r15" cond="(S4B.r15)">Parkinson's Disease</row>
+  <row label="r16" cond="(S4B.r16)">Osteoarthritis</row>
+  <row label="r17" cond="(S4B.r17)">Hyperlipidemia</row>
+  <row label="r18" cond="(S4B.r18)">Cardiomyopathy</row>
+  <row label="r19" cond="(S4B.r19)">Huntington's Disease</row>
+  <row label="r20" cond="(S4B.r20)">Sickle Cell Disease</row>
+  <row label="r21" cond="(S4B.r21)">Chronic kidney disease or failure (CKD)</row>
+  <row label="r22" cond="(S4B.r22)">Thrombotic Disorders (e.g., pulmonary embolism, deep venous thrombosis)</row>
+  <row label="r23" cond="(S4B.r23)">Non-Alcoholic Fatty Liver Disease &amp; Non-Alcoholic Steatohepatitis (NAFLD &amp; NASH)</row>
+  <row label="r24" cond="(S4B.r24)">Vaccine for ${S3.r25.text}</row>
+  <row label="r25" cond="(S4B.r25)">COVID-19</row>
+  <row label="r26" cond="(S4B.r26)">Other vaccine</row>
+  <row label="r27" cond="(S4B.r27)" randomize="0">${S4B.r27.open}</row>
+  <choice label="ch1">Yes</choice>
+  <choice label="ch2">No</choice>
+  <choice label="ch3">Not Sure</choice>
+  <col label="c1"><b>Was Medical Information Shared At End of Trial?</b></col>
+</select>

@@ -1,0 +1,92 @@
+ <exec>
+import math
+
+TT1val = TT1.r1.val
+TT2val = TT2.r1.val
+TT3val = TT3.r1.val
+TT4val = TT4.r1.val
+TT5val = TT5.r1.val
+
+segAintercept = 1.4463526
+segBintercept = -7.4946087
+segCintercept = 4.9745343
+segDintercept = 1.07372182
+
+TT1segA = [	0	,	-2.6941	,	-3.12579	]
+TT1segB = [	0	,	3.251902	,	4.873838	]
+TT1segC = [	0	,	-0.80676	,	-2.27692	]
+TT1segD = [	0	,	0.248968	,	0.52888	]
+						
+TT2segA = [	2.31738	,	1.145104	,	0	]
+TT2segB = [	2.843481	,	2.786615	,	0	]
+TT2segC = [	-1.6991	,	-2.13771	,	0	]
+TT2segD = [	-3.46176	,	-1.79401	,	0	]
+						
+TT3segA = [	0	,	0.415568	,	2.586049	]
+TT3segB = [	0	,	1.713059	,	4.136269	]
+TT3segC = [	0	,	-2.66582	,	-3.75963	]
+TT3segD = [	0	,	0.037198	,	-2.96269	]
+						
+TT4segA = [	1.423616	,	0.620029	,	0	]
+TT4segB = [	2.579965	,	0.817177	,	0	]
+TT4segC = [	-0.96833	,	-1.18505	,	0	]
+TT4segD = [	-3.03525	,	-0.25216	,	0	]
+						
+TT5segA = [	0	,	-1.31076	,	-1.43974	]
+TT5segB = [	0	,	2.00959	,	1.951963	]
+TT5segC = [	0	,	-1.60182	,	-1.75469	]
+TT5segD = [	0	,	0.902983	,	1.242462	]
+
+sumA = 0.0 + segAintercept + TT1segA[TT1val] + TT2segA[TT2val] + TT3segA[TT3val] + TT4segA[TT4val] + TT5segA[TT5val]
+sumB = 0.0 + segBintercept + TT1segB[TT1val] + TT2segB[TT2val] + TT3segB[TT3val] + TT4segB[TT4val] + TT5segB[TT5val]
+sumC = 0.0 + segCintercept + TT1segC[TT1val] + TT2segC[TT2val] + TT3segC[TT3val] + TT4segC[TT4val] + TT5segC[TT5val]
+sumD = 0.0 + segDintercept + TT1segD[TT1val] + TT2segD[TT2val] + TT3segD[TT3val] + TT4segD[TT4val] + TT5segD[TT5val]
+
+segAintercept = 1.4463526
+segBintercept = -7.4946087
+segCintercept = 4.9745343
+segDintercept = 1.07372182
+
+# print(TT1val  ,  TT1segA[TT1val]  ,  TT1segB[TT1val]  ,  TT1segC[TT1val]  )
+# print(TT2val  ,  TT2segA[TT2val]  ,  TT2segB[TT2val]  ,  TT2segC[TT2val]  )
+# print(TT3val  ,  TT3segA[TT3val]  ,  TT3segB[TT3val]  ,  TT3segC[TT3val]  )
+# print(TT4val  ,  TT4segA[TT4val]  ,  TT4segB[TT4val]  ,  TT4segC[TT4val]  )
+# print(TT5val  ,  TT5segA[TT5val]  ,  TT5segB[TT5val]  ,  TT5segC[TT5val]  )
+
+
+SEG = [sumA, sumB, sumC, sumD]
+expSEG = [math.exp(sumA), math.exp(sumB), math.exp(sumC), math.exp(sumD)]
+expSEGsum = sum(expSEG)
+LikehoodScore = [expSEG[0]/expSEGsum*100, expSEG[1]/expSEGsum*100, expSEG[2]/expSEGsum*100, expSEG[3]/expSEGsum*100]
+
+Thresholds = [42.00, 38.00, 31.00, 0.00]
+
+
+if LikehoodScore[0] gt Thresholds[0]:
+  QSegment.val = QSegment.r1.index
+  print()
+elif LikehoodScore[1] gt Thresholds[1]:
+  QSegment.val = QSegment.r2.index
+elif LikehoodScore[2] gt Thresholds[2]:
+  QSegment.val = QSegment.r3.index
+else:
+  QSegment.val = QSegment.r4.index 
+
+
+print(SEG)
+print(expSEG)
+print(expSEGsum)
+print(LikehoodScore)
+</exec>
+
+  <radio 
+   label="QSegment"
+   optional="1"
+   ss:listDisplay="0"
+   where="execute,survey,report">
+    <title><strong>Hidden question to allocate the segment based on highest probability</strong>.</title>
+    <row label="r1">Segment A</row>
+    <row label="r2">Segment B</row>
+    <row label="r3">Segment C</row>
+    <row label="r4">Segment D</row>
+  </radio>
